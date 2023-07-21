@@ -1,3 +1,6 @@
+![EnduraTrak](https://github.com/SSauseda/endurotrak/assets/108492423/1eeea400-60b0-419e-a11f-4b8e515c2707)
+
+
 # Flask React Project
 
 This is the starter for the Flask React project.
