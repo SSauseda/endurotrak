@@ -13,6 +13,12 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    location = db.Column(db.String(255), nullable=False)
+    about = db.Column(db.String(255), nullable=False)
+    profile_image = db.Column(db.String(255), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
+
 
     @property
     def password(self):
@@ -30,4 +36,6 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email
+            'location': self.location,
+            'profile_image': self.profile_image,
         }
