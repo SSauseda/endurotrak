@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+from datetime import datetime
 
 class Follower(db.Model):
     __tablename__ = 'followers'

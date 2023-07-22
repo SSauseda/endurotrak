@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from datetime import datetime
 
 
 class Bravo(db.Model):
@@ -14,7 +15,7 @@ class Bravo(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    user = db.relationship('User', back_populates='given_bravos', foreign_keys=[user_id]
+    user = db.relationship('User', back_populates='given_bravos', foreign_keys=[user_id])
     recipient = db.relationship('User', back_populates='received_bravos', foreign_keys=[recipient_id])
 
     result = db.relationship('ChallengeResult', back_populates='bravos')

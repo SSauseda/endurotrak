@@ -1,4 +1,4 @@
-from app.models import db, Challenge, environment, SCHEMA
+from app.models import db, Challenge, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
@@ -8,7 +8,7 @@ def seed_challenges():
     demo = User.query.filter(User.username == 'Demo').first()
     marnie = User.query.filter(User.username == 'marnie').first()
     bobbie = User.query.filter(User.username == 'bobbie').first()
-    karen = User.query.filter(User.username == 'KarenRuns').first()
+    karen = User.query.filter(User.username == 'KarenKeepsFit').first()
     jess = User.query.filter(User.username == 'JessTheBest').first()
     mike = User.query.filter(User.username == 'MikeTheHiker').first()
 

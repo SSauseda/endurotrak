@@ -13,7 +13,7 @@ def seed_users():
         password='password', 
         location='New York', 
         about="I'm a fitness enthusiast who loves challenging myself and setting new personal records. When I'm not running or lifting weights, you'll find me reading up on the latest in nutrition and health science.",
-        profile_image=url_for('static', filename='profile_images/demo.jpg')
+        profile_image='static/profile_images/demo.jpg'
         )
     marnie = User(
         first_name='Marnie',
@@ -23,7 +23,7 @@ def seed_users():
         password='password', 
         location='Los Angeles', 
         about="As an avid traveller, I've hiked, biked, and kayaked in some of the most beautiful places in the world. Now, I'm taking on new challenges to keep my fitness levels high between adventures.",
-        profile_image=url_for('static', filename='profile_images/marnie.jpg')
+        profile_image='static/profile_images/marnie.jpg'
         )
     bobbie = User(
         first_name='Bobbie',
@@ -32,7 +32,8 @@ def seed_users():
         email='bobbie@aa.io', 
         password='password', 
         location='Chicago', 
-        about="A former couch potato turned fitness junkie. I found my passion for fitness later in life, and now there's no looking back. Every day is a new opportunity to push my boundaries."
+        about="A former couch potato turned fitness junkie. I found my passion for fitness later in life, and now there's no looking back. Every day is a new opportunity to push my boundaries.",
+        profile_image='static/profile_images/bobbie.jpg'
         )
     sam = User(
         first_name='Sammy',
@@ -42,7 +43,7 @@ def seed_users():
         password='password',
         location='Chicago',
         about="Avid runner and fitness junkie. Constantly pushing my limits and setting new goals.",
-        profile_image=url_for('static', filename='profile_images/sam.jpg')
+        profile_image='static/profile_images/sammy.jpg'
     )
     laura = User(
         first_name='Laura',
@@ -52,7 +53,7 @@ def seed_users():
         password='password',
         location='Boston',
         about="Passionate about fitness, health, and living a balanced life. You can find me at the gym or running by the Charles River.",
-        profile_image=url_for('static', filename='profile_images/laura.jpg')
+        profile_image='static/profile_images/laura.jpg'
     )
     mike = User(
         first_name='Mike',
@@ -62,7 +63,7 @@ def seed_users():
         password='password',
         location='Seattle',
         about="Love exploring the outdoors, especially the beautiful Pacific Northwest. I enjoy hiking, biking, and trail running.",
-        profile_image=url_for('static', filename='profile_images/mike.jpg')
+        profile_image='static/profile_images/mike.jpg'
     )
     jess = User(
         first_name='Jess',
@@ -72,7 +73,7 @@ def seed_users():
         password='password',
         location='Austin',
         about="Living a healthy and fit life in Austin. Yoga enthusiast and love trying new fitness challenges.",
-        profile_image=url_for('static', filename='profile_images/jess.jpg')
+        profile_image='static/profile_images/jess.jpg'
     )
     luke = User(
         first_name='Luke',
@@ -82,7 +83,7 @@ def seed_users():
         password='password',
         location='Denver',
         about="Fitness has transformed my life. I especially love weightlifting and constantly learning new techniques.",
-        profile_image=url_for('static', filename='profile_images/luke.jpg')
+        profile_image='static/profile_images/luke.jpg'
     )
     karen = User(
         first_name='Karen',
@@ -92,7 +93,7 @@ def seed_users():
         password='password',
         location='San Diego',
         about="A lifelong fitness devotee. Love running by the beach and trying out new workout classes.",
-        profile_image=url_for('static', filename='profile_images/karen.jpg')
+        profile_image='static/profile_images/karen.jpg'
     )
     tom = User(
         first_name='Tom',
@@ -102,7 +103,7 @@ def seed_users():
         password='password',
         location='Miami',
         about="Embracing the fit lifestyle in sunny Miami. I'm all about balance, discipline, and pushing the boundaries.",
-        profile_image=url_for('static', filename='profile_images/tom.jpg')
+        profile_image='static/profile_images/tom.jpg'
     )
     
     users=[demo, marnie, bobbie, sam, laura, mike, jess, luke, karen, tom]

@@ -1,4 +1,4 @@
-from app.models import db, Challenge, environment, SCHEMA
+from app.models import db, ChallengeResult, Challenge, ChallengeParticipant, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import time
 
@@ -82,9 +82,9 @@ def seed_challenge_results():
 
     db.session.commit()
 
-    def undo_challenge_results():
-        if environment == "production":
-            db.session.execute(f"TRUNCATE table {SCHEMA}.challenge_results RESTART IDENTITY CASCADE;")
-        else:
-            db.session.execute(text("DELETE FROM challenge_results"))
-        db.session.commit()
+def undo_challenge_results():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.challenge_results RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM challenge_results"))
+    db.session.commit()

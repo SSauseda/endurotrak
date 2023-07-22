@@ -1,4 +1,4 @@
-from app.models import db, Challenge, environment, SCHEMA
+from app.models import db, ChallengeParticipant, Challenge, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
@@ -23,9 +23,9 @@ def seed_challenge_participants():
     db.session.add_all([participant1, participant2, participant3, participant4, participant5, participant6])
     db.session.commit()
 
-    def undo_challenge_participants():
-        if environment == "production":
-            db.session.execute(f"TRUNCATE table {SCHEMA}.challenge_participants RESTART IDENTITY CASCADE;")
-        else:
-            db.session.execute(text("DELETE FROM challenge_participants"))
-        db.session.commit()
+def undo_challenge_participants():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.challenge_participants RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM challenge_participants"))
+    db.session.commit()

@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
 
 
 class User(db.Model, UserMixin):
@@ -22,8 +23,8 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan', lazy='joined')
-    given_bravos = db.relationship('Bravo', back_populates='user', foreign_keys=[Bravo.user_id], cascade='all, delete-orphan')
-    received_bravos = db.relationship('Bravo', back_populates='recipient', foreign_keys=[Bravo.recipient_id], cascade='all, delete-orphan')
+    given_bravos = db.relationship('Bravo', back_populates='user', foreign_keys='Bravo.user_id', cascade='all, delete-orphan')
+    received_bravos = db.relationship('Bravo', back_populates='recipient', foreign_keys='Bravo.recipient_id', cascade='all, delete-orphan')
     created_challenges = db.relationship('Challenge', back_populates='user', cascade='all, delete-orphan')
     challenge_participants = db.relationship('ChallengeParticipant', back_populates='user', cascade='all, delete-orphan')
     # instance where user is following another user
@@ -47,9 +48,9 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'first_name': self.first_name,
-            'last_name': self.last_name
+            'last_name': self.last_name,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
             'location': self.location,
             'about': self.about,
             'profile_image': self.profile_image,
@@ -60,9 +61,9 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'first_name': self.first_name,
-            'last_name': self.last_name
+            'last_name': self.last_name,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
             'location': self.location,
             'about': self.about,
             'profile_image': self.profile_image,

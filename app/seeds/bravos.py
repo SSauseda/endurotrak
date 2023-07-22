@@ -1,4 +1,4 @@
-from app.models import db, Challenge, environment, SCHEMA
+from app.models import db, Bravo, User, ChallengeResult, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
@@ -69,10 +69,10 @@ def seed_bravos():
 
     db.session.commit()
 
-    def undo_bravos():
-        if environment == "production":
-            db.session.execute(f"TRUNCATE table {SCHEMA}.bravos RESTART IDENTITY CASCADE;")
-        else:
-            db.session.execute(text("DELETE FROM bravos"))
-        db.session.commit()
+def undo_bravos():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.bravos RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM bravos"))
+    db.session.commit()
 

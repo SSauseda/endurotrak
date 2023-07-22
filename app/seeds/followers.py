@@ -1,4 +1,4 @@
-from app.models import db, Challenge, environment, SCHEMA
+from app.models import db, Follower, User, Challenge, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
@@ -50,10 +50,11 @@ def seed_followers():
 
     db.session.commit()
 
-    def undo_followers():
-        if environment == "production":
-            db.session.execute(f"TRUNCATE table {SCHEMA}.followers RESTART IDENTITY CASCADE;")
-        else:
-            db.session.execute(text("DELETE FROM followers"))
-        db.session.commit()
+def undo_followers():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.followers RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM followers"))
+    
+    db.session.commit()
 
