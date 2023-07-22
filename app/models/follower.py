@@ -15,7 +15,7 @@ class Follower(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # One who is following another user
-    user = db.relationship('User',foreign_keys=[user_id], back_populates='following')
+    user = db.relationship('User',foreign_keys=[user_id], back_populates='followings')
     # One who is being followed by another user
     follower = db.relationship('User', foreign_keys=[follower_id], back_populates='followers')
 
@@ -24,4 +24,6 @@ class Follower(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'follower_id': self.follower_id,
+            'follower_username': self.follower.username,
+            'follower_profile_image': self.follower.profile_image,
         }

@@ -27,9 +27,9 @@ class User(db.Model, UserMixin):
     created_challenges = db.relationship('Challenge', back_populates='user', cascade='all, delete-orphan')
     challenge_participants = db.relationship('ChallengeParticipant', back_populates='user', cascade='all, delete-orphan')
     # instance where user is following another user
-    followings = db.relationship('Follower', foreign_keys='Follower.user_id', back_populates='user', cascade='all, delete-orphan', lazy='dynamic')
+    followings = db.relationship('Follower', foreign_keys='Follower.user_id', back_populates='user', cascade='all, delete-orphan', lazy='joined')
     # instance where user is being followed by another user
-    followers = db.relationship('Follower', foreign_keys='Follower.follower_id', back_populates='follower', cascade='all, delete-orphan', lazy='dynamic')
+    followers = db.relationship('Follower', foreign_keys='Follower.follower_id', back_populates='follower', cascade='all, delete-orphan', lazy='joined')
 
 
     @property
@@ -43,7 +43,7 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self):
+    def to_dict_basic(self):
         return {
             'id': self.id,
             'first_name': self.first_name,
@@ -54,3 +54,32 @@ class User(db.Model, UserMixin):
             'about': self.about,
             'profile_image': self.profile_image,
         }
+    
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name
+            'username': self.username,
+            'email': self.email
+            'location': self.location,
+            'about': self.about,
+            'profile_image': self.profile_image,
+            'followers': [follower.to_dict() for follower in self.followers],
+            'comments': [comment.to_dict() for comment in self.comments],
+            'given_bravos': len(self.given_bravos),
+            'received_bravos': len(self.received_bravos),
+            'created_challenges': [challenge.to_dict() for challenge in self.created_challenges],
+            'challenge_participants': [participant.to_dict() for participant in self.challenge_participants],
+        }
+
+    def to_dict_followers(self):
+        user_dict = self.to_dict_basic()
+        user_dict['followers'] = [follower.to_dict() for follower in self.followers]
+        return user_dict
+
+    def to_dict_comments(self):
+        user_dict = self.to_dict_basic()
+        user_dict['comments'] = [comment.to_dict() for comment in self.comments]
+        return user_dict
