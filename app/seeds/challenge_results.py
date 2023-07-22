@@ -14,6 +14,15 @@ def seed_challenge_results():
     challenge6 = Challenge.query.filter(Challenge.title == 'Virtual Marathon!').first()
 
     participant1 = ChallengeParticipant.query.filter_by(user_id=1).first()
+    # participant2 = ChallengeParticipant.query.filter_by(user_id=2).first()
+    # participant3 = ChallengeParticipant.query.filter_by(user_id=3).first()
+    # participant4 = ChallengeParticipant.query.filter_by(user_id=4).first()
+    # participant5 = ChallengeParticipant.query.filter_by(user_id=5).first()
+    # participant6 = ChallengeParticipant.query.filter_by(user_id=6).first()
+    # participant7 = ChallengeParticipant.query.filter_by(user_id=7).first()
+    # participant8 = ChallengeParticipant.query.filter_by(user_id=8).first()
+    # participant9 = ChallengeParticipant.query.filter_by(user_id=9).first()
+    # participant10 = ChallengeParticipant.query.filter_by(user_id=10).first()
 
     result1 = ChallengeResult(
         participant_id=participant1.id,
