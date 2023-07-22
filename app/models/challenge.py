@@ -9,6 +9,7 @@ class Challenge(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -21,5 +22,6 @@ class Challenge(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'title': self.title,
             'description': self.description,
         }
