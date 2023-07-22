@@ -1,5 +1,6 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
+from .followers import seed_followers, undo_followers
 from .challenges import seed_challenges, undo_challenges
 from .challenge_participants import seed_challenge_participants, undo_challenge_participants
 from .challenge_results import seed_challenge_results, undo_challenge_results
@@ -26,8 +27,10 @@ def seed():
         undo_challenge_results()
         undo_challenge_participants()
         undo_challenges()
+        undo_followers()
         undo_users()
     seed_users()
+    seed_followers()
     seed_challenges()
     seed_challenge_participants()
     seed_challenge_results()
@@ -44,5 +47,6 @@ def undo():
     undo_challenge_results()
     undo_challenge_participants()
     undo_challenges()
+    undo_followers()
     undo_users()
     # Add other undo functions here
