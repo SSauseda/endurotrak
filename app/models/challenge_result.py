@@ -17,8 +17,8 @@ class ChallengeResult(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
   
-    comments = db.relationship('Comment', back_populates='result')
-    bravos = db.relationship('Bravo', back_populates='result')
+    comments = db.relationship('Comment', back_populates='result', cascade='all, delete')
+    bravos = db.relationship('Bravo', back_populates='result', cascade='all, delete')
     challenge = db.relationship('Challenge', back_populates='results')
  
 

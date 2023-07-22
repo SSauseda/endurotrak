@@ -14,8 +14,8 @@ class Challenge(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     user = db.relationship('User', back_populates='created_challenges')
-    participants = db.relationship('ChallengeParticipant', back_populates='challenge')
-    results = db.relationship('ChallengeResult', back_populates='challenge')
+    participants = db.relationship('ChallengeParticipant', back_populates='challenge', cascade='all, delete')
+    results = db.relationship('ChallengeResult', back_populates='challenge', cascade='all, delete')
 
     def to_dict(self):
         return {
