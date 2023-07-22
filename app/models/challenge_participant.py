@@ -22,5 +22,7 @@ class ChallengeParticipant(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'user_username': self.user.username,
             'challenge_id': self.challenge_id,
+            'challenge_title': self.challenge.title,
         }

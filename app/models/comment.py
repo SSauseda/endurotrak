@@ -22,6 +22,8 @@ class Comment(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'user_username': self.user.username,
             'result_id': self.result_id,
+            'result_description': self.result.result_description,
             'text': self.text,
         }

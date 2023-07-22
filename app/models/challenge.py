@@ -22,6 +22,8 @@ class Challenge(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'user_username': self.user.username,
             'title': self.title,
             'description': self.description,
+            'participants': [participant.to_dict() for participant in self.participants],
         }

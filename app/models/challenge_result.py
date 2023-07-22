@@ -33,4 +33,6 @@ class ChallengeResult(db.Model):
             'distance': self.distance,
             'duration': self.duration,
             'pace': self.pace,
+            'comments': [comment.to_dict() for comment in self.comments],
+            'bravos': len(self.bravos),
         }
