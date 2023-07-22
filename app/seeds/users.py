@@ -6,6 +6,8 @@ from flask import url_for
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
+        first_name='Demo',
+        last_name='User',
         username='Demo', 
         email='demo@aa.io', 
         password='password', 
@@ -14,6 +16,8 @@ def seed_users():
         profile_image=url_for('static', filename='profile_images/demo.jpg')
         )
     marnie = User(
+        first_name='Marnie',
+        last_name='Barnes',
         username='marnie',
         email='marnie@aa.io', 
         password='password', 
@@ -22,6 +26,8 @@ def seed_users():
         profile_image=url_for('static', filename='profile_images/marnie.jpg')
         )
     bobbie = User(
+        first_name='Bobbie',
+        last_name='Runsalot',
         username='bobbie', 
         email='bobbie@aa.io', 
         password='password', 
@@ -29,6 +35,8 @@ def seed_users():
         about="A former couch potato turned fitness junkie. I found my passion for fitness later in life, and now there's no looking back. Every day is a new opportunity to push my boundaries."
         )
     sam = User(
+        first_name='Sammy',
+        last_name='Speedster',
         username='SammyRuns',
         email='sammy@aa.io',
         password='password',
@@ -37,6 +45,8 @@ def seed_users():
         profile_image=url_for('static', filename='profile_images/sam.jpg')
     )
     laura = User(
+        first_name='Laura',
+        last_name='Liftalot',
         username='LauraFitLife',
         email='laura@aa.io',
         password='password',
@@ -45,6 +55,8 @@ def seed_users():
         profile_image=url_for('static', filename='profile_images/laura.jpg')
     )
     mike = User(
+        first_name='Mike',
+        last_name='Mountainman',
         username='MikeTheHiker',
         email='mike@aa.io',
         password='password',
@@ -53,6 +65,8 @@ def seed_users():
         profile_image=url_for('static', filename='profile_images/mike.jpg')
     )
     jess = User(
+        first_name='Jess',
+        last_name='Yogi',
         username='JessTheBest',
         email='jess@aa.io',
         password='password',
@@ -61,6 +75,8 @@ def seed_users():
         profile_image=url_for('static', filename='profile_images/jess.jpg')
     )
     luke = User(
+        first_name='Luke',
+        last_name='Liftweights',
         username='LukeLifts',
         email='luke@aa.io',
         password='password',
@@ -69,6 +85,8 @@ def seed_users():
         profile_image=url_for('static', filename='profile_images/luke.jpg')
     )
     karen = User(
+        first_name='Karen',
+        last_name='Kettlebell',
         username='KarenKeepsFit',
         email='karen@aa.io',
         password='password',
@@ -77,6 +95,8 @@ def seed_users():
         profile_image=url_for('static', filename='profile_images/karen.jpg')
     )
     tom = User(
+        first_name='Tom',
+        last_name='Treadmill',
         username='TomTakesOn',
         email='tom@aa.io',
         password='password',
