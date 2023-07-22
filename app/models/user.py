@@ -19,6 +19,19 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    comments = db.relationship('Comment', back_populates='user')
+    given_bravos = db.relationship('Bravo', back_populates='user', foreign_keys=[Bravo.user_id])
+    received_bravos = db.relationship('Bravo', back_populates='recipient', foreign_keys=[Bravo.recipient_id])
+
+    created_challenges = db.relationship('Challenge', back_populates='user')
+
+    challenge_participants = db.relationship('ChallengeParticipant', back_populates='user')
+
+    # instance where user is following another user
+    followings = db.relationship('Follower', foreign_keys='Follower.user_id', back_populates='user')
+    # instance where user is being followed by another user
+    followers = db.relationship('Follower', foreign_keys='Follower.follower_id', back_populates='follower')
+
 
     @property
     def password(self):
@@ -37,5 +50,6 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email
             'location': self.location,
+            'about': self.about,
             'profile_image': self.profile_image,
         }
