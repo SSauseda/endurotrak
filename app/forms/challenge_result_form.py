@@ -7,6 +7,6 @@ class ChallengeResultsForm(FlaskForm):
     challenge_id = IntegerField('Challenge ID', validators=[DataRequired()])
     result_description = TextAreaField('Result Description', validators=[DataRequired(), Length(max=255)])
     distance = FloatField('Distance', validators=[DataRequired()])
-    duration = TimeField('Duration', format='%H:%M:%S' validators=[DataRequired()])
+    duration = TimeField('Duration', format='%H:%M:%S', validators=[DataRequired()])
     pace = FloatField('Pace', validators=[DataRequired()])
     submit = SubmitField('Submit Result')
