@@ -14,7 +14,7 @@ def seed_challenge_results():
     challenge6 = Challenge.query.filter(Challenge.title == 'Virtual Marathon!').first()
 
     participant1 = ChallengeParticipant.query.filter_by(user_id=1).first()
-    # participant2 = ChallengeParticipant.query.filter_by(user_id=2).first()
+    participant2 = ChallengeParticipant.query.filter_by(user_id=2).first()
     # participant3 = ChallengeParticipant.query.filter_by(user_id=3).first()
     # participant4 = ChallengeParticipant.query.filter_by(user_id=4).first()
     # participant5 = ChallengeParticipant.query.filter_by(user_id=5).first()
@@ -72,6 +72,14 @@ def seed_challenge_results():
         duration=time(hour=3, minute=30),
         pace=5.0,
     )
+    result7 = ChallengeResult(
+        participant_id=participant2.id,
+        challenge_id=challenge1.id,
+        result_description='Finished 5k run in my best time yet!',
+        distance=5.0,
+        duration=time(hour=0, minute=30),
+        pace=6.0,
+    )
 
     db.session.add(result1)
     db.session.add(result2)
@@ -79,6 +87,7 @@ def seed_challenge_results():
     db.session.add(result4)
     db.session.add(result5)
     db.session.add(result6)
+    db.session.add(result7)
 
     db.session.commit()
 
