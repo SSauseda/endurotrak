@@ -68,6 +68,7 @@ class User(db.Model, UserMixin):
             'about': self.about,
             'profile_image': self.profile_image,
             'followers': [follower.to_dict() for follower in self.followers],
+            'followings': [following.to_dict() for following in self.followings],
             'comments': [comment.to_dict() for comment in self.comments],
             'given_bravos': len(self.given_bravos),
             'received_bravos': len(self.received_bravos),

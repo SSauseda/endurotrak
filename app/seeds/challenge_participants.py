@@ -12,6 +12,7 @@ def seed_challenge_participants():
     challenge6 = Challenge.query.filter(Challenge.title == 'Virtual Marathon!').first()
 
     user1 = User.query.get(1)
+    user2 = User.query.get(2)
 
     participant1 = ChallengeParticipant(user_id=user1.id, challenge_id=challenge1.id)
     participant2 = ChallengeParticipant(user_id=user1.id, challenge_id=challenge2.id)
@@ -20,7 +21,18 @@ def seed_challenge_participants():
     participant5 = ChallengeParticipant(user_id=user1.id, challenge_id=challenge5.id)
     participant6 = ChallengeParticipant(user_id=user1.id, challenge_id=challenge6.id)
 
-    db.session.add_all([participant1, participant2, participant3, participant4, participant5, participant6])
+    participant7 = ChallengeParticipant(user_id=user2.id, challenge_id=challenge1.id)
+
+    db.session.add_all([
+        participant1, 
+        participant2, 
+        participant3, 
+        participant4, 
+        participant5,
+        participant6,
+        participant7,
+        ])
+        
     db.session.commit()
 
 def undo_challenge_participants():
