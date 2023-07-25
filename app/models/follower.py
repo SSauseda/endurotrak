@@ -32,3 +32,19 @@ class Follower(db.Model):
             'follower_username': self.follower.username,
             'follower_profile_image': self.follower.profile_image,
         }
+
+    def to_dict_follower(self):
+        return {
+            'id': self.id,
+            'follower_id': self.follower_id,
+            'follower_username': self.follower.username,
+            'follower_profile_image': self.follower.profile_image,
+        }
+
+    def to_dict_followings(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'user_username': self.user.username,
+            'user_profile_image': self.user.profile_image,
+        }
