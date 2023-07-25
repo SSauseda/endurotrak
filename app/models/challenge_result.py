@@ -32,7 +32,7 @@ class ChallengeResult(db.Model):
             'challenge_id': self.challenge_id,
             'result_description': self.result_description,
             'distance': self.distance,
-            'duration': self.duration,
+            'duration': self.duration.strftime("%H:%M:%S") if self.duration else None,
             'pace': self.pace,
             'comments': [comment.to_dict() for comment in self.comments],
             'bravos': len(self.bravos),

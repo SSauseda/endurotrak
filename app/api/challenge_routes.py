@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Challenge
+from app.models import db, Challenge, ChallengeParticipant
 from app.forms import ChallengeForm
 
 
@@ -81,3 +81,34 @@ def delete_challenge(id):
     db.session.delete(challenge)
     db.session.commit()
     return {'message': 'Challenge deleted'}
+
+
+# ALLOW A USER TO JOIN A CHALLENGE
+@challenge_routes.route('/<int:challenge_id>/participants', methods=['POST'])
+@login_required
+def join_challenge(challenge_id):
+    user_id = current_user.id
+
+    existing_participant = ChallengeParticipant.query.filter_by(user_id=user_id, challenge_id=challenge_id).first()
+    if existing_participant:
+        return {'errors': ['You are already a participant in this challenge']}, 400
+    participant = ChallengeParticipant(
+        user_id = user_id,
+        challenge_id = challenge_id
+    )
+    db.session.add(participant)
+    db.session.commit()
+    return participant.to_dict()
+
+
+# ALLOW USER TO LEAVE A CHALLENGE
+@challenge_routes.route('/<int:challenge_id>/participants', methods=['DELETE'])
+@login_required
+def leave_challenge(challenge_id):
+    user_id = current_user.id
+    participant = ChallengeParticipant.query.filter_by(user_id=user_id, challenge_id=challenge_id).first()
+    if not participant:
+        return {'errors': ['You are not a participant in this challenge']}, 400
+    db.session.delete(participant)
+    db.session.commit()
+    return {'message': 'You have successfully left this challenge'}
