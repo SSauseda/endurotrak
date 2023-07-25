@@ -9,6 +9,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.bravo_routes import bravo_routes
 from .api.challenge_routes import challenge_routes
+from .api.follower_routes import follower_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -32,6 +33,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(bravo_routes, url_prefix='/api/bravos')
 app.register_blueprint(challenge_routes, url_prefix='/api/challenges')
+app.register_blueprint(follower_routes, url_prefix='/api/users')
 db.init_app(app)
 Migrate(app, db)
 
