@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import User, Challenge
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +23,11 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+    
+@user_routes.route('/<int:user_id>/challenges')
+@login_required
+def get_user_challenges(user_id):
+    if current_user.id != user_id:
+        return {'errors': ['Unauthorized']}, 401
+    user_challenges = Challenge.query.filter_by(user_id=user_id).all()
+    return {'challenges': [challenge.to_dict() for challenge in user_challenges]}
