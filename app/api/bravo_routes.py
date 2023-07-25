@@ -15,6 +15,7 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
+# GET ALL BRAVOS
 @bravo_routes.route('/')
 def get_bravos():
     """
@@ -24,6 +25,7 @@ def get_bravos():
     return {'bravos': [bravo.to_dict() for bravo in bravos]}
 
 
+# CREATE A BRAVO FOR A CHALLENGE RESULT
 @bravo_routes.route('/', methods=['POST'])
 @login_required
 def post_bravo():
