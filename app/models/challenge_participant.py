@@ -27,3 +27,10 @@ class ChallengeParticipant(db.Model):
             'challenge_id': self.challenge_id,
             'challenge_title': self.challenge.title,
         }
+
+    def to_dict_user(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'user_username': self.user.username,
+        }

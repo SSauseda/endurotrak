@@ -27,5 +27,5 @@ class Challenge(db.Model):
             'title': self.title,
             'description': self.description,
             'activity_type': self.activity_type,
-            'participants': [participant.to_dict() for participant in self.participants],
+            'participants': [participant.to_dict_user() for participant in self.participants],
         }
