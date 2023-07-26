@@ -16,7 +16,7 @@ class ChallengeParticipant(db.Model):
 
     user = db.relationship('User', back_populates='challenge_participants')
     challenge = db.relationship('Challenge', back_populates='participants')
-
+    challenge_results = db.relationship('ChallengeResult', back_populates='participant', cascade='all, delete-orphan')
 
 
     def to_dict(self):

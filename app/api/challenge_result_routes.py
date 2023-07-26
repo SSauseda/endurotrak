@@ -22,18 +22,24 @@ def create_challenge_result(challenge_id):
     """
     Logged in User creates a Challenge Result
     """
-    form = ChallengeResultsForm()
-    form.populate_obj(request.json)
+    data = request.get_json()
+    form = ChallengeResultsForm(data=data)
+    form['csrf_token'].data = request.cookies['csrf_token']
 
     # CHECK IF THE USER IS A PARTICIPANT IN THE CHALLENGE
     participant = ChallengeParticipant.query.filter_by(user_id=current_user.id, challenge_id=challenge_id).first()
     if not participant:
         return {'errors': ['You are not a participant in this challenge']}, 400
 
+    # CHECK IF THE USER HAS ALREADY SUBMITTED A RESULT FOR THIS CHALLENGE
+    existing_result = ChallengeResult.query.filter_by(participant_id=participant.id, challenge_id=challenge_id).first()
+    if existing_result:
+        return {'errors': ['You have already submitted a result for this challenge']}, 400
+
     if form.validate():
         result = ChallengeResult(
-            # participant_id = form.participant_id.data,
-            # challenge_id = form.challenge_id.data,
+            participant_id = participant.id,
+            challenge_id = challenge_id,
             result_description = form.result_description.data,
             distance = form.distance.data,
             duration = form.duration.data,
@@ -71,7 +77,7 @@ def get_challenge_result(challenge_id, result_id):
 
 @result_routes.route('/<int:challenge_id>/results/<int:result_id>', methods=['DELETE'])
 @login_required
-def delete_challenge_result(result_id):
+def delete_challenge_result(challenge_id, result_id):
     """
     Delete a Challenge Result by ID
     """

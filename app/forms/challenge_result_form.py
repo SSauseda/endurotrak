@@ -10,3 +10,4 @@ class ChallengeResultsForm(FlaskForm):
     duration = TimeField('Duration', format='%H:%M:%S', validators=[DataRequired()])
     pace = FloatField('Pace', validators=[DataRequired()])
     submit = SubmitField('Submit Result')
+

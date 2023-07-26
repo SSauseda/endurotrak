@@ -21,7 +21,7 @@ class ChallengeResult(db.Model):
     comments = db.relationship('Comment', back_populates='result', cascade='all, delete')
     bravos = db.relationship('Bravo', back_populates='result', cascade='all, delete')
     challenge = db.relationship('Challenge', back_populates='results')
- 
+    participant = db.relationship('ChallengeParticipant', back_populates='challenge_results')
 
 
 
@@ -29,6 +29,7 @@ class ChallengeResult(db.Model):
         return {
             'id': self.id,
             'participant_id': self.participant_id,
+            'participant_username': self.participant.user.username,
             'challenge_id': self.challenge_id,
             'result_description': self.result_description,
             'distance': self.distance,
