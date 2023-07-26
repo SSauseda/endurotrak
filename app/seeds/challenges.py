@@ -17,31 +17,37 @@ def seed_challenges():
         user_id=demo.id,
         title='Run 5K!',
         description='Run 5 kilometers as fast as you can.',
+        activity_type='Running',
     )
     challenge2 = Challenge(
         user_id=marnie.id,
         title='Your fastest Mile!',
         description='Run 1 mile as fast as you can.',
+        activity_type='Running',
     )
     challenge3 = Challenge(
         user_id=bobbie.id,
         title='Run 10K',
         description='Run 10 kilometers as fast as you can.',
+        activity_type='Running',
     )
     challenge4 = Challenge(
         user_id=karen.id,
         title='Bike 20K',
         description='Bike 20 kilometers as fast as you can.',
+        activity_type='Cycling',
     )
     challenge5 = Challenge(
         user_id=jess.id,
         title='August Gran Fondo',
         description='Complete a Gran Fondo (100km).',
+        activity_type='Cycling',
     )
     challenge6 = Challenge(
         user_id=mike.id,
         title='Virtual Marathon!',
         description='Run a marathon (42km) as fast as you can.',
+        activity_type='Running',
     )
 
 

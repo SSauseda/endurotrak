@@ -47,7 +47,8 @@ def post_challenge():
         challenge = Challenge(
             user_id = current_user.id,
             title = form.data['title'],
-            description = form.data['description']
+            description = form.data['description'],
+            activity_type = form.data['activity_type'],
         )
         db.session.add(challenge)
         db.session.commit()

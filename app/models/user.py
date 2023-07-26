@@ -19,6 +19,8 @@ class User(db.Model, UserMixin):
     location = db.Column(db.String(255), nullable=False)
     about = db.Column(db.String(255), nullable=False)
     profile_image = db.Column(db.String(255), nullable=True)
+    total_distance_running = db.Column(db.Float, default=0)
+    total_distance_cycling = db.Column(db.Float, default=0)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 

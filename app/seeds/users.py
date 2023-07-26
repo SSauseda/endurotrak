@@ -1,4 +1,4 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, environment, SCHEMA, Challenge, ChallengeParticipant, ChallengeResult  
 from sqlalchemy.sql import text
 from flask import url_for
 
@@ -109,6 +109,24 @@ def seed_users():
     users=[demo, marnie, bobbie, sam, laura, mike, jess, luke, karen, tom]
     
     db.session.add_all(users)
+    db.session.commit()
+
+     # Calculate total distances after committing the users to the database
+    for user in users:
+        # Get all the results associated with this user through ChallengeParticipant relationship
+        results = ChallengeResult.query.filter(ChallengeResult.participant.has(user_id=user.id)).all()
+
+        # Iterate over each result
+        for result in results:
+            # Get the challenge associated with this result
+            challenge = Challenge.query.get(result.challenge_id)
+
+            # Update the appropriate total distance field based on the challenge's activity type
+            if challenge.activity_type == 'running':
+                user.total_distance_running += result.distance
+            elif challenge.activity_type == 'cycling':
+                user.total_distance_cycling += result.distance
+
     db.session.commit()
 
 

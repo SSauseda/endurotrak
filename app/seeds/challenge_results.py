@@ -1,4 +1,4 @@
-from app.models import db, ChallengeResult, Challenge, ChallengeParticipant, environment, SCHEMA
+from app.models import db, User, ChallengeResult, Challenge, ChallengeParticipant, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import time
 
@@ -23,6 +23,8 @@ def seed_challenge_results():
     # participant8 = ChallengeParticipant.query.filter_by(user_id=8).first()
     # participant9 = ChallengeParticipant.query.filter_by(user_id=9).first()
     # participant10 = ChallengeParticipant.query.filter_by(user_id=10).first()
+    # user = User.query.get(1)
+
 
     result1 = ChallengeResult(
         participant_id=participant1.id,
@@ -32,14 +34,24 @@ def seed_challenge_results():
         duration=time(hour=0, minute=30),
         pace=6.0,
     )
+    if challenge1.activity_type == 'Running':
+        participant1.user.total_distance_running += result1.distance
+    elif challenge1.activity_type == 'Cycling':
+        participant1.user.total_distance_cycling += result1.distance
+
     result2 = ChallengeResult(
         participant_id=participant1.id,
         challenge_id=challenge2.id,
         result_description='Ran my fastest mile today! Can you beat it?',
-        distance=1.0,
+        distance=1.61,
         duration=time(hour=0, minute=6),
         pace=6.0,
     )
+    if challenge2.activity_type == 'Running':
+        participant1.user.total_distance_running += result2.distance
+    elif challenge2.activity_type == 'Cycling':
+        participant1.user.total_distance_cycling += result2.distance
+    
     result3 = ChallengeResult(
         participant_id=participant1.id,
         challenge_id=challenge3.id,
@@ -48,6 +60,11 @@ def seed_challenge_results():
         duration=time(hour=1, minute=5),
         pace=6.5,
     )
+    if challenge3.activity_type == 'Running':
+        participant1.user.total_distance_running += result3.distance
+    elif challenge3.activity_type == 'Cycling':
+        participant1.user.total_distance_cycling += result3.distance
+
     result4 = ChallengeResult(
         participant_id=participant1.id,
         challenge_id=challenge4.id,
@@ -56,6 +73,11 @@ def seed_challenge_results():
         duration=time(hour=1, minute=10),
         pace=3.5,
     )
+    if challenge4.activity_type == 'Running':
+        participant1.user.total_distance_running += result4.distance
+    elif challenge4.activity_type == 'Cycling':
+        participant1.user.total_distance_cycling += result4.distance
+
     result5 = ChallengeResult(
         participant_id=participant1.id,
         challenge_id=challenge5.id,
@@ -64,6 +86,11 @@ def seed_challenge_results():
         duration=time(hour=5),
         pace=3.0,
     )
+    if challenge5.activity_type == 'Running':
+        participant1.user.total_distance_running += result5.distance
+    elif challenge5.activity_type == 'Cycling':
+        participant1.user.total_distance_cycling += result5.distance
+
     result6 = ChallengeResult(
         participant_id=participant1.id,
         challenge_id=challenge6.id,
@@ -72,6 +99,11 @@ def seed_challenge_results():
         duration=time(hour=3, minute=30),
         pace=5.0,
     )
+    if challenge6.activity_type == 'Running':
+        participant1.user.total_distance_running += result6.distance
+    elif challenge6.activity_type == 'Cycling':
+        participant1.user.total_distance_cycling += result6.distance
+
     result7 = ChallengeResult(
         participant_id=participant2.id,
         challenge_id=challenge1.id,
@@ -80,6 +112,10 @@ def seed_challenge_results():
         duration=time(hour=0, minute=30),
         pace=6.0,
     )
+    if challenge1.activity_type == 'Running':
+        participant2.user.total_distance_running += result7.distance
+    elif challenge1.activity_type == 'Cycling':
+        participant2.user.total_distance_cycling += result7.distance
 
     db.session.add(result1)
     db.session.add(result2)
@@ -90,6 +126,11 @@ def seed_challenge_results():
     db.session.add(result7)
 
     db.session.commit()
+
+    # if challenge1.activity_type == 'Running':
+    #     participant1.user.total_distance_running += result1.distance
+    # elif challenge1.activity_type == 'cycling':
+    #     participant1.total_distance_cycling += result1.distance
 
 def undo_challenge_results():
     if environment == "production":

@@ -11,6 +11,7 @@ class Challenge(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
+    activity_type = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -25,5 +26,6 @@ class Challenge(db.Model):
             'user_username': self.user.username,
             'title': self.title,
             'description': self.description,
+            'activity_type': self.activity_type,
             'participants': [participant.to_dict() for participant in self.participants],
         }

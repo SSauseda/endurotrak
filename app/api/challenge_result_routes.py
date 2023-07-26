@@ -47,6 +47,14 @@ def create_challenge_result(challenge_id):
         )
 
         db.session.add(result)
+
+        # UPDATE THE PARTICIPANT'S TOTAL DISTANCE
+        challenge = Challenge.query.get(challenge_id)
+        if challenge.activity_type == 'running':
+            current_user.total_distance_running += form.result.distance
+        elif challenge.activity_type == 'cycling':
+            current_user.total_distance_cycling += form.result.distance
+
         db.session.commit()
 
         return result.to_dict()
@@ -87,6 +95,12 @@ def delete_challenge_result(challenge_id, result_id):
     
     if result.participant.user_id != current_user.id:
         return {'errors': ['You do not have permission to delete this result']}, 403
+
+    # UPDATE THE PARTICIPANT'S TOTAL DISTANCE
+    if challenge.activity_type == 'running':
+        current_user.total_distance_running -= result.distance
+    elif challenge.activity_type == 'cycling':
+        current_user.total_distance_cycling -= result.distance
 
     db.session.delete(result)
     db.session.commit()
