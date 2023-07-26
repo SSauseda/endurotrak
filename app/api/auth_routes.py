@@ -70,7 +70,10 @@ def sign_up():
             about=form.data['about'],
             profile_image=form.data['profile_image'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            banner_image1=form.data['banner_image1'],
+            banner_image2=form.data['banner_image2'],
+            banner_image3=form.data['banner_image3'],
         )
         db.session.add(user)
         db.session.commit()

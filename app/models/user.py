@@ -19,6 +19,9 @@ class User(db.Model, UserMixin):
     location = db.Column(db.String(255), nullable=False)
     about = db.Column(db.String(255), nullable=False)
     profile_image = db.Column(db.String(255), nullable=True)
+    banner_image1 = db.Column(db.String(255), nullable=True)
+    banner_image2 = db.Column(db.String(255), nullable=True)
+    banner_image3 = db.Column(db.String(255), nullable=True)
     total_distance_running = db.Column(db.Float, default=0)
     total_distance_cycling = db.Column(db.Float, default=0)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -56,6 +59,11 @@ class User(db.Model, UserMixin):
             'location': self.location,
             'about': self.about,
             'profile_image': self.profile_image,
+            'banner_image1': self.banner_image1,
+            'banner_image2': self.banner_image2,
+            'banner_image3': self.banner_image3,
+            'total_distance_running': self.total_distance_running,
+            'total_distance_cycling': self.total_distance_cycling,
         }
     
     
@@ -69,6 +77,9 @@ class User(db.Model, UserMixin):
             'location': self.location,
             'about': self.about,
             'profile_image': self.profile_image,
+            'banner_image1': self.banner_image1,
+            'banner_image2': self.banner_image2,
+            'banner_image3': self.banner_image3,
             'followers': [follower.to_dict() for follower in self.followers],
             'followings': [following.to_dict() for following in self.followings],
             'comments': [comment.to_dict() for comment in self.comments],
@@ -78,12 +89,12 @@ class User(db.Model, UserMixin):
             'challenge_participants': [participant.to_dict() for participant in self.challenge_participants],
         }
 
-    def to_dict_followers(self):
-        user_dict = self.to_dict_basic()
-        user_dict['followers'] = [follower.to_dict() for follower in self.followers]
-        return user_dict
+    # def to_dict_followers(self):
+    #     user_dict = self.to_dict_basic()
+    #     user_dict['followers'] = [follower.to_dict() for follower in self.followers]
+    #     return user_dict
 
-    def to_dict_comments(self):
-        user_dict = self.to_dict_basic()
-        user_dict['comments'] = [comment.to_dict() for comment in self.comments]
-        return user_dict
+    # def to_dict_comments(self):
+    #     user_dict = self.to_dict_basic()
+    #     user_dict['comments'] = [comment.to_dict() for comment in self.comments]
+    #     return user_dict

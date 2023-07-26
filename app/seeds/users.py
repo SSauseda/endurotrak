@@ -13,7 +13,10 @@ def seed_users():
         password='password', 
         location='New York', 
         about="I'm a fitness enthusiast who loves challenging myself and setting new personal records. When I'm not running or lifting weights, you'll find me reading up on the latest in nutrition and health science.",
-        profile_image='static/profile_images/demo.jpg'
+        profile_image='static/profile_images/demo.jpg',
+        banner_image1='static/banner_images/demo_banner1.png',
+        banner_image2='static/banner_images/demo_banner2.jpg',
+        banner_image3='static/banner_images/demo_banner3.jpg'
         )
     marnie = User(
         first_name='Marnie',
