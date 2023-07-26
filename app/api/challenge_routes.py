@@ -25,10 +25,10 @@ def get_challenges():
 
 
 # GET A CHALLENGE BY ID
-@challenge_routes.route('/<int:id>')
+@challenge_routes.route('/<int:challenge_id>')
 @login_required
-def get_challenge(id):
-    challenge = Challenge.query.get(id)
+def get_challenge(challenge_id):
+    challenge = Challenge.query.get(challenge_id)
     if not challenge:
         return {'errors': ['Challenge not found']}, 404
     return challenge.to_dict()
@@ -58,25 +58,26 @@ def post_challenge():
 
 
 # UPDATE A CHALLENGE
-@challenge_routes.route('/<int:id>', methods=['PUT'])
+@challenge_routes.route('/<int:challenge_id>', methods=['PUT'])
 @login_required
-def update_challenge(id):
+def update_challenge(challenge_id):
     form = ChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        challenge = Challenge.query.get(id)
+        challenge = Challenge.query.get(challenge_id)
         challenge.title = form.data['title']
         challenge.description = form.data['description']
+        challenge.activity_type = form.data['activity_type']
         db.session.commit()
         return challenge.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 # DELETE A CHALLENGE
-@challenge_routes.route('/<int:id>', methods=['DELETE'])
+@challenge_routes.route('/<int:challenge_id>', methods=['DELETE'])
 @login_required
-def delete_challenge(id):
-    challenge = Challenge.query.get(id)
+def delete_challenge(challenge_id):
+    challenge = Challenge.query.get(challenge_id)
     if not challenge:
         return {'errors': ['Challenge not found']}, 404
     db.session.delete(challenge)

@@ -16,9 +16,9 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 # CREATE A COMMENT FOR A CHALLENGE RESULT
-@comment_routes.route('/', methods=['POST'])
+@comment_routes.route('/<int:challenge_id>/results/<int:result_id>/comments', methods=['POST'])
 @login_required
-def post_comment():
+def post_comment(challenge_id, result_id):
     """
     Logged in User creates a comment for a challenge result
     """
@@ -37,9 +37,9 @@ def post_comment():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # GET COMMENT BY ID
-@comment_routes.route('/<int:comment_id>', methods=['GET'])
+@comment_routes.route('/<int:challenge_id>/results/<int:result_id>/comments/<int:comment_id>', methods=['GET'])
 @login_required
-def get_comment(comment_id):
+def get_comment(challenge_id, result_id, comment_id):
     comment = Comment.query.get(comment_id)
     if comment:
         return comment.to_dict()
@@ -47,9 +47,9 @@ def get_comment(comment_id):
         return {'errors': ['Comment not found']}, 404
 
 # UPDATE A COMMENT
-@comment_routes.route('/<int:comment_id>', methods=['PUT'])
+@comment_routes.route('/<int:challenge_id>/results/<int:result_id>/comments/<int:comment_id>', methods=['PUT'])
 @login_required
-def update_comment(comment_id):
+def update_comment(challenge_id, result_id, comment_id):
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -62,9 +62,9 @@ def update_comment(comment_id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # DELETE A COMMENT
-@comment_routes.route('/<int:comment_id>', methods=['DELETE'])
+@comment_routes.route('/<int:challenge_id>/results/<int:result_id>/comments/<int:comment_id>', methods=['DELETE'])
 @login_required
-def delete_comment(comment_id):
+def delete_comment(challenge_id, result_id, comment_id):
     comment = Comment.query.get(comment_id)
     if comment.user_id != current_user.id:
         return {'errors': ['You do not have permission to delete this comment.']}, 403
@@ -73,9 +73,9 @@ def delete_comment(comment_id):
     return {'message': 'Comment deleted'}
 
 # GET ALL COMMENTS FOR A CHALLENGE RESULT
-@comment_routes.route('/results/<int:result_id>', methods=['GET'])
+@comment_routes.route('/<int:challenge_id>/results/<int:result_id>/comments', methods=['GET'])
 @login_required
-def get_comments_for_result(result_id):
+def get_comments_for_result(challenge_id, result_id):
     comments = Comment.query.filter_by(result_id=result_id).all()
     return {'comments': [comment.to_dict() for comment in comments]}
 
