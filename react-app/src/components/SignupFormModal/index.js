@@ -21,6 +21,8 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
+	const cities = ["New York", "Los Angeles", "Chicago", "Houston", "Dallas", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Miami", "San Francisco", "Denver", "Boston", "Seattle"]
+
 	const validateImageUrl = (url) => {
 		return url === '' || url.match(/\.(jpeg|jpg|png)$/) != null;
 	}
@@ -111,12 +113,16 @@ function SignupFormModal() {
 				</label>
 				<label>
 					Location
-					<input 
-						type="text"
+					<select
 						value={location}
 						onChange={(e) => setLocation(e.target.value)}
 						required
-					/>
+					>
+						<option value="">--Please choose a city--</option>
+						{cities.map((city, index) => (
+							<option key={index} value={city}>{city}</option>
+						))}
+					</select>
 				</label>
 				<label>
 					Tell us about yourself
