@@ -21,7 +21,22 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
-	const cities = ["New York", "Los Angeles", "Chicago", "Houston", "Dallas", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Miami", "San Francisco", "Denver", "Boston", "Seattle"]
+	const cities = [
+		"Boston", 
+		"Chicago", 
+		"Dallas", 
+		"Denver", 
+		"Houston", 
+		"Los Angeles", 
+		"Miami", 
+		"New York", 
+		"Philadelphia", 
+		"Phoenix", 
+		"San Antonio", 
+		"San Diego", 
+		"San Francisco", 
+		"Seattle"
+	];
 
 	const validateImageUrl = (url) => {
 		return url === '' || url.match(/\.(jpeg|jpg|png)$/) != null;
