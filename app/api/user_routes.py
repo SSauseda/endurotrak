@@ -35,3 +35,14 @@ def get_user_challenges(user_id):
     user_challenges = Challenge.query.filter_by(user_id=user_id).all()
     return {'challenges': [challenge.to_dict() for challenge in user_challenges]}
 
+
+@user_routes.route('/search', methods=['GET'])
+def search_users():
+    """
+    Search for users by username
+    """
+    search = request.args.get('search')
+    if search is None:
+        return {'users': []}
+    users = User.query.filter(User.first_name.ilike(f'%{search}%')).all()
+    return {'users': [user.to_dict_basic() for user in users]}

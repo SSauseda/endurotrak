@@ -20,9 +20,9 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 
-def password_matches(form, field):
-    if field.data != form.password.data:
-        raise ValidationError('Passwords do not match.')
+# def password_matches(form, field):
+#     if field.data != form.password.data:
+#         raise ValidationError('Passwords do not match.')
 
 def validate_image_url(form, field):
     if field.data:
@@ -35,12 +35,12 @@ class SignUpForm(FlaskForm):
     first_name = StringField('first_name',validators=[DataRequired(message="Please enter your first name")])
     last_name = StringField('last_name',validators=[DataRequired(message="Please enter your last name")])
     location = StringField('location',validators=[DataRequired(message="Please enter your location")])
-    about = TextAreaField('about',validators=[DataRequired(message="Please enter a short bio"), Length(max=255)])
+    about = TextAreaField('about',validators=[DataRequired(message="Please enter a short bio"), Length(min=10, max=255, message="Your bio must be between 10 and 255 characters")])
     profile_image = StringField('profile_image', validators=[validate_image_url])
     banner_image1 = StringField('banner_image1', validators=[validate_image_url])
     banner_image2 = StringField('banner_image2', validators=[validate_image_url])
     banner_image3 = StringField('banner_image3', validators=[validate_image_url])
     email = StringField('email', validators=[DataRequired(message="Please enter your email"), Email(message="Please enter a valid email address"), user_exists])
     password = PasswordField('password', validators=[DataRequired(message="Please create a password")])
-    confirm_password = PasswordField('confirm_password', validators=[DataRequired(message="Please confirm your password"), password_matches])
+    # confirm_password = PasswordField('confirm_password', validators=[DataRequired(message="Please confirm your password"), password_matches])
     
