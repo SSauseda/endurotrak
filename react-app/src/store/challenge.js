@@ -42,7 +42,13 @@ export const addChallenge = (
     userId,
     title,
     description,
-    activityType
+    activityType,
+    goal,
+    goalUnit,
+    startDate,
+    endDate,
+    imageUrl,
+    rules
     ) => async (dispatch) => {
     const response = await fetch ('/api/challenges', {
         method: 'POST',
@@ -52,6 +58,12 @@ export const addChallenge = (
             title,
             description,
             activity_type: activityType,
+            goal,
+            goal_unit: goalUnit,
+            start_date: startDate,
+            end_date: endDate,
+            image_url: imageUrl,
+            rules
         }),
     });
 
@@ -59,6 +71,66 @@ export const addChallenge = (
         const data = await response.json();
         dispatch(createChallenge(data));
         return data;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.'];
+    }
+}
+
+export const editChallenge = (
+    challengeId,
+    title,
+    description,
+    activityType,
+    goal,
+    goalUnit,
+    startDate,
+    endDate,
+    imageUrl,
+    rules
+) => async (dispatch) => {
+    const response = await fetch(`/api/challenges/${challengeId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            title,
+            description,
+            activity_type: activityType,
+            goal,
+            goal_unit: goalUnit,
+            start_date: startDate,
+            end_date: endDate,
+            image_url: imageUrl,
+            rules
+        }),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(updateChallenge(data));
+        return data;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.'];
+    }
+}
+
+export const removeChallenge = (challengeId) => async (dispatch) => {
+    const response = await fetch(`/api/challenges/${challengeId}`, {
+        method: 'DELETE',
+    });
+
+    if (response.ok) {
+        dispatch(deleteChallenge(challengeId));
+        return response;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
@@ -85,6 +157,14 @@ const challengeReducer = (state = initialState, action) => {
         case CREATE_CHALLENGE:
             newState = { ...state };
             newState[action.payload.id] = action.payload;
+            return newState;
+        case UPDATE_CHALLENGE:
+            newState = { ...state };
+            newState[action.payload.id] = action.payload;
+            return newState;
+        case DELETE_CHALLENGE:
+            newState = { ...state };
+            delete newState[action.payload];
             return newState;
         default:
             return state;
