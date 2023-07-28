@@ -28,10 +28,11 @@ const deleteChallenge = (challengeId) => ({
 
 // Thunks
 export const fetchChallenges = () => async (dispatch) => {
-    const response = await fetch('/api/challenges');
+    const response = await fetch('/api/challenges/');
 
     if (response.ok) {
-        const challenges = await response.json();
+        const challengesData = await response.json();
+        const challenges = Object.values(challengesData)
         dispatch(getChallenges(challenges));
         return challenges;
     }
