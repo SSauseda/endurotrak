@@ -1,8 +1,8 @@
-"""migrate to fix revision
+"""empty message
 
-Revision ID: 8584aa020dc2
+Revision ID: 9cbde8fa4b38
 Revises: 
-Create Date: 2023-07-25 18:21:11.214491
+Create Date: 2023-07-27 19:14:47.085263
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '8584aa020dc2'
+revision = '9cbde8fa4b38'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,13 +32,17 @@ def upgrade():
     sa.Column('location', sa.String(length=255), nullable=False),
     sa.Column('about', sa.String(length=255), nullable=False),
     sa.Column('profile_image', sa.String(length=255), nullable=True),
+    sa.Column('banner_image1', sa.String(length=255), nullable=True),
+    sa.Column('banner_image2', sa.String(length=255), nullable=True),
+    sa.Column('banner_image3', sa.String(length=255), nullable=True),
+    sa.Column('total_distance_running', sa.Float(), nullable=True),
+    sa.Column('total_distance_cycling', sa.Float(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
@@ -47,12 +51,18 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
+    sa.Column('activity_type', sa.String(length=50), nullable=False),
+    sa.Column('goal', sa.Float(), nullable=False),
+    sa.Column('goal_unit', sa.String(length=50), nullable=False),
+    sa.Column('start_date', sa.DateTime(), nullable=False),
+    sa.Column('end_date', sa.DateTime(), nullable=False),
+    sa.Column('image_url', sa.String(length=255), nullable=True),
+    sa.Column('rules', sa.Text(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
@@ -66,7 +76,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
@@ -80,7 +89,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
@@ -90,6 +98,7 @@ def upgrade():
     sa.Column('challenge_id', sa.Integer(), nullable=False),
     sa.Column('result_description', sa.String(length=255), nullable=False),
     sa.Column('distance', sa.Float(), nullable=False),
+    sa.Column('goal_unit', sa.String(length=50), nullable=False),
     sa.Column('duration', sa.Time(), nullable=False),
     sa.Column('pace', sa.Float(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -98,7 +107,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['participant_id'], ['challenge_participants.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
@@ -114,7 +122,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
@@ -129,7 +136,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###

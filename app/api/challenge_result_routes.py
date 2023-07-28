@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, ChallengeResult, ChallengeParticipant
-from app.forms import ChallengeResultsForm
+from app.models import db, ChallengeResult, ChallengeParticipant, User, Challenge
+from app.forms import ChallengeResultsForm, ChallengeForm
 
 
 result_routes = Blueprint('results', __name__)
@@ -15,6 +15,20 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
     return errorMessages
+
+def update_total_distance(user_id, challenge_result, activity_type, is_deleted=False):
+    user = User.query.get(user_id)
+    distance = challenge_result.distance
+    if challenge_result.goal_unit == 'mi':
+        distance = distance * 1.60934
+    if is_deleted:
+        distance = -distance # SUBTRACT THE DISTANCE FROM THE TOTAL
+    if activity_type == 'Running':
+        user.total_distance_running += distance
+    elif activity_type == 'Cycling':
+        user.total_distance_cycling += distance
+    db.session.commit()
+
 
 @result_routes.route('/<int:challenge_id>/results', methods=['POST'])
 @login_required
@@ -40,20 +54,18 @@ def create_challenge_result(challenge_id):
         result = ChallengeResult(
             participant_id = participant.id,
             challenge_id = challenge_id,
-            result_description = form.result_description.data,
-            distance = form.distance.data,
-            duration = form.duration.data,
-            pace = form.pace.data,
+            result_description = form.data['result_description'],
+            distance = form.data['distance'],
+            duration = form.data['duration'],
+            pace = form.data['pace'],
+            goal_unit = form.data['goal_unit'],
         )
 
         db.session.add(result)
+        challenge = Challenge.query.get(challenge_id)
 
         # UPDATE THE PARTICIPANT'S TOTAL DISTANCE
-        challenge = Challenge.query.get(challenge_id)
-        if challenge.activity_type == 'running':
-            current_user.total_distance_running += form.result.distance
-        elif challenge.activity_type == 'cycling':
-            current_user.total_distance_cycling += form.result.distance
+        update_total_distance(current_user.id, result, challenge.activity_type)
 
         db.session.commit()
 
@@ -97,10 +109,8 @@ def delete_challenge_result(challenge_id, result_id):
         return {'errors': ['You do not have permission to delete this result']}, 403
 
     # UPDATE THE PARTICIPANT'S TOTAL DISTANCE
-    if challenge.activity_type == 'running':
-        current_user.total_distance_running -= result.distance
-    elif challenge.activity_type == 'cycling':
-        current_user.total_distance_cycling -= result.distance
+    challenge = Challenge.query.get(challenge_id)
+    update_total_distance(current_user.id, result, challenge.activity_type, is_deleted=True)
 
     db.session.delete(result)
     db.session.commit()

@@ -13,6 +13,7 @@ class ChallengeResult(db.Model):
     challenge_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('challenges.id')), nullable=False)
     result_description = db.Column(db.String(255), nullable=False)
     distance = db.Column(db.Float, nullable=False)
+    goal_unit = db.Column(db.String(50), nullable=False)
     duration = db.Column(db.Time, nullable=False)
     pace = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -33,6 +34,7 @@ class ChallengeResult(db.Model):
             'challenge_id': self.challenge_id,
             'result_description': self.result_description,
             'distance': self.distance,
+            'goal_unit': self.goal_unit,
             'duration': self.duration.strftime("%H:%M:%S") if self.duration else None,
             'pace': self.pace,
             'comments': [comment.to_dict() for comment in self.comments],

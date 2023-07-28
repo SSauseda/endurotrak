@@ -1,5 +1,6 @@
 from app.models import db, Challenge, User, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import datetime, timedelta
 
 
 def seed_challenges():
@@ -18,36 +19,72 @@ def seed_challenges():
         title='Run 5K!',
         description='Run 5 kilometers as fast as you can.',
         activity_type='Running',
+        goal=5.0,
+        goal_unit='km',
+        start_date=datetime.now(),
+        end_date=datetime.now() + timedelta(days=30),
+        image_url='https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg',
+        rules='Run 5 kilometers as fast as you can. You can run as many times as you want during the challenge period. Your fastest time will be recorded.',
     )
     challenge2 = Challenge(
         user_id=marnie.id,
         title='Your fastest Mile!',
         description='Run 1 mile as fast as you can.',
         activity_type='Running',
+        goal=1.0,
+        goal_unit='mi',
+        start_date=datetime.now(),
+        end_date=datetime.now() + timedelta(days=30),
+        image_url='https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg',
+        rules='The winner is the one who completes the goal in the shortest time.',
     )
     challenge3 = Challenge(
         user_id=bobbie.id,
         title='Run 10K',
         description='Run 10 kilometers as fast as you can.',
         activity_type='Running',
+        goal=10.0,
+        goal_unit='km',
+        start_date=datetime.now(),
+        end_date=datetime.now() + timedelta(days=30),
+        image_url='https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg',
+        rules='The winner is the one who completes the goal in the shortest time.',
     )
     challenge4 = Challenge(
         user_id=karen.id,
         title='Bike 20K',
         description='Bike 20 kilometers as fast as you can.',
         activity_type='Cycling',
+        goal=20.0,
+        goal_unit='km',
+        start_date=datetime.now(),
+        end_date=datetime.now() + timedelta(days=30),
+        image_url='https://st3.depositphotos.com/1439758/37733/v/600/depositphotos_377334960-stock-illustration-love-cycling-banner.jpg',
+        rules='The winner is the one who completes the goal in the shortest time.',
     )
     challenge5 = Challenge(
         user_id=jess.id,
         title='August Gran Fondo',
         description='Complete a Gran Fondo (100km).',
         activity_type='Cycling',
+        goal=100.0,
+        goal_unit='km',
+        start_date=datetime.now(),
+        end_date=datetime.now() + timedelta(days=30),
+        image_url='https://st3.depositphotos.com/1439758/37733/v/600/depositphotos_377334960-stock-illustration-love-cycling-banner.jpg',
+        rules='The winner is the one who completes the goal in the shortest time.',
     )
     challenge6 = Challenge(
         user_id=mike.id,
         title='Virtual Marathon!',
         description='Run a marathon (42km) as fast as you can.',
         activity_type='Running',
+        goal=42.0,
+        goal_unit='km',
+        start_date=datetime.now(),
+        end_date=datetime.now() + timedelta(days=30),
+        image_url='https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg',
+        rules='The winner is the one who completes the goal in the shortest time.',
     )
 
 

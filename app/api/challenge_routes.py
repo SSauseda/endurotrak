@@ -49,6 +49,12 @@ def post_challenge():
             title = form.data['title'],
             description = form.data['description'],
             activity_type = form.data['activity_type'],
+            goal = form.data['goal'],
+            goal_unit = form.data['goal_unit'],
+            start_date = form.data['start_date'],
+            end_date = form.data['end_date'],
+            image_url = form.data['image_url'],
+            rules = form.data['rules'],
         )
         db.session.add(challenge)
         db.session.commit()
@@ -61,6 +67,13 @@ def post_challenge():
 @challenge_routes.route('/<int:challenge_id>', methods=['PUT'])
 @login_required
 def update_challenge(challenge_id):
+    challenge = Challenge.query.get(challenge_id)
+    if not challenge:
+        return {'errors': ['Challenge not found']}, 404
+
+    if challenge.user_id != current_user.id:
+        return {'errors': ['You are not authorized to edit this challenge']}, 401
+
     form = ChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -68,6 +81,13 @@ def update_challenge(challenge_id):
         challenge.title = form.data['title']
         challenge.description = form.data['description']
         challenge.activity_type = form.data['activity_type']
+        challenge.goal = form.data['goal']
+        challenge.goal_unit = form.data['goal_unit']
+        challenge.start_date = form.data['start_date']
+        challenge.end_date = form.data['end_date']
+        challenge.image_url = form.data['image_url']
+        challenge.rules = form.data['rules']
+
         db.session.commit()
         return challenge.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -80,6 +100,11 @@ def delete_challenge(challenge_id):
     challenge = Challenge.query.get(challenge_id)
     if not challenge:
         return {'errors': ['Challenge not found']}, 404
+
+    if challenge.user_id != current_user.id:
+        return {'errors': ['You are not authorized to edit this challenge']}, 401
+
+        
     db.session.delete(challenge)
     db.session.commit()
     return {'message': 'Challenge deleted'}

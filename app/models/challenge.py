@@ -12,6 +12,12 @@ class Challenge(db.Model):
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     activity_type = db.Column(db.String(50), nullable=False)
+    goal = db.Column(db.Float, nullable=False)
+    goal_unit = db.Column(db.String(50), nullable=False)
+    start_date = db.Column(db.DateTime, nullable=False)
+    end_date = db.Column(db.DateTime, nullable=False)
+    image_url = db.Column(db.String(255))
+    rules = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -27,5 +33,11 @@ class Challenge(db.Model):
             'title': self.title,
             'description': self.description,
             'activity_type': self.activity_type,
+            'goal': self.goal,
+            'goal_unit': self.goal_unit,
+            'start_date': self.start_date,
+            'end_date': self.end_date,
+            'image_url': self.image_url,
+            'rules': self.rules,
             'participants': [participant.to_dict_user() for participant in self.participants],
         }
