@@ -31,11 +31,18 @@ export const fetchChallenges = () => async (dispatch) => {
     const response = await fetch('/api/challenges/');
 
     if (response.ok) {
-        const challengesData = await response.json();
-        const challenges = Object.values(challengesData)
+        const { challenges } = await response.json();
         dispatch(getChallenges(challenges));
-        return challenges;
+    } else {
+        console.error('Error fetching challenges')
     }
+
+    // if (response.ok) {
+    //     const challengesData = await response.json();
+    //     const challenges = Object.values(challengesData)
+    //     dispatch(getChallenges(challenges));
+    //     return challenges;
+    // }
 };
 
 
@@ -51,7 +58,7 @@ export const addChallenge = (
     imageUrl,
     rules
     ) => async (dispatch) => {
-    const response = await fetch ('/api/challenges', {
+    const response = await fetch ('/api/challenges/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
