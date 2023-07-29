@@ -1,6 +1,7 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const SET_SEARCH_RESULTS = "session/SET_SEARCH_RESULTS";
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -11,7 +12,12 @@ const removeUser = () => ({
 	type: REMOVE_USER,
 });
 
-const initialState = { user: null };
+const setSearchResults = (users) => ({
+	type: SET_SEARCH_RESULTS,
+	payload: users,
+});
+
+
 
 export const authenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/", {
@@ -113,12 +119,31 @@ export const signUp = (username,
 	}
 };
 
+export const searchUsers = (search) => async (dispatch) => {
+	const response = await fetch(`/api/users/search?search=${search}`);
+	console.log("HELLLOOOOOOO", response)
+
+	if (response.ok) {
+		const { users } = await response.json();
+		dispatch(setSearchResults(users));
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
+
+const initialState = { user: null, searchResults: [] };
+
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:
-			return { user: action.payload };
+			return { ...state, user: action.payload };
 		case REMOVE_USER:
-			return { user: null };
+			return { ...state, user: null };
+		case SET_SEARCH_RESULTS:
+			return { ...state, searchResults: action.payload };
 		default:
 			return state;
 	}

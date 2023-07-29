@@ -1,1 +1,6 @@
 /* TODO Add site wide styles */
+
+body {
+  background: #ebebeb;
+  font-family: "Raleway",sans-serif;
+}
