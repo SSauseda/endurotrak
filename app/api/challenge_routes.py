@@ -21,7 +21,7 @@ def validation_errors_to_error_messages(validation_errors):
 @challenge_routes.route('/')
 def get_challenges():
     challenges = Challenge.query.all()
-    return {'challenges': [challenge.to_dict() for challenge in challenges]}
+    return {'challenges': [challenge.to_dict(current_user) for challenge in challenges]}
 
 
 # GET A CHALLENGE BY ID

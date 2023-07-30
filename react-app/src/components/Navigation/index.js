@@ -17,7 +17,7 @@ function Navigation({ isLoaded }){
 				<NavLink to='/' className='logo-link'>
 					<img className='logo' src={logo} alt='logo' />
 				</NavLink>
-				<UserSearch />
+				{sessionUser && <UserSearch />}
 			</div>
 			<div className='right-items'>
 				<div className='nav-challenge'>

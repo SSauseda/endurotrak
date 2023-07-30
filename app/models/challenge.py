@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from flask_login import current_user
 
 class Challenge(db.Model):
     __tablename__ = 'challenges'
@@ -25,8 +26,8 @@ class Challenge(db.Model):
     participants = db.relationship('ChallengeParticipant', back_populates='challenge', cascade='all, delete')
     results = db.relationship('ChallengeResult', back_populates='challenge', cascade='all, delete')
 
-    def to_dict(self):
-        return {
+    def to_dict(self, current_user=None):
+        challenge_dict = {
             'id': self.id,
             'user_id': self.user_id,
             'user_username': self.user.username,
@@ -41,3 +42,6 @@ class Challenge(db.Model):
             'rules': self.rules,
             'participants': [participant.to_dict_user() for participant in self.participants],
         }
+        if current_user is not None and current_user.is_authenticated:
+            challenge_dict['isUserParticipant'] = any(participant.user.id == current_user.id for participant in self.participants)
+        return challenge_dict

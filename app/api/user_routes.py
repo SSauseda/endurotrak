@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import User, db, Challenge, Follower
+from app.models import User, db, Challenge, Follower, ChallengeParticipant
 
 user_routes = Blueprint('users', __name__)
 
@@ -24,7 +24,7 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
     
-@user_routes.route('/<int:user_id>/challenges')
+@user_routes.route('/<int:user_id>/created_challenges')
 @login_required
 def get_user_challenges(user_id):
     """
@@ -34,6 +34,22 @@ def get_user_challenges(user_id):
         return {'errors': ['Unauthorized']}, 401
     user_challenges = Challenge.query.filter_by(user_id=user_id).all()
     return {'challenges': [challenge.to_dict() for challenge in user_challenges]}
+
+@user_routes.route('/<int:user_id>/participating_challenges')
+@login_required
+def user_challenges(user_id):
+
+    """
+    get all challenges that a user is participating in
+    """
+    user = User.query.get(user_id)
+    if not user:
+        return {'errors': ['User not found']}, 404
+    
+    participants = ChallengeParticipant.query.filter_by(user_id=user_id).all()
+    challenges = [Challenge.query.get(participant.challenge_id) for participant in participants]
+
+    return jsonify([challenge.to_dict() for challenge in challenges])
 
 
 @user_routes.route('/search', methods=['GET'])

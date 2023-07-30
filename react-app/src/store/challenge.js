@@ -3,6 +3,8 @@ const GET_CHALLENGES = 'challenges/GET_CHALLENGES';
 const CREATE_CHALLENGE = 'challenges/CREATE_CHALLENGE';
 const UPDATE_CHALLENGE = 'challenges/UPDATE_CHALLENGE';
 const DELETE_CHALLENGE = 'challenges/DELETE_CHALLENGE';
+const JOIN_CHALLENGE = 'challenges/JOIN_CHALLENGE';
+const LEAVE_CHALLENGE = 'challenges/LEAVE_CHALLENGE';
 
 
 // Action Creators
@@ -24,7 +26,17 @@ const updateChallenge = (challenge) => ({
 const deleteChallenge = (challengeId) => ({
     type: DELETE_CHALLENGE,
     payload: challengeId
-})
+});
+
+const participateChallenge = (challengeId, userId) => ({
+    type: JOIN_CHALLENGE,
+    payload: { challengeId, userId }
+});
+
+const unparticipateChallenge = (challengeId) => ({
+    type: LEAVE_CHALLENGE,
+    payload: challengeId
+});
 
 // Thunks
 export const fetchChallenges = () => async (dispatch) => {
@@ -32,6 +44,7 @@ export const fetchChallenges = () => async (dispatch) => {
 
     if (response.ok) {
         const { challenges } = await response.json();
+        console.log("FETCHFETCHFETCH", challenges)
         dispatch(getChallenges(challenges));
     } else {
         console.error('Error fetching challenges')
@@ -149,6 +162,54 @@ export const removeChallenge = (challengeId) => async (dispatch) => {
     }
 }
 
+export const joinChallenge = (challengeId) => async (dispatch, getState) => {
+    const state = getState();
+    const userId = state.session.user.id;
+
+    const response = await fetch(`/api/challenges/${challengeId}/participants`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId })
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(participateChallenge(challengeId, data));
+        dispatch(fetchChallenges());
+        return null;
+    } else {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    }
+};
+
+export const leaveChallenge = (challengeId) => async (dispatch, getState) => {
+    const state = getState();
+    const userId = state.session.user.id;
+
+    const response = await fetch(`/api/challenges/${challengeId}/participants`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId })
+    });
+
+    if (response.ok) {
+        console.log("LEAVELEAVELAVEEALEAVE", getChallenges());
+        dispatch(unparticipateChallenge({ challengeId, userId }));
+        dispatch(fetchChallenges());
+        return null;
+    } else {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        } else {
+            return ['An error occurred. Please try again.'];
+        }
+    }
+}
+
 
 // Reducer
 const initialState = {};
@@ -174,6 +235,13 @@ const challengeReducer = (state = initialState, action) => {
             newState = { ...state };
             delete newState[action.payload];
             return newState;
+        case JOIN_CHALLENGE:
+            newState = { ...state };
+            newState[action.payload.challengeId].participants.push(action.payload.userId);
+            return newState;
+        case LEAVE_CHALLENGE:
+            newState = { ...state };
+            newState[action.payload.challengeId].participants = newState[action.payload.challengeId].participants.filter(userId => userId !== action.payload.userId);
         default:
             return state;
     }

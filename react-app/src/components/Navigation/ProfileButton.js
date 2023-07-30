@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
@@ -58,9 +58,9 @@ function ProfileButton({ user }) {
             <li>Hello! {user.firstName}</li>
             {/* <li>{user.email}</li> */}
             <li className="dropdown-item-profile">
-              <NavLink onClick={closeMenuAndNavigate} to='/athlete'>
+              <Link onClick={closeMenuAndNavigate} to='/athlete'>
                 My Profile
-              </NavLink>
+              </Link>
             </li>
             <li className="dropdown-item-profile">
               <NavLink onClick={closeMenuAndNavigate} to='/athlete/challenges'>

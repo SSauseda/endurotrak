@@ -1,0 +1,29 @@
+.search-bar {
+    width: 200px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding: 0px 8px;
+    margin-left: 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-button {
+    height: 30px;
+    background-color: #5271ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+.search-button:hover {
+    background-color: #3c5be8;
+}
+
+

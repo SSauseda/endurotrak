@@ -64,6 +64,7 @@ class User(db.Model, UserMixin):
             'bannerImage3': self.banner_image3,
             'totalDistanceRunning': self.total_distance_running,
             'totalDistanceCycling': self.total_distance_cycling,
+            'participatingChallenges': [participant.challenge.to_dict_challenge() for participant in self.challenge_participants],
         }
     
     
@@ -87,6 +88,7 @@ class User(db.Model, UserMixin):
             'receivedBravos': len(self.received_bravos),
             'createdChallenges': [challenge.to_dict() for challenge in self.created_challenges],
             'challengeParticipants': [participant.to_dict() for participant in self.challenge_participants],
+            'participatingChallenges': [participant.challenge.to_dict() for participant in self.challenge_participants],
         }
 
     # def to_dict_followers(self):
