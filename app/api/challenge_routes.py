@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.models import db, Challenge, ChallengeParticipant
 from app.forms import ChallengeForm
@@ -139,3 +139,16 @@ def leave_challenge(challenge_id):
     db.session.delete(participant)
     db.session.commit()
     return {'message': 'You have successfully left this challenge'}
+
+
+# GET CHALLENGES FOR USER BY PARTICIPANT ID
+@challenge_routes.route('/my-challenges')
+@login_required
+def get_challenges_by_participant():
+    challenge_participant_instances = ChallengeParticipant.query.filter_by(user_id = current_user.id).all()
+
+    challenge_ids = [instance.challenge_id for instance in challenge_participant_instances]
+
+    challenges = Challenge.query.filter(Challenge.id.in_(challenge_ids)).all()
+
+    return jsonify([challenge.to_dict() for challenge in challenges])

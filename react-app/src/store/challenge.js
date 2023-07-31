@@ -5,6 +5,7 @@ const UPDATE_CHALLENGE = 'challenges/UPDATE_CHALLENGE';
 const DELETE_CHALLENGE = 'challenges/DELETE_CHALLENGE';
 const JOIN_CHALLENGE = 'challenges/JOIN_CHALLENGE';
 const LEAVE_CHALLENGE = 'challenges/LEAVE_CHALLENGE';
+const GET_MY_CHALLENGES = 'challenges/GET_MY_CHALLENGES';
 
 
 // Action Creators
@@ -37,6 +38,11 @@ const unparticipateChallenge = (challengeId) => ({
     type: LEAVE_CHALLENGE,
     payload: challengeId
 });
+
+const getMyChallenges = (challenges) => ({
+    type: GET_MY_CHALLENGES,
+    payload: challenges
+})
 
 // Thunks
 export const fetchChallenges = () => async (dispatch) => {
@@ -210,6 +216,18 @@ export const leaveChallenge = (challengeId) => async (dispatch, getState) => {
     }
 }
 
+export const fetchMyChallenges = () => async (dispatch) => {
+    const response = await fetch('/api/challenges/my-challenges');
+
+    if (response.ok) {
+        const challenges = await response.json();
+        console.log("INSIDE THUNK", challenges)
+        dispatch(getMyChallenges(challenges));
+    } else {
+        console.error('Error fetching challenges')
+    }
+};
+
 
 // Reducer
 const initialState = {};
@@ -242,9 +260,32 @@ const challengeReducer = (state = initialState, action) => {
         case LEAVE_CHALLENGE:
             newState = { ...state };
             newState[action.payload.challengeId].participants = newState[action.payload.challengeId].participants.filter(userId => userId !== action.payload.userId);
+            return newState;
+        case GET_MY_CHALLENGES:
+            console.log('payload:' , action.payload)
+            newState = { ...state };
+            Object.values(action.payload).forEach(challenge => {
+                newState[challenge.id] = challenge;
+            });
+            return newState;
         default:
             return state;
     }
 }
 
-export default challengeReducer;
+const userChallengeReducer = (state = initialState, action) => {
+    let newState;
+    switch (action.type) {
+        case GET_MY_CHALLENGES:
+            console.log('payload:' , action.payload)
+            newState = { ...state };
+            Object.values(action.payload).forEach(challenge => {
+                newState[challenge.id] = challenge;
+            });
+            return newState;
+        default:
+            return state;
+    }
+}
+
+export { challengeReducer, userChallengeReducer};

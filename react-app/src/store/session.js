@@ -127,17 +127,17 @@ export const signUp = (username,
 	}
 };
 
-export const fetchParticipatingChallenges = (userId) => async (dispatch) => {
-	const response = await fetch(`/api/users/${userId}/participating_challenges`);
+// export const fetchParticipatingChallenges = (userId) => async (dispatch) => {
+// 	const response = await fetch(`/api/users/${userId}/participating_challenges`);
 
-	if (response.ok) {
-		const data = await response.json();
-		dispatch(getParticipatingChallenges(data));
-		return null;
-	} else {
-		return ["An error occurred. Please try again."];
-	}
-}
+// 	if (response.ok) {
+// 		const data = await response.json();
+// 		dispatch(getParticipatingChallenges(data));
+// 		return null;
+// 	} else {
+// 		return ["An error occurred. Please try again."];
+// 	}
+// }
 
 export const searchUsers = (search) => async (dispatch) => {
 	const response = await fetch(`/api/users/search?search=${search}`);
@@ -157,16 +157,16 @@ const initialState = { user: null, searchResults: [], participatingChallenges: [
 
 
 export default function reducer(state = initialState, action) {
-	let newState;
+	// let newState;
 	switch (action.type) {
 		case SET_USER:
 			return { ...state, user: action.payload };
 		case REMOVE_USER:
 			return { ...state, user: null };
-		case GET_PARTICIPATING_CHALLENGES:
-			newState = { ...state };
-			newState.participatingChallenges = action.payload;
-			return newState;
+		// case GET_PARTICIPATING_CHALLENGES:
+		// 	newState = { ...state };
+		// 	newState.participatingChallenges = action.payload;
+		// 	return newState;
 		// case JOIN_CHALLENGE:
 		// 	newState = { ...state };
 		// 	newState.user.participatingChallenges.push(action.payload.challengeId);

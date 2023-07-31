@@ -58,12 +58,12 @@ function ProfileButton({ user }) {
             <li>Hello! {user.firstName}</li>
             {/* <li>{user.email}</li> */}
             <li className="dropdown-item-profile">
-              <Link onClick={closeMenuAndNavigate} to='/athlete'>
+              <Link onClick={closeMenuAndNavigate} to='/user'>
                 My Profile
               </Link>
             </li>
             <li className="dropdown-item-profile">
-              <NavLink onClick={closeMenuAndNavigate} to='/athlete/challenges'>
+              <NavLink onClick={closeMenuAndNavigate} to='/user/challenges'>
                 My Challenges
               </NavLink>
             </li>

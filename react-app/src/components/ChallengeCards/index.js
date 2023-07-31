@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { joinChallenge, leaveChallenge } from '../../store/challenge';
+// import { joinChallenge, leaveChallenge } from '../../store/participant';
+import { fetchChallenges, joinChallenge, leaveChallenge } from '../../store/challenge';
 
 const ChallengeCard = ({challenge}) => {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.session.user);
 
     const [buttonText, setButtonText] = useState('Challenge Joined');
     const [isUserParticipant, setIsUserParticipant] = useState(challenge.isUserParticipant);
@@ -28,6 +30,29 @@ const ChallengeCard = ({challenge}) => {
             setButtonText('Join Challenge');
         }
     }
+
+    // const joinChallengeHandler = async (e) => {
+    //     e.stopPropagation();
+    //     const join = await dispatch(joinChallenge(challenge.id));
+    //     if (join) {
+    //         setIsUserParticipant(true);
+    //         dispatch(fetchChallenges()); // fetch the updated list of all challenges
+    //         dispatch(fetchParticipatingChallenges(user.id)); // fetch the updated list of participating challenges
+    //     }
+    // };
+
+    // const leaveChallengeHandler = async (e) => {
+    //     e.stopPropagation();
+    //     const leave = await dispatch(leaveChallenge(challenge.id));
+    //     if (leave) {
+    //         setIsUserParticipant(false);
+    //         setButtonText('Join Challenge');
+    //         dispatch(fetchChallenges()); // fetch the updated list of all challenges
+    //         dispatch(fetchParticipatingChallenges(user.id)); // fetch the updated list of participating challenges
+    //     }
+    // }
+
+    // console.log("HELLOHELLO", user)
 
     return (
     <div className='card-container' key={challenge.id}>

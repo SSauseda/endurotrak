@@ -35,7 +35,7 @@ def get_user_challenges(user_id):
     user_challenges = Challenge.query.filter_by(user_id=user_id).all()
     return {'challenges': [challenge.to_dict() for challenge in user_challenges]}
 
-@user_routes.route('/<int:user_id>/participating_challenges')
+@user_routes.route('/<int:user_id>/participating-challenges')
 @login_required
 def user_challenges(user_id):
 
