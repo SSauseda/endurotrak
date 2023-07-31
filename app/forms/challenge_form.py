@@ -9,7 +9,7 @@ def validate_end_date(form, field):
 
 
 class ChallengeForm(FlaskForm):
-    # user_id = IntegerField('User ID', validators=[DataRequired()])
+    # user_id = IntegerField('user_id', validators=[DataRequired()])
     title = StringField('title', validators=[DataRequired(), Length(max=100)])
     description = TextAreaField('description', validators=[DataRequired(), Length(max=255)])
     activity_type = SelectField('activity_type', choices=[('running', 'Running'), ('cycling', 'Cycling')], validators=[DataRequired(), Length(max=50)])

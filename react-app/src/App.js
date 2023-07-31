@@ -7,6 +7,8 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Challenge from "./components/Challenges";
 import UserProfile from "./components/UserProfile";
+import AddChallengeForm from "./components/CreateChallenge";
+import ChallengePage from "./components/ChallengePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +33,12 @@ function App() {
           </Route>
           <Route exact path="/challenges">
             <Challenge />
+          </Route>
+          <Route exact path="/challenges/:id">
+            <ChallengePage />
+          </Route>
+          <Route exact path="/challenges/new-challenge">
+            <AddChallengeForm />
           </Route>
         </Switch>
       )}

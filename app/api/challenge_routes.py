@@ -145,10 +145,9 @@ def leave_challenge(challenge_id):
 @challenge_routes.route('/my-challenges')
 @login_required
 def get_challenges_by_participant():
+
     challenge_participant_instances = ChallengeParticipant.query.filter_by(user_id = current_user.id).all()
-
     challenge_ids = [instance.challenge_id for instance in challenge_participant_instances]
-
     challenges = Challenge.query.filter(Challenge.id.in_(challenge_ids)).all()
 
     return jsonify([challenge.to_dict() for challenge in challenges])

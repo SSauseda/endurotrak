@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import { joinChallenge, leaveChallenge } from '../../store/participant';
-import { fetchChallenges, joinChallenge, leaveChallenge } from '../../store/challenge';
+import { fetchChallenges, joinChallenge, leaveChallenge, removeChallenge } from '../../store/challenge';
 
 const ChallengeCard = ({challenge}) => {
     const dispatch = useDispatch();
@@ -28,6 +28,14 @@ const ChallengeCard = ({challenge}) => {
         if (leave) {
             setIsUserParticipant(false);
             setButtonText('Join Challenge');
+        }
+    }
+
+    const deleteChallengeHandler = async (e) => {
+        e.stopPropagation();
+        const deleteConfirmation = window.confirm('Are you sure you want to delete this challenge?');
+        if (deleteConfirmation) {
+            const deleted = await dispatch(removeChallenge(challenge.id));
         }
     }
 
@@ -80,6 +88,14 @@ const ChallengeCard = ({challenge}) => {
                 onClick={joinChallengeHandler}
             >
                 Join Challenge
+            </button>
+        )}
+        {user.id === challenge.user_id && (
+            <button
+                className="delete-challenge-button"
+                onClick={deleteChallengeHandler}
+            >
+                Delete Challenge
             </button>
         )}
     </div>

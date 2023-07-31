@@ -1,3 +1,5 @@
+import { REMOVE_USER } from "./session";
+
 // Action Types
 const GET_CHALLENGES = 'challenges/GET_CHALLENGES';
 const CREATE_CHALLENGE = 'challenges/CREATE_CHALLENGE';
@@ -34,9 +36,9 @@ const participateChallenge = (challengeId, userId) => ({
     payload: { challengeId, userId }
 });
 
-const unparticipateChallenge = (challengeId) => ({
+const unparticipateChallenge = (challengeId, userId) => ({
     type: LEAVE_CHALLENGE,
-    payload: challengeId
+    payload: { challengeId, userId }
 });
 
 const getMyChallenges = (challenges) => ({
@@ -65,39 +67,17 @@ export const fetchChallenges = () => async (dispatch) => {
 };
 
 
-export const addChallenge = (
-    userId,
-    title,
-    description,
-    activityType,
-    goal,
-    goalUnit,
-    startDate,
-    endDate,
-    imageUrl,
-    rules
-    ) => async (dispatch) => {
+export const addChallenge = (challenge) => async (dispatch) => {
     const response = await fetch ('/api/challenges/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            user_id: userId,
-            title,
-            description,
-            activity_type: activityType,
-            goal,
-            goal_unit: goalUnit,
-            start_date: startDate,
-            end_date: endDate,
-            image_url: imageUrl,
-            rules
-        }),
+        body: JSON.stringify(challenge),
     });
 
     if (response.ok) {
-        const data = await response.json();
-        dispatch(createChallenge(data));
-        return data;
+        const newChallenge = await response.json();
+        dispatch(createChallenge(newChallenge));
+        return newChallenge;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
@@ -191,7 +171,7 @@ export const joinChallenge = (challengeId) => async (dispatch, getState) => {
     }
 };
 
-export const leaveChallenge = (challengeId) => async (dispatch, getState) => {
+export const leaveChallenge = (challengeId, userId) => async (dispatch, getState) => {
     const state = getState();
     const userId = state.session.user.id;
 
@@ -205,6 +185,7 @@ export const leaveChallenge = (challengeId) => async (dispatch, getState) => {
         console.log("LEAVELEAVELAVEEALEAVE", getChallenges());
         dispatch(unparticipateChallenge({ challengeId, userId }));
         dispatch(fetchChallenges());
+        // dispatch(fetchMyChallenges());
         return null;
     } else {
         const data = await response.json();
@@ -221,7 +202,7 @@ export const fetchMyChallenges = () => async (dispatch) => {
 
     if (response.ok) {
         const challenges = await response.json();
-        console.log("INSIDE THUNK", challenges)
+        // console.log("INSIDE THUNK", challenges)
         dispatch(getMyChallenges(challenges));
     } else {
         console.error('Error fetching challenges')
@@ -232,7 +213,7 @@ export const fetchMyChallenges = () => async (dispatch) => {
 // Reducer
 const initialState = {};
 
-const challengeReducer = (state = initialState, action) => {
+const challengeReducer = (state = initialState, action, getState) => {
     let newState;
     switch (action.type) {
         case GET_CHALLENGES:
@@ -242,6 +223,7 @@ const challengeReducer = (state = initialState, action) => {
             });
             return newState;
         case CREATE_CHALLENGE:
+            console.log('payload:' , action.payload)
             newState = { ...state };
             newState[action.payload.id] = action.payload;
             return newState;
@@ -259,7 +241,9 @@ const challengeReducer = (state = initialState, action) => {
             return newState;
         case LEAVE_CHALLENGE:
             newState = { ...state };
-            newState[action.payload.challengeId].participants = newState[action.payload.challengeId].participants.filter(userId => userId !== action.payload.userId);
+            if (newState[action.payload.challengeId]) {
+                newState[action.payload.challengeId].participants = newState[action.payload.challengeId].participants.filter(userId => userId !== action.payload.userId);
+            }
             return newState;
         case GET_MY_CHALLENGES:
             console.log('payload:' , action.payload)
@@ -268,6 +252,8 @@ const challengeReducer = (state = initialState, action) => {
                 newState[challenge.id] = challenge;
             });
             return newState;
+        case REMOVE_USER:
+            return initialState;
         default:
             return state;
     }
@@ -283,6 +269,8 @@ const userChallengeReducer = (state = initialState, action) => {
                 newState[challenge.id] = challenge;
             });
             return newState;
+        case REMOVE_USER:
+            return initialState;
         default:
             return state;
     }

@@ -1,10 +1,8 @@
 // constants
 const SET_USER = "session/SET_USER";
-const REMOVE_USER = "session/REMOVE_USER";
-const GET_PARTICIPATING_CHALLENGES = "session/GET_PARTICIPATING_CHALLENGES";
+export const REMOVE_USER = "session/REMOVE_USER";
+// const GET_PARTICIPATING_CHALLENGES = "session/GET_PARTICIPATING_CHALLENGES";
 const SET_SEARCH_RESULTS = "session/SET_SEARCH_RESULTS";
-// const JOIN_CHALLENGE = "challenges/JOIN_CHALLENGE";
-// const LEAVE_CHALLENGE = "challenges/LEAVE_CHALLENGE";
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -15,10 +13,10 @@ const removeUser = () => ({
 	type: REMOVE_USER,
 });
 
-const getParticipatingChallenges = (challenges) => ({
-	type: GET_PARTICIPATING_CHALLENGES,
-	payload: challenges,
-})
+// const getParticipatingChallenges = (challenges) => ({
+// 	type: GET_PARTICIPATING_CHALLENGES,
+// 	payload: challenges,
+// })
 
 const setSearchResults = (users) => ({
 	type: SET_SEARCH_RESULTS,
@@ -127,17 +125,6 @@ export const signUp = (username,
 	}
 };
 
-// export const fetchParticipatingChallenges = (userId) => async (dispatch) => {
-// 	const response = await fetch(`/api/users/${userId}/participating_challenges`);
-
-// 	if (response.ok) {
-// 		const data = await response.json();
-// 		dispatch(getParticipatingChallenges(data));
-// 		return null;
-// 	} else {
-// 		return ["An error occurred. Please try again."];
-// 	}
-// }
 
 export const searchUsers = (search) => async (dispatch) => {
 	const response = await fetch(`/api/users/search?search=${search}`);
@@ -153,7 +140,7 @@ export const searchUsers = (search) => async (dispatch) => {
 };
 
 
-const initialState = { user: null, searchResults: [], participatingChallenges: [] };
+const initialState = { user: null, searchResults: [] };
 
 
 export default function reducer(state = initialState, action) {
@@ -163,18 +150,6 @@ export default function reducer(state = initialState, action) {
 			return { ...state, user: action.payload };
 		case REMOVE_USER:
 			return { ...state, user: null };
-		// case GET_PARTICIPATING_CHALLENGES:
-		// 	newState = { ...state };
-		// 	newState.participatingChallenges = action.payload;
-		// 	return newState;
-		// case JOIN_CHALLENGE:
-		// 	newState = { ...state };
-		// 	newState.user.participatingChallenges.push(action.payload.challengeId);
-		// 	return newState;
-		// case LEAVE_CHALLENGE:
-		// 	newState = { ...state };
-		// 	newState.user.participatingChallenges = newState.user.participatingChallenges.filter(challengeId => challengeId !== action.payload);
-		// 	return newState;
 		case SET_SEARCH_RESULTS:
 			return { ...state, searchResults: action.payload };
 		default:
