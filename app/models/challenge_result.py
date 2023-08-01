@@ -31,6 +31,7 @@ class ChallengeResult(db.Model):
             'id': self.id,
             'participant_id': self.participant_id,
             'participant_username': self.participant.user.username,
+            'participant_image': self.participant.user.profile_image,
             'challenge_id': self.challenge_id,
             'result_description': self.result_description,
             'distance': self.distance,

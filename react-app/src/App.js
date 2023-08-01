@@ -7,7 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Challenge from "./components/Challenges";
 import UserProfile from "./components/UserProfile";
-import AddChallengeForm from "./components/CreateChallenge";
+import AddChallengeForm from "./components/CreateChallengeForm";
 import ChallengePage from "./components/ChallengePage";
 
 function App() {
@@ -34,11 +34,11 @@ function App() {
           <Route exact path="/challenges">
             <Challenge />
           </Route>
-          <Route exact path="/challenges/:id">
-            <ChallengePage />
-          </Route>
           <Route exact path="/challenges/new-challenge">
             <AddChallengeForm />
+          </Route>
+          <Route exact path="/challenges/:challengeId">
+            <ChallengePage />
           </Route>
         </Switch>
       )}

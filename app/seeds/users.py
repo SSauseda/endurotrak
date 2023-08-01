@@ -13,7 +13,7 @@ def seed_users():
         password='password', 
         location='New York', 
         about="I'm a fitness enthusiast who loves challenging myself and setting new personal records. When I'm not running or lifting weights, you'll find me reading up on the latest in nutrition and health science.",
-        profile_image='static/profile_images/demo.jpg',
+        profile_image='https://i0.wp.com/marzbandds.com/wp-content/uploads/2011/10/Doing-the-distance-with-fillings-min.jpg',
         banner_image1='static/banner_images/demo_banner1.png',
         banner_image2='static/banner_images/demo_banner2.jpg',
         banner_image3='static/banner_images/demo_banner3.jpg'
@@ -26,7 +26,7 @@ def seed_users():
         password='password', 
         location='Los Angeles', 
         about="As an avid traveller, I've hiked, biked, and kayaked in some of the most beautiful places in the world. Now, I'm taking on new challenges to keep my fitness levels high between adventures.",
-        profile_image='static/profile_images/marnie.jpg'
+        profile_image='https://hips.hearstapps.com/hmg-prod/images/image0-5-1602636458.jpeg'
         )
     bobbie = User(
         first_name='Bobbie',
@@ -36,7 +36,7 @@ def seed_users():
         password='password', 
         location='Chicago', 
         about="A former couch potato turned fitness junkie. I found my passion for fitness later in life, and now there's no looking back. Every day is a new opportunity to push my boundaries.",
-        profile_image='static/profile_images/bobbie.jpg'
+        profile_image='https://s3.amazonaws.com/images.gearjunkie.com/uploads/2020/10/Ricky-Gates-runner-headshot-cWanderingFever-1880x1256.jpg'
         )
     sam = User(
         first_name='Sammy',
@@ -46,7 +46,7 @@ def seed_users():
         password='password',
         location='Chicago',
         about="Avid runner and fitness junkie. Constantly pushing my limits and setting new goals.",
-        profile_image='static/profile_images/sammy.jpg'
+        profile_image='https://herway.net/wp-content/uploads/2019/09/healthy-man-standing-in-the-park-768x513.jpg.webp'
     )
     laura = User(
         first_name='Laura',
@@ -56,7 +56,7 @@ def seed_users():
         password='password',
         location='Boston',
         about="Passionate about fitness, health, and living a balanced life. You can find me at the gym or running by the Charles River.",
-        profile_image='static/profile_images/laura.jpg'
+        profile_image='https://images.ctfassets.net/pxcfulgsd9e2/articleImage199201/9aafc21b41dfb32488258600abd6e0e3/How-to-make-running-more-fun-HN3017-iStock-1287421009-Sized.jpg'
     )
     mike = User(
         first_name='Mike',
@@ -66,7 +66,7 @@ def seed_users():
         password='password',
         location='Seattle',
         about="Love exploring the outdoors, especially the beautiful Pacific Northwest. I enjoy hiking, biking, and trail running.",
-        profile_image='static/profile_images/mike.jpg'
+        profile_image='https://hips.hearstapps.com/hmg-prod/images/senior-black-man-racing-on-a-road-bike-royalty-free-image-1655393634.jpg'
     )
     jess = User(
         first_name='Jess',
@@ -76,7 +76,7 @@ def seed_users():
         password='password',
         location='Austin',
         about="Living a healthy and fit life in Austin. Yoga enthusiast and love trying new fitness challenges.",
-        profile_image='static/profile_images/jess.jpg'
+        profile_image='https://i0.wp.com/optionstogrow.com/wp-content/uploads/2022/04/pexels-run-ffwpu-2402777.jpg'
     )
     luke = User(
         first_name='Luke',
@@ -86,7 +86,7 @@ def seed_users():
         password='password',
         location='Denver',
         about="Fitness has transformed my life. I especially love weightlifting and constantly learning new techniques.",
-        profile_image='static/profile_images/luke.jpg'
+        profile_image='https://dqh479dn9vg99.cloudfront.net/wp-content/uploads/sites/9/2015/12/02120621/rapha_core_jersey-970x546.jpg'
     )
     karen = User(
         first_name='Karen',
@@ -96,7 +96,7 @@ def seed_users():
         password='password',
         location='San Diego',
         about="A lifelong fitness devotee. Love running by the beach and trying out new workout classes.",
-        profile_image='static/profile_images/karen.jpg'
+        profile_image='https://i0.wp.com/hospitalsantamonica.com.br/wp-content/uploads/2018/05/saude-mental-e-a-importancia-dela-na-vida-das-pessoas.jpg'
     )
     tom = User(
         first_name='Tom',
@@ -106,7 +106,7 @@ def seed_users():
         password='password',
         location='Miami',
         about="Embracing the fit lifestyle in sunny Miami. I'm all about balance, discipline, and pushing the boundaries.",
-        profile_image='static/profile_images/tom.jpg'
+        profile_image='https://link.usps.com/wp-content/uploads/2021/06/WellnessMensHealthWeek_large-story.jpg'
     )
     
     users=[demo, marnie, bobbie, sam, laura, mike, jess, luke, karen, tom]

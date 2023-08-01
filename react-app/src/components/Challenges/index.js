@@ -14,10 +14,10 @@ const Challenge = () => {
     const challenges = useSelector((state) => Object.values(state.challenges));
     console.log("CHALLENGES", typeof challenges)
 
-    const [buttonText, setButtonText] = useState('Challenge Joined');
+    // const [buttonText, setButtonText] = useState('Challenge Joined');
 
-    const handleMouseEnter = () => { setButtonText('Leave Challenge') };
-    const handleMouseLeave = () => { setButtonText('Challenge Joined') };
+    // const handleMouseEnter = () => { setButtonText('Leave Challenge') };
+    // const handleMouseLeave = () => { setButtonText('Challenge Joined') };
     
     useEffect(() => {
         dispatch(fetchChallenges());
@@ -31,8 +31,8 @@ const Challenge = () => {
 
     return (
         <div className="challenge-container">
-          <h1>Challenges</h1>
-          <button onClick={handleButtonClick}>Create a challenge</button>
+          <h1 className="challenge-header">Challenges</h1>
+          <button className="create-button" onClick={handleButtonClick}>Create a challenge</button>
           <div className="challenge-cards">
             {challenges.map(challenge => (
                 <ChallengeCard challenge={challenge} />

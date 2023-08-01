@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import { joinChallenge, leaveChallenge } from '../../store/participant';
 import { fetchChallenges, joinChallenge, leaveChallenge, removeChallenge } from '../../store/challenge';
+import './ChallengeCards.css';
 
 const ChallengeCard = ({challenge}) => {
     const dispatch = useDispatch();
@@ -38,29 +39,6 @@ const ChallengeCard = ({challenge}) => {
             const deleted = await dispatch(removeChallenge(challenge.id));
         }
     }
-
-    // const joinChallengeHandler = async (e) => {
-    //     e.stopPropagation();
-    //     const join = await dispatch(joinChallenge(challenge.id));
-    //     if (join) {
-    //         setIsUserParticipant(true);
-    //         dispatch(fetchChallenges()); // fetch the updated list of all challenges
-    //         dispatch(fetchParticipatingChallenges(user.id)); // fetch the updated list of participating challenges
-    //     }
-    // };
-
-    // const leaveChallengeHandler = async (e) => {
-    //     e.stopPropagation();
-    //     const leave = await dispatch(leaveChallenge(challenge.id));
-    //     if (leave) {
-    //         setIsUserParticipant(false);
-    //         setButtonText('Join Challenge');
-    //         dispatch(fetchChallenges()); // fetch the updated list of all challenges
-    //         dispatch(fetchParticipatingChallenges(user.id)); // fetch the updated list of participating challenges
-    //     }
-    // }
-
-    // console.log("HELLOHELLO", user)
 
     return (
     <div className='card-container' key={challenge.id}>

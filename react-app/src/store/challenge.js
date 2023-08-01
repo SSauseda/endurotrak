@@ -10,6 +10,7 @@ const LEAVE_CHALLENGE = 'challenges/LEAVE_CHALLENGE';
 const GET_MY_CHALLENGES = 'challenges/GET_MY_CHALLENGES';
 
 
+
 // Action Creators
 const getChallenges = (challenges) => ({
     type: GET_CHALLENGES,
@@ -45,6 +46,7 @@ const getMyChallenges = (challenges) => ({
     type: GET_MY_CHALLENGES,
     payload: challenges
 })
+
 
 // Thunks
 export const fetchChallenges = () => async (dispatch) => {
