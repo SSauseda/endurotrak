@@ -53,11 +53,11 @@
 }
 
 .card-container .join-challenge-button {
-    background-color: #FC4C02; /* Adjust color as needed */
+    background-color: #FC4C02;
 }
 
 .card-container .leave-challenge-button {
-    background-color: #888; /* Adjust color as needed */
+    background-color: #888;
     position: absolute;
     bottom: 10px;
     width: 40%;
@@ -65,7 +65,7 @@
 }
 
 .card-container .delete-challenge-button {
-    background-color: #dd0000; /* Adjust color as needed */
+    background-color: #dd0000;
     position: absolute;
     bottom: 10px;
 }
@@ -73,15 +73,15 @@
 .card-container .join-challenge-button, .card-container .delete-challenge-button {
     position: absolute;
     bottom: 10px;
-    width: 40%; /* You may need to adjust this */
+    width: 40%;
 }
 
 .card-container .join-challenge-button {
-    left: 5%; /* You may need to adjust this */
+    left: 5%;
 }
 
 .card-container .delete-challenge-button {
-    right: 5%; /* You may need to adjust this */
+    right: 5%;
 }
 
 
