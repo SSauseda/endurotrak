@@ -102,6 +102,7 @@ export const editChallenge = (
     imageUrl,
     rules
 ) => async (dispatch) => {
+    console.log("EDIT", challengeId)
     const response = await fetch(`/api/challenges/${challengeId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },

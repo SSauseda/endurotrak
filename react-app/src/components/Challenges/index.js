@@ -35,7 +35,7 @@ const Challenge = () => {
           <button className="create-button" onClick={handleButtonClick}>Create a challenge</button>
           <div className="challenge-cards">
             {challenges.map(challenge => (
-                <ChallengeCard challenge={challenge} />
+                <ChallengeCard challenge={challenge} isChallengePage={true}/>
             ))}
           </div>
         </div>

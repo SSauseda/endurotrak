@@ -9,6 +9,8 @@ import Challenge from "./components/Challenges";
 import UserProfile from "./components/UserProfile";
 import AddChallengeForm from "./components/CreateChallengeForm";
 import ChallengePage from "./components/ChallengePage";
+import EditChallengeForm from "./components/EditChallenges";
+import ManageChallenges from "./components/ManageChallenges";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +27,9 @@ function App() {
           <Route exact path="/user">
             <UserProfile />
           </Route>
+          <Route exact path="/user/challenges">
+            <ManageChallenges />
+          </Route>
           <Route exact path="/login" >
             <LoginFormPage />
           </Route>
@@ -39,6 +44,9 @@ function App() {
           </Route>
           <Route exact path="/challenges/:challengeId">
             <ChallengePage />
+          </Route>
+          <Route exact path="/challenges/:challengeId/edit">
+            <EditChallengeForm />
           </Route>
         </Switch>
       )}

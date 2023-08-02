@@ -1,25 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addChallenge } from '../../store/challenge';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useParams } from 'react-router-dom';
+import { editChallenge } from '../../store/challenge';
 
-const AddChallengeForm = () => {
+
+const EditChallengeForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const sessionUser = useSelector((state) => state.session.user);
-    // console.log("SESSIONUSER", sessionUser)
+    const { challengeId } = useParams();
+    const challenge = useSelector((state) => state.challenges[challengeId]);
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [activityType, setActivityType] = useState('running');
+    const [activityType, setActivityType] = useState('');
     const [goal, setGoal] = useState('');
-    const [goalUnit, setGoalUnit] = useState('mi');
+    const [goalUnit, setGoalUnit] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [rules, setRules] = useState('');
-    const [newChallenge, setNewChallenge] = useState(null);
     const [errors, setErrors] = useState([]);
+
+
+    useEffect(() => {
+        console.log("EDITEDITEDIT2", challengeId)
+      if (challenge) {
+        setTitle(challenge.title);
+        setDescription(challenge.description);
+        setActivityType(challenge.activity_type);
+        setGoal(challenge.goal);
+        setGoalUnit(challenge.goal_unit);
+        setStartDate(challenge.start_date);
+        setEndDate(challenge.end_date);
+        setImageUrl(challenge.image_url);
+        setRules(challenge.rules);
+      }
+    }, [challenge]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -59,45 +75,31 @@ const AddChallengeForm = () => {
             errorMessages.push('Image URL must be a valid image file');
         }
 
-
         if (errorMessages.length > 0) {
             setErrors(errorMessages);
             return;
         }
 
-
-
-
-
-
-        const timezoneOffset = startDateObj.getTimezoneOffset() * 60000;
-        const adjustedStartDate = new Date(startDateObj.getTime() + timezoneOffset).toISOString().split('T')[0];
-        const adjustedEndDate = new Date(endDateObj.getTime() + timezoneOffset).toISOString().split('T')[0];
-
-
-
-        const challenge = {
-            user_id: sessionUser.id,
+        console.log("EDITEDITEDIT3", challengeId)
+        const updatedChallenge = await dispatch(editChallenge(
+            challengeId,
             title,
             description,
-            activity_type: activityType,
+            activityType,
             goal,
-            goal_unit: goalUnit,
-            start_date: adjustedStartDate,
-            end_date: adjustedEndDate,
-            image_url: imageUrl,
+            goalUnit,
+            startDate,
+            endDate,
+            imageUrl,
             rules
-        };
-        const createChallenge = await dispatch(addChallenge(challenge));
-        console.log("CREATECHALLENGECHALLENGECHALLENGE", createChallenge)
-        setNewChallenge(createChallenge);
-        if (createChallenge.errors) {
-            console.log("ERRORS", createChallenge.errors)
-            setErrors(createChallenge.errors);
+        ));
+
+        if (Array.isArray(updatedChallenge)) {
+            setErrors(updatedChallenge);
         } else {
-            history.push('/challenges');
+            history.push(`/user/challenges`);
         }
-    };
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -194,8 +196,10 @@ const AddChallengeForm = () => {
                 />
             </label>
             <button type="submit">Create Challenge</button>
+            <button type="button">Cancel</button>
         </form>
     )
+
 }
 
-export default AddChallengeForm;
+export default EditChallengeForm;
