@@ -9,12 +9,15 @@ const ChallengePage = () => {
     const history = useHistory();
 
     const challenge = useSelector((state) => state.challenges[challengeId]);
-    console.log("challengepage",challengeId)
+    // console.log("challengepage",challengeId)
     const currentUser = useSelector((state) => state.session.user);
 
     const isUserParticipant = challenge && challenge.isUserParticipant
-    console.log("BOOLEANBOOLEAN", isUserParticipant)
+    // console.log("BOOLEANBOOLEAN", isUserParticipant)
 
+    const results = useSelector((state) => Object.values(state.results))
+
+    // console.log("USERRESULT", results)
 
     return (
         <div>

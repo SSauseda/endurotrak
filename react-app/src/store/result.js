@@ -71,6 +71,7 @@ export const addChallengeResult = (challengeId, result) => async (dispatch) => {
 }
 
 export const removeChallengeResult = (challengeId, resultId) => async (dispatch) => {
+    console.log("THUNK", challengeId)
     const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}`, {
         method: 'DELETE',
     });

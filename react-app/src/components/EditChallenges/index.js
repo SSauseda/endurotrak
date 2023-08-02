@@ -101,6 +101,10 @@ const EditChallengeForm = () => {
         }
     }
 
+    const handleCancel = () => {
+        history.push(`/user/challenges`);
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             {errors && errors.map((error, idx) => <p key={idx}>{error}</p>)}
@@ -195,8 +199,8 @@ const EditChallengeForm = () => {
                     required
                 />
             </label>
-            <button type="submit">Create Challenge</button>
-            <button type="button">Cancel</button>
+            <button type="submit">Edit Challenge Challenge</button>
+            <button type="button" onClick={handleCancel}>Cancel</button>
         </form>
     )
 

@@ -1,19 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllResults, clearChallengeResults } from '../../store/result';
+import { getAllResults, clearChallengeResults, removeChallengeResult } from '../../store/result';
 import './Leaderboard.css';
 
 
 const Leaderboard = ({ challengeId }) => {
     const dispatch = useDispatch();
+    const currentUser = useSelector((state) => state.session.user);
+    console.log("USERPARTICIPANTS", currentUser.challengeParticipants.id)
 
     useEffect(() => {
         dispatch(getAllResults(challengeId));
         return () => dispatch(clearChallengeResults());
     }, [dispatch, challengeId])
 
-    const results = useSelector((state) => Object.values(state.results));
-    console.log("RESULTS", results)
+    const results = useSelector((state) => Object.values(state.results))
+    console.log("RESULTS LEADERBOARD", results)
+
+    const handleDelete = (challengeId, resultId) => {
+        dispatch(removeChallengeResult(challengeId, resultId));
+    }
 
     return (
         <div className='leaderboard-container'>
@@ -32,6 +38,8 @@ const Leaderboard = ({ challengeId }) => {
                     <div className='result-distance'>{result.distance}{result.goal_unit}</div>
                     <div className='result-duration'>{result.duration}</div>
                     <div className='result-pace'>{result.pace}km/hr</div>
+                    {currentUser.challengeParticipants.find(cp => cp.id === result.participant_id) && 
+                        <button onClick={() => handleDelete(challengeId, result.id)}>Delete</button>}
                 </div>
             )) : <p>Loading ...</p>}
             </div>
