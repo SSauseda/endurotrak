@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChallenge } from '../../store/challenge';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import './CreateChallengeForm.css';
+
 
 const AddChallengeForm = () => {
     const dispatch = useDispatch();
@@ -101,7 +103,7 @@ const AddChallengeForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            {errors && errors.map((error, idx) => <p key={idx}>{error}</p>)}
+            {errors && errors.map((error, idx) => <p style={{color: 'red'}} key={idx}>{error}</p>)}
             <label>
                 Title
                 <input
