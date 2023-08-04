@@ -11,6 +11,7 @@ import AddChallengeForm from "./components/CreateChallengeForm";
 import ChallengePage from "./components/ChallengePage";
 import EditChallengeForm from "./components/EditChallenges";
 import ManageChallenges from "./components/ManageChallenges";
+import ResultModal from "./components/ResultModal";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route exact path="/challenges/:challengeId/edit">
             <EditChallengeForm />
+          </Route>
+          <Route exact path="/challenges/:challengeId/results/:resultId">
+            <ResultModal />
           </Route>
         </Switch>
       )}

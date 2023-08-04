@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllResults, clearChallengeResults, removeChallengeResult } from '../../store/result';
+import { useHistory } from 'react-router-dom';
+import { getAllResults, clearChallengeResults, removeChallengeResult, getEachResult } from '../../store/result';
+import ResultModal from '../ResultModal';
+import OpenModalButton from '../OpenModalButton';
 import './Leaderboard.css';
 
 
 const Leaderboard = ({ challengeId }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const currentUser = useSelector((state) => state.session.user);
     // console.log("USERPARTICIPANTS", currentUser.challengeParticipants.id)
+
+    const [selectedResult, setSelectedResult] = useState(null);
+
 
     useEffect(() => {
         dispatch(getAllResults(challengeId));
@@ -15,10 +23,17 @@ const Leaderboard = ({ challengeId }) => {
     }, [dispatch, challengeId])
 
     const results = useSelector((state) => Object.values(state.results))
+    const result = useSelector((state) => state.results[selectedResult]);
     // console.log("RESULTS LEADERBOARD", results)
 
     const handleDelete = (challengeId, resultId) => {
         dispatch(removeChallengeResult(challengeId, resultId));
+    }
+
+    const handleOpenModal = (challengeId, resultId) => {
+        dispatch(getEachResult(challengeId, resultId));
+        setSelectedResult(resultId);
+        history.push(`/challenges/${challengeId}/results/${resultId}`);
     }
 
     return (
@@ -32,7 +47,11 @@ const Leaderboard = ({ challengeId }) => {
                     <div>Pace</div>
                 </div>
             {results ? results.map(result => (
-                <div className='result-card' key={result.id}>
+                <div 
+                    className='result-card'
+                    key={result.id}
+                    onClick={() => handleOpenModal(challengeId, result.id)}
+                 >
                     <img className='profile-img' src={result.participant_image} alt='participantImage'/>
                     <div className='result-name'>{result.participant_username}</div>
                     <div className='result-distance'>{result.distance}{result.goal_unit}</div>

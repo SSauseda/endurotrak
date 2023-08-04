@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import Leaderboard from '../Leaderboard';
 import { useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
-import CreateResultModal from '../ResultModal';
+import CreateResultModal from '../CreateResultModal';
 
 const ChallengePage = () => {
 
