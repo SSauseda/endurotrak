@@ -54,21 +54,27 @@ export const getEachResult = (challengeId, resultId) => async (dispatch) => {
 };
 
 export const addChallengeResult = (challengeId, result) => async (dispatch) => {
-    const response = await fetch(`/api/challenges/${challengeId}/results`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(result),
-    });
+    try {
+        console.log(JSON.stringify(result)); // Here
+        const response = await fetch(`/api/challenges/${challengeId}/results`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(result),
+        });
 
-    if (response.ok) {
-        const result = await response.json();
-        dispatch(createChallengeResult(result));
-    } else {
-        console.error('Error creating result')
+        if (response.ok) {
+            const result = await response.json();
+            dispatch(createChallengeResult(result));
+        } else {
+            console.error('Error creating result', response.status, response.statusText)
+        }
+    } catch (err) {
+        console.error(err);
     }
 }
+
 
 export const removeChallengeResult = (challengeId, resultId) => async (dispatch) => {
     console.log("THUNK", challengeId)

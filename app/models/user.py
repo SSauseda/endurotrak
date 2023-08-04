@@ -89,6 +89,7 @@ class User(db.Model, UserMixin):
             'createdChallenges': [challenge.to_dict() for challenge in self.created_challenges],
             'challengeParticipants': [participant.to_dict() for participant in self.challenge_participants],
             'participatingChallenges': [participant.challenge.to_dict() for participant in self.challenge_participants],
+            'participantIds': [participant.id for participant in self.challenge_participants],
         }
 
     # def to_dict_followers(self):
