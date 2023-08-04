@@ -7,7 +7,7 @@ import './Leaderboard.css';
 const Leaderboard = ({ challengeId }) => {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.session.user);
-    console.log("USERPARTICIPANTS", currentUser.challengeParticipants.id)
+    // console.log("USERPARTICIPANTS", currentUser.challengeParticipants.id)
 
     useEffect(() => {
         dispatch(getAllResults(challengeId));
@@ -15,7 +15,7 @@ const Leaderboard = ({ challengeId }) => {
     }, [dispatch, challengeId])
 
     const results = useSelector((state) => Object.values(state.results))
-    console.log("RESULTS LEADERBOARD", results)
+    // console.log("RESULTS LEADERBOARD", results)
 
     const handleDelete = (challengeId, resultId) => {
         dispatch(removeChallengeResult(challengeId, resultId));

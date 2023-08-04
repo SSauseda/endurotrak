@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Leaderboard from '../Leaderboard';
 import { useSelector } from 'react-redux';
+import OpenModalButton from '../OpenModalButton';
+import CreateResultModal from '../ResultModal';
 
 const ChallengePage = () => {
 
@@ -23,7 +25,12 @@ const ChallengePage = () => {
         <div>
             <h1>Challenge Page</h1>
             <div>
-                {isUserParticipant && <button>Add your result</button>}
+                {isUserParticipant &&
+                    <OpenModalButton
+                    buttonText="Add result"
+                    modalComponent={<CreateResultModal  challenge={challenge}/>}
+                  />
+                 }
                 <Leaderboard challengeId={challengeId}/>
             </div>
         </div>
