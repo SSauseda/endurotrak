@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { postComment } from '../../store/comment';
+import { createComment } from '../../store/comment';
 
 function CommentForm() {
     const [text, setText] = useState('');
@@ -11,7 +11,7 @@ function CommentForm() {
     const { challengeId, resultId } = useParams();
 
     const currentUser = useSelector((state) => state.session.user);
-    console.log("RESULT", text)
+    console.log("RESULT", resultId)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,11 +23,11 @@ function CommentForm() {
 
         const commentData = {
             user_id: currentUser.id,
-            result_id: resultId,
+            result_id: parseInt(resultId),
             text: text,
 
         };
-        const post = await dispatch(postComment(challengeId, resultId, commentData));
+        const post = await dispatch(createComment(challengeId, resultId, commentData));
 
         if (post && post.success) {
             setText('');

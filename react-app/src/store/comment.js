@@ -1,131 +1,121 @@
-const SET_COMMENT = 'comments/SET_COMMENT';
-const ADD_COMMENT = 'comments/ADD_COMMENT';
-const UPDATE_COMMENT = 'comments/UPDATE_COMMENT';
-const DELETE_COMMENT = 'comments/DELETE_COMMENT';
-const SET_COMMENTS = 'comments/SET_COMMENTS';
+const GET_COMMENTS = 'GET_COMMENTS';
+const GET_COMMENT = 'GET_COMMENT';
+const ADD_COMMENT = 'ADD_COMMENT';
+const EDIT_COMMENT = 'EDIT_COMMENT';
+const DELETE_COMMENT = 'DELETE_COMMENT';
 
-
-const setComment = (comment) => ({
-    type: SET_COMMENT,
-    comment,
-});
-
+const getComments = (comments) => ({
+    type: GET_COMMENTS,
+    comments
+  });
+  
+const getComment = (comment) => ({
+    type: GET_COMMENT,
+    comment
+  });
+  
 const addComment = (comment) => ({
     type: ADD_COMMENT,
-    comment,
-});
-
-const updateCommentData = (comment) => ({
-    type: UPDATE_COMMENT,
-    comment,
-});
-
+    comment
+  });
+  
+const editComment = (comment) => ({
+    type: EDIT_COMMENT,
+    comment
+  });
+  
 const deleteComment = (commentId) => ({
     type: DELETE_COMMENT,
-    commentId,
-});
-
-const setComments = (comments) => ({
-    type: SET_COMMENTS,
-    comments,
-});
+    commentId
+  });
 
 
-export const getAllComments = (challengeId, resultId) => async dispatch => {
-    const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments`);
-    
 
-    if (response.ok) {
+export const fetchComments = (challengeId, resultId) => async (dispatch) => {
+    try {
+        const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments`);
+        console.log("FETCH THUNK", response)
         const data = await response.json();
-        dispatch(setComments(data.comments));
-    } else {
-        console.error('Error fetching comments')
+        dispatch(getComments(data));
+    } catch (err) {
+        console.error('Failed to fetch comments', err);
     }
 };
 
-export const getCommentById = (challengeId, resultId, commentId) => async dispatch => {
-    const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments/${commentId}`);
 
-    if (response.ok) {
-        const comment = await response.json();
-        dispatch(setComment(comment));
-    } else {
-        console.error('Error fetching comment')
-    }
-}
-
-
-export const postComment = (challengeId, resultId, text) => async dispatch => {
-    const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(text)
-    });
-    if (response.ok) {
-        const comment = await response.json();
-        dispatch(addComment(comment));
-        return;
-    } else {
-        const errorData = await response.json();
-        return errorData.errors;
+export const fetchComment = (challengeId, resultId, commentId) => async (dispatch) => {
+    try {
+        const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments/${commentId}`);
+        const data = await response.json();
+        dispatch(getComment(data));
+    } catch (err) {
+        console.error(`Failed to fetch comment ${commentId}`, err);
     }
 };
 
-export const updateCommentById = (challengeId, resultId, commentId, text) => async dispatch => {
+export const createComment = (challengeId, resultId, commentData) => async (dispatch) => {
+    const payload = JSON.stringify(commentData);
+    console.log("Sending payload:", payload);
+    try {
+        const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: payload
+        });
+
+        const data = await response.json();
+        console.log("DATA", data)
+        dispatch(addComment(data));
+    } catch (err) {
+        console.error('Failed to create comment', err);
+    }
+};
+
+export const updateComment = (challengeId, resultId, commentId, text) => async (dispatch) => {
     try {
         const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments/${commentId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(text)
         });
-        if (response.ok) {
-            const comment = await response.json();
-            dispatch(updateCommentData(comment));
-            return comment;
-        } else {
-            const errorData = await response.json();
-            console.error('Error updating comment:', errorData.message);
-        }
-    } catch (error) {
-        console.error('Error updating comment:', error.message);
+        const data = await response.json();
+        dispatch(editComment(data));
+    } catch (err) {
+        console.error(`Failed to update comment ${commentId}`, err);
     }
 };
 
-export const deleteCommentById = (challengeId, resultId, commentId) => async dispatch => {
-    const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments/${commentId}`, {
-        method: 'DELETE',
-    });
-    if (response.ok) {
+export const removeComment = (challengeId, resultId, commentId) => async (dispatch) => {
+    try {
+        await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments/${commentId}`, {
+            method: 'DELETE'
+        });
         dispatch(deleteComment(commentId));
-    } else {
-        console.error('Error deleting comment')
+    } catch (err) {
+        console.error(`Failed to delete comment ${commentId}`, err);
     }
-}
+};
 
 
-const initialState = {};
+const initialState = [];
 
 const commentReducer = (state = initialState, action) => {
-    let newState;
     switch (action.type) {
-        case SET_COMMENTS:
+        case GET_COMMENTS:
             return action.comments;
-        case SET_COMMENT:
-            newState = { ...state, [action.comment.id]: action.comment };
-            return newState;
+        case GET_COMMENT:
+            return [...state, action.comment];
         case ADD_COMMENT:
-            newState = { ...state, [action.comment.id]: action.comment };
-            return newState;
-        case UPDATE_COMMENT:
-            newState = { ...state, [action.comment.id]: action.comment };
-            return newState;
+            return [...state, action.comment];
+        case EDIT_COMMENT:
+            return state.map((comment) => comment.id === action.comment.id ? action.comment : comment);
         case DELETE_COMMENT:
-            newState = { ...state };
-            delete newState[action.commentId];
-            return newState;
+            return state.filter((comment) => comment.id !== action.commentId);
         default:
             return state;
-    }
-}
+        }
+};
 
 export default commentReducer;

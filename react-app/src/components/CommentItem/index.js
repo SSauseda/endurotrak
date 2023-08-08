@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCommentById, deleteCommentById } from '../../store/comment';
+import { updateComment, removeComment } from '../../store/comment';
 import { useParams } from 'react-router-dom';
 
 
@@ -13,17 +13,17 @@ function CommentItem({ comment }) {
     console.log("COMMENTEDIT", comment.id)
 
     const handleSave = () => {
-        // Dispatch an action to update the comment
-        dispatch(updateCommentById(challengeId, resultId, comment.id, { 
+
+        dispatch(updateComment(challengeId, resultId, comment.id, { 
             user_id: currentUser.id,
             result_id: resultId,
             text: editedText 
         }));
-        setIsEditing(false); // Exit editing mode
+        setIsEditing(false);
     };
 
     const handleDelete = () => {
-        dispatch(deleteCommentById(challengeId, resultId, comment.id));
+        dispatch(removeComment(challengeId, resultId, comment.id));
     };
 
     if (isEditing) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllComments } from "../../store/comment";
+import { fetchComments } from "../../store/comment";
 import { useParams } from "react-router-dom";
 import CommentItem from "../CommentItem";
 import CommentForm from "../CommentForm";
@@ -16,10 +16,10 @@ const Comments = () => {
     const currentUser = useSelector((state) => state.session.user);
 
     useEffect(() => {
-        dispatch(getAllComments(challengeId, resultId));
+        dispatch(fetchComments(challengeId, resultId));
     }, [dispatch, challengeId, resultId]);
 
-    const comments = useSelector((state) => Object.values(state.comments));
+    const comments = useSelector((state) => state.comments);
     console.log("HELLOOOOOOO", comments)
 
 
