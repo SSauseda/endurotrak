@@ -32,6 +32,9 @@ const ResultModal = () => {
             <p><strong>Distance:</strong> {result.distance} {result.goal_unit}</p>
             <p><strong>Duration:</strong> {result.duration}</p>
             <p><strong>Pace:</strong> {result.pace}</p>
+            <div>
+                <Comments />
+            </div>
             <button onClick={() => history.push(`/challenges/${challengeId}`)}>Return</button>
         </div>
     )
