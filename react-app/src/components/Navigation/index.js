@@ -13,25 +13,27 @@ function Navigation({ isLoaded }){
 
 	return (
 		<div className='navbar-container'>
-			<div className='left-items'>
-				<NavLink to='/' className='logo-link'>
-					<img className='logo' src={logo} alt='logo' />
-				</NavLink>
-				{sessionUser && <UserSearch />}
-			</div>
-			<div className='right-items'>
-				<div className='nav-challenge'>
-					<Link to='/challenges'>
-						<button className='nav-challenge-button'>Challenges</button>
-					</Link>
-				</div>
-				{isLoaded && (
-					<li>
-						<ProfileButton user={sessionUser} />
-					</li>
-				)}
-			</div>
-		</div>
+            <div className='left-items'>
+                <NavLink to='/' className='logo-link'>
+                    <img className='logo' src={logo} alt='logo' />
+                </NavLink>
+                {sessionUser && <UserSearch />}
+            </div>
+            <div className='right-items'>
+                {sessionUser && (
+                    <div className='nav-challenge'>
+                        <Link to='/challenges'>
+                            <button className='nav-challenge-button'>Challenges</button>
+                        </Link>
+                    </div>
+                )}
+                {isLoaded && (
+                    <li>
+                        <ProfileButton user={sessionUser} />
+                    </li>
+                )}
+            </div>
+        </div>
 	);
 }
 

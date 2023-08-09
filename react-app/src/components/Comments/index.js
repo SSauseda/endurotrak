@@ -30,7 +30,7 @@ const Comments = () => {
             {comments.length === 0 ? (
                 <div className="no-comment">No comments yet</div>
             ) : (
-                <ul>
+                <ul className="comment-list">
                 {comments.map(comment => (
                     <CommentItem key={comment.id} comment={comment} />
                 ))}

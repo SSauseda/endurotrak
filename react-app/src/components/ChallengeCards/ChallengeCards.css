@@ -1,87 +1,94 @@
 .card-container {
-    width: 300px;
-    height: 420px;
-    background-color: #ffffff;
+    width: 250px;
+    height: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-    margin: 20px;
+    position: relative;
+    margin: 10px;
+    transition: transform 0.3s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    position: relative;
 }
 
-.card-container .card-img {
+.card-img {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
 
-.card-container .card-title {
+.content-container {
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.card-title,
+.card-description,
+.card-activity,
+.card-start,
+.card-end,
+.card-participants {
+    margin: 5px;
+}
+
+.card-title {
     font-size: 1.2em;
     font-weight: bold;
-    margin-top: 10px;
 }
 
-.card-container .card-description {
-    font-size: 1em;
-    margin: 10px;
-    color: #666;
+.card-description {
+    font-size: 0.9em;
 }
 
-.card-container .card-activity, .card-start, .card-end, .card-participants {
+.card-activity,
+.card-start,
+.card-end,
+.card-participants {
     font-size: 0.8em;
-    margin: 5px;
-    color: #999;
 }
 
-.card-container a {
-    color: inherit;
-    text-decoration: none;
-}
 
-.card-container button {
-    width: 80%;
-    padding: 10px 0;
-    margin: 10px;
+.leave-challenge-button {
+    background-color: rgb(233, 104, 104);
+    padding: 5px 10px;
     border-radius: 5px;
     border: none;
-    color: #ffffff;
-    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #fff;
+    margin: 5px;
 }
 
-.card-container .join-challenge-button {
-    background-color: #FC4C02;
+.join-challenge-button,
+.delete-challenge-button,
+.edit-challenge-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #5271ff;
+    transition: background-color 0.3s;
+    color: #fff;
+    margin: 5px;
 }
 
-.card-container .leave-challenge-button {
-    background-color: #888;
-    position: absolute;
-    bottom: 10px;
-    width: 40%;
-    left: 5%;
+.leave-challenge-button:hover,
+.join-challenge-button:hover,
+.delete-challenge-button:hover,
+.edit-challenge-button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
-.card-container .delete-challenge-button {
-    background-color: #dd0000;
-    position: absolute;
-    bottom: 10px;
+.join-challenge-button:hover {
+    background-color: rgba(46, 187, 33, 0.703);
 }
 
-.card-container .join-challenge-button, .card-container .delete-challenge-button {
-    position: absolute;
-    bottom: 10px;
-    width: 40%;
-}
-
-.card-container .join-challenge-button {
-    left: 5%;
-}
-
-.card-container .delete-challenge-button {
-    right: 5%;
+.leave-challenge-button:hover {
+    background-color: rgb(233, 104, 104);
 }
 
 

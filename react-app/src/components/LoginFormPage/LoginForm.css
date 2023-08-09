@@ -1,0 +1,107 @@
+.login-form-container {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+    width: 30%;
+    /* font-family: Arial, sans-serif; */
+    background: #fff; 
+    border: 1px solid #ccc;
+}
+
+
+.login-form-page {
+    width: 300px;
+    margin: 100px auto; 
+    text-align: center; 
+}
+
+.login-header {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center;
+}
+
+
+.input-box {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: left;
+}
+
+
+.login-button, .demoLogin {
+    width: 107%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.login-button {
+    background-color: #5271ff; 
+    color: #fff;
+}
+
+.demoLogin {
+    background-color: #EFEFEF; 
+    color: #333;
+}
+
+.signup-button {
+    width: 50%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0 0 50px;
+}
+
+.member-signup {
+    margin: 60px 0;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.new-member {
+    display: flex;
+    align-items: center;
+    /* border: 2px solid red; */
+}
+
+.no-pointer-events {
+    pointer-events: none;
+}
+
+@keyframes buttonClick {
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.signup-button:active, 
+.login-button:active, 
+.demoLogin:active, 
+.nav-challenge-button:active,
+.search-button:active,
+.challenge-submit:active
+.create-button:active
+ {
+    animation: buttonClick 0.2s ease;
+}

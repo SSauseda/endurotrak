@@ -16,6 +16,8 @@ const Leaderboard = ({ challengeId }) => {
 
     const [selectedResult, setSelectedResult] = useState(null);
 
+    
+
 
     useEffect(() => {
         dispatch(getAllResults(challengeId));
@@ -35,7 +37,10 @@ const Leaderboard = ({ challengeId }) => {
         setSelectedResult(resultId);
         history.push(`/challenges/${challengeId}/results/${resultId}`);
     }
+    
+    if (!currentUser) return null;
 
+    
     return (
         <div className='leaderboard-container'>
             <h1 className='leaderboard-header'>Leaderboard</h1>
@@ -57,7 +62,7 @@ const Leaderboard = ({ challengeId }) => {
                     <div className='result-distance'>{result.distance}{result.goal_unit}</div>
                     <div className='result-duration'>{result.duration}</div>
                     <div className='result-pace'>{result.pace}km/hr</div>
-                    {currentUser.challengeParticipants.find(cp => cp.id === result.participant_id) && 
+                    {currentUser && currentUser.challengeParticipants.find(cp => cp.id === result.participant_id) && 
                         <button onClick={() => handleDelete(challengeId, result.id)}>Delete</button>}
                 </div>
             )) : <p>Loading ...</p>}

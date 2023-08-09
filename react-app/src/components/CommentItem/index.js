@@ -37,7 +37,7 @@ function CommentItem({ comment }) {
     }
 
     return (
-        <li>
+        <li className='individual-comment'>
             <div className="comment-user">{comment.user_username}</div>
             <div className="comment-text">{comment.text}</div>
             {currentUser && currentUser.id === comment.user_id && (

@@ -12,7 +12,7 @@ def users():
     Query for all users and returns them in a list of user dictionaries
     """
     users = User.query.all()
-    return {'users': [user.to_dict_basic() for user in users]}
+    return {'users': [user.to_dict() for user in users]}
 
 
 @user_routes.route('/<int:id>')
@@ -61,4 +61,4 @@ def search_users():
     if search is None:
         return {'users': []}
     users = User.query.filter(User.first_name.ilike(f'%{search}%')).all()
-    return {'users': [user.to_dict_basic() for user in users]}
+    return {'users': [user.to_dict() for user in users]}

@@ -19,13 +19,13 @@
     font-style: italic;
 }
 
-ul {
+.comment-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-li {
+.individual-comment {
     background-color: #fff;
     border: 1px solid #e0e0e0;
     padding: 10px 15px;

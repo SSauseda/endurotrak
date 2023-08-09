@@ -1,0 +1,50 @@
+.challenge-form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+
+.challenge-form-input,
+.challenge-form-select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.challenge-form-input:focus,
+.challenge-form-select:focus {
+    border-color: #5271ff;
+    outline: none;
+}
+
+.challenge-submit {
+    background-color: #5271ff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.challenge-submit:hover {
+    background-color: #2f53f4;
+}
+
+.create-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 1px;
+}

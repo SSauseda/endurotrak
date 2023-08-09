@@ -56,12 +56,14 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
             <div className='card-container' key={challenge.id}>
                 <Link to={`/challenges/${challenge.id}`}>
                     <img className="card-img" src={challenge.image_url} alt="challenge"/>
+                <div className='content-container'>
                     <div className="card-title">{challenge.title}</div>
                     <div className="card-description">{challenge.description}</div>
                     <div className="card-activity">{challenge.activity_type}</div>
                     <div className="card-start">{new Date(challenge.start_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric'})}</div>
                     <div className="card-end">{new Date(challenge.end_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric'})}</div>
                     <div className="card-participants">{challenge.participants.length}</div>
+                </div>
                 </Link>
                 {isChallengePage && (
                     challenge.isUserParticipant ? (
@@ -82,7 +84,7 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                         </button>
                     )
                 )}
-                {isManagePage && user.id === challenge.user_id && (
+                {/* {isManagePage && user.id === challenge.user_id && (
                     <>
                         <button
                             className="delete-challenge-button"
@@ -97,7 +99,7 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                             Edit Challenge
                         </button>
                     </>
-                )}
+                )} */}
             </div>
         </>
     )

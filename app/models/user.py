@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 
-
+DEFAULT_PROFILE_IMAGE = 'https://i.stack.imgur.com/l60Hf.png'
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     location = db.Column(db.String(255), nullable=False)
     about = db.Column(db.String(255), nullable=False)
-    profile_image = db.Column(db.String(255), nullable=True)
+    profile_image = db.Column(db.String(255), nullable=True, default=DEFAULT_PROFILE_IMAGE)
     banner_image1 = db.Column(db.String(255), nullable=True)
     banner_image2 = db.Column(db.String(255), nullable=True)
     banner_image3 = db.Column(db.String(255), nullable=True)
@@ -58,7 +58,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'location': self.location,
             'about': self.about,
-            'profileImage': self.profile_image,
+            'profileImage': self.profile_image or DEFAULT_PROFILE_IMAGE,
             'bannerImage1': self.banner_image1,
             'bannerImage2': self.banner_image2,
             'bannerImage3': self.banner_image3,
@@ -77,17 +77,22 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'location': self.location,
             'about': self.about,
-            'profileImage': self.profile_image,
+            'profileImage': self.profile_image or DEFAULT_PROFILE_IMAGE,
             'bannerImage1': self.banner_image1,
             'bannerImage2': self.banner_image2,
             'bannerImage3': self.banner_image3,
+            'followersCount': len(self.followers),
+            'followingsCount': len(self.followings),
             'followers': [follower.to_dict() for follower in self.followers],
             'followings': [following.to_dict() for following in self.followings],
             'comments': [comment.to_dict() for comment in self.comments],
             'givenBravos': len(self.given_bravos),
             'receivedBravos': len(self.received_bravos),
+            'totalDistanceRunning': self.total_distance_running,
+            'totalDistanceCycling': self.total_distance_cycling,
             'createdChallenges': [challenge.to_dict() for challenge in self.created_challenges],
             'challengeParticipants': [participant.to_dict() for participant in self.challenge_participants],
+            'participatingChallengesCount': len(self.challenge_participants),
             'participatingChallenges': [participant.challenge.to_dict() for participant in self.challenge_participants],
             'participantIds': [participant.id for participant in self.challenge_participants],
         }

@@ -31,7 +31,7 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('location', sa.String(length=255), nullable=False),
     sa.Column('about', sa.String(length=255), nullable=False),
-    sa.Column('profile_image', sa.String(length=255), nullable=True),
+    sa.Column('profile_image', sa.String(length=255), nullable=True, default='https://i.imgur.com/2PrwK1S.png'),
     sa.Column('banner_image1', sa.String(length=255), nullable=True),
     sa.Column('banner_image2', sa.String(length=255), nullable=True),
     sa.Column('banner_image3', sa.String(length=255), nullable=True),

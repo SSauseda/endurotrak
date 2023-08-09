@@ -32,12 +32,13 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
-    dispatch(logout());
+    await dispatch(logout());
     setShowMenu(false);
     history.push("/");
   };
+  
 
   const closeMenuAndNavigate = (e) => {
     e.stopPropagation();
@@ -58,7 +59,7 @@ function ProfileButton({ user }) {
             <li>Hello! {user.firstName}</li>
             {/* <li>{user.email}</li> */}
             <li className="dropdown-item-profile">
-              <Link onClick={closeMenuAndNavigate} to='/user'>
+              <Link onClick={closeMenuAndNavigate} to='/athlete'>
                 My Profile
               </Link>
             </li>
@@ -73,11 +74,11 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <>
-            <OpenModalButton
+            {/* <OpenModalButton
               buttonText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
-            />
+            /> */}
 
             <OpenModalButton
               buttonText="Sign Up"

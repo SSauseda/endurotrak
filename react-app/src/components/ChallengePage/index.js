@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Leaderboard from '../Leaderboard';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import CreateResultModal from '../CreateResultModal';
+import { fetchChallenges } from '../../store/challenge';
+
 
 const ChallengePage = () => {
 
+
     const { challengeId } = useParams();
+    const dispatch = useDispatch();
     const history = useHistory();
+
+    
 
     const challenge = useSelector((state) => state.challenges[challengeId]);
     // console.log("challengepage",challengeId)
@@ -18,7 +24,12 @@ const ChallengePage = () => {
     // console.log("BOOLEANBOOLEAN", isUserParticipant)
 
     const results = useSelector((state) => Object.values(state.results))
-
+    
+    useEffect(() => {
+        if(!challenge) {
+            dispatch(fetchChallenges(challengeId));
+        }
+    }, [dispatch, challengeId, challenge])
     // console.log("USERRESULT", results)
 
     return (

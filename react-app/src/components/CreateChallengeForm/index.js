@@ -102,11 +102,12 @@ const AddChallengeForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className='create-form' onSubmit={handleSubmit}>
             {errors && errors.map((error, idx) => <p style={{color: 'red'}} key={idx}>{error}</p>)}
-            <label>
+            <label className='challenge-form-label'>
                 Title
                 <input
+                    className='challenge-form-input'
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -114,9 +115,10 @@ const AddChallengeForm = () => {
                     required
                     />
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Description
                 <textarea
+                    className='challenge-form-input'
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -124,9 +126,10 @@ const AddChallengeForm = () => {
                     required
                     />          
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Activity Type
                 <select
+                    className='challenge-form-select'
                     value={activityType}
                     onChange={(e) => setActivityType(e.target.value)}
                     required
@@ -136,9 +139,10 @@ const AddChallengeForm = () => {
                     <option disabled value="">--More activites coming soon--</option>
                 </select>
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Goal
                 <input
+                    className='challenge-form-input'
                     type="number"
                     value={goal}
                     onChange={(e) => setGoal(parseFloat(e.target.value))}
@@ -146,9 +150,10 @@ const AddChallengeForm = () => {
                     required
                 />
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Goal Unit
                 <select
+                    className='challenge-form-select'
                     value={goalUnit}
                     onChange={(e) => setGoalUnit(e.target.value)}
                     required
@@ -158,7 +163,7 @@ const AddChallengeForm = () => {
                 </select>
                 all paces will be converted to km for ranking purposes
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Start Date
                 <input
                     type="date"
@@ -179,15 +184,17 @@ const AddChallengeForm = () => {
             <label>
                 Challenge Banner Image
                 <input
+                    className='challenge-form-input'
                     type="text"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder="Image URL"
                 />
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Rules
                 <textarea
+                    className='challenge-form-input'
                     type="text"
                     value={rules}
                     onChange={(e) => setRules(e.target.value)}
@@ -195,7 +202,7 @@ const AddChallengeForm = () => {
                     required
                 />
             </label>
-            <button type="submit">Create Challenge</button>
+            <button className='challenge-submit' type="submit">Create Challenge</button>
         </form>
     )
 }

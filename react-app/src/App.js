@@ -12,6 +12,7 @@ import ChallengePage from "./components/ChallengePage";
 import EditChallengeForm from "./components/EditChallenges";
 import ManageChallenges from "./components/ManageChallenges";
 import ResultModal from "./components/ResultModal";
+import Homepage from "./components/Homepage";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,15 +26,18 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/user">
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route exact path="/athlete">
             <UserProfile />
           </Route>
           <Route exact path="/user/challenges">
             <ManageChallenges />
           </Route>
-          <Route exact path="/login" >
+          {/* <Route exact path="/login" >
             <LoginFormPage />
-          </Route>
+          </Route> */}
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
