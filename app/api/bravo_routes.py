@@ -16,19 +16,25 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 # GET ALL BRAVOS
-@bravo_routes.route('/')
-def get_bravos():
-    """
-    Query for all bravos and returns them in a list of bravo dictionaries
-    """
-    bravos = Bravo.query.all()
+# @bravo_routes.route('/')
+# def get_bravos():
+#     """
+#     Query for all bravos and returns them in a list of bravo dictionaries
+#     """
+#     bravos = Bravo.query.all()
+#     return {'bravos': [bravo.to_dict() for bravo in bravos]}
+
+# GET BRAVOS BASED ON RESULT ID
+@bravo_routes.route('/challenges/<int:challenge_id>/results/<int:result_id>/bravos')
+def get_bravos_by_result(challenge_id, result_id):
+
+    bravos = Bravo.query.filter_by(result_id=result_id).all()
     return {'bravos': [bravo.to_dict() for bravo in bravos]}
 
-
 # CREATE A BRAVO FOR A CHALLENGE RESULT
-@bravo_routes.route('/', methods=['POST'])
+@bravo_routes.route('/challenges/<int:challenge_id>/results/<int:result_id>/bravos', methods=['POST'])
 @login_required
-def post_bravo():
+def post_bravo(challenge_id, result_id):
     """
     Logged in User gives Bravo to another User for a Challenge Result
     """

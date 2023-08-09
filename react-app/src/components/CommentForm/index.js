@@ -16,6 +16,8 @@ function CommentForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setErrors([]);
+
         if (!text.trim()) {
             setErrors(['Comment cannot be empty']);
             return;
@@ -28,7 +30,8 @@ function CommentForm() {
 
         };
         const post = await dispatch(createComment(challengeId, resultId, commentData));
-
+        // console.log("COMMENT", post)
+        
         if (post && post.success) {
             setText('');
             setSuccessMessage(['Comment posted!']);

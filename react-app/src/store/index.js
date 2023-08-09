@@ -4,6 +4,7 @@ import session from './session'
 import { challengeReducer, userChallengeReducer } from './challenge';
 import resultReducer from './result';
 import commentReducer from './comment';
+import bravoReducer from './bravo';
 
 const rootReducer = combineReducers({
   session,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   userChallenges: userChallengeReducer,
   results: resultReducer,
   comments: commentReducer,
+  bravos: bravoReducer,
 });
 
 

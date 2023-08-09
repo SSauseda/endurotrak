@@ -26,7 +26,7 @@ const Leaderboard = ({ challengeId }) => {
 
     const results = useSelector((state) => Object.values(state.results))
     const result = useSelector((state) => state.results[selectedResult]);
-    // console.log("RESULTS LEADERBOARD", results)
+    console.log("RESULTS LEADERBOARD", results)
 
     const handleDelete = (challengeId, resultId) => {
         dispatch(removeChallengeResult(challengeId, resultId));

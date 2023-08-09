@@ -68,6 +68,7 @@ export const createComment = (challengeId, resultId, commentData) => async (disp
         const data = await response.json();
         console.log("DATA", data)
         dispatch(addComment(data));
+        return { success: true };
     } catch (err) {
         console.error('Failed to create comment', err);
     }
