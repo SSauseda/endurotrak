@@ -32,9 +32,20 @@ const ChallengePage = () => {
     }, [dispatch, challengeId, challenge])
     // console.log("USERRESULT", results)
 
+    const formatDate = (date) => {
+        const dateObj = new Date(date);
+        return dateObj.toUTCString().split(' ').slice(0, 4).join(' ');
+    }
+
     return (
         <div>
             <h1>Challenge Page</h1>
+            <div>
+                {challenge && formatDate(challenge.start_date)}
+            </div>
+            <div>
+                {challenge && formatDate(challenge.end_date)}
+            </div>
             <div>
                 {isUserParticipant &&
                     <OpenModalButton

@@ -51,6 +51,12 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
         history.push(`/challenges/${challenge.id}/edit`);
     }
 
+    const formatDate = (date) => {
+        const dateObj = new Date(date);
+        return dateObj.toUTCString().split(' ').slice(1, 4).join(' ');
+    }
+    
+
     return (
         <>
             <div className='card-container' key={challenge.id}>
@@ -60,8 +66,8 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                     <div className="card-title">{challenge.title}</div>
                     <div className="card-description">{challenge.description}</div>
                     <div className="card-activity">{challenge.activity_type}</div>
-                    <div className="card-start">{new Date(challenge.start_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric'})}</div>
-                    <div className="card-end">{new Date(challenge.end_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric'})}</div>
+                    <div className="card-start">{challenge && formatDate(challenge.start_date)}</div>
+                    <div className="card-end">{challenge && formatDate(challenge.end_date)}</div>
                     <div className="card-participants">{challenge.participants.length}</div>
                 </div>
                 </Link>

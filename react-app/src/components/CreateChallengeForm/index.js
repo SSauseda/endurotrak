@@ -35,11 +35,6 @@ const AddChallengeForm = () => {
             return url.match(/\.(jpeg|jpg|png)$/) !== null;
         }
 
-        const startDateObj = new Date(startDate);
-        const endDateObj = new Date(endDate);
-        if (startDateObj > endDateObj) {
-            errorMessages.push('Start date must be before end date');
-        }
 
         if (title.length > 100) {
             errorMessages.push('Title must be 100 characters or less');
@@ -68,16 +63,6 @@ const AddChallengeForm = () => {
         }
 
 
-
-
-
-
-        const timezoneOffset = startDateObj.getTimezoneOffset() * 60000;
-        const adjustedStartDate = new Date(startDateObj.getTime() + timezoneOffset).toISOString().split('T')[0];
-        const adjustedEndDate = new Date(endDateObj.getTime() + timezoneOffset).toISOString().split('T')[0];
-
-
-
         const challenge = {
             user_id: sessionUser.id,
             title,
@@ -85,21 +70,24 @@ const AddChallengeForm = () => {
             activity_type: activityType,
             goal,
             goal_unit: goalUnit,
-            start_date: adjustedStartDate,
-            end_date: adjustedEndDate,
+            start_date: startDate,
+            end_date: endDate,
             image_url: imageUrl,
             rules
         };
+        console.log("CHECKINGTIME", challenge)
         const createChallenge = await dispatch(addChallenge(challenge));
-        console.log("CREATECHALLENGECHALLENGECHALLENGE", createChallenge)
+        // console.log("CREATECHALLENGECHALLENGECHALLENGE", createChallenge)
         setNewChallenge(createChallenge);
         if (createChallenge.errors) {
-            console.log("ERRORS", createChallenge.errors)
+            // console.log("ERRORS", createChallenge.errors)
             setErrors(createChallenge.errors);
         } else {
             history.push('/challenges');
         }
     };
+
+    
 
     return (
         <form className='create-form' onSubmit={handleSubmit}>
@@ -172,7 +160,7 @@ const AddChallengeForm = () => {
                     required
                 />
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 End Date
                 <input
                     type="date"
@@ -181,8 +169,9 @@ const AddChallengeForm = () => {
                     required
                 />
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Challenge Banner Image
+                <div className="image-validation">(must end in .jpeg, .jpg, or .png)</div>
                 <input
                     className='challenge-form-input'
                     type="text"
