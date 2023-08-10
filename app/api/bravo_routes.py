@@ -44,7 +44,7 @@ def post_bravo(challenge_id, result_id):
         # Check if a bravo already exists for this user, recipient, and result
         existing_bravo = Bravo.query.filter_by(
             user_id = current_user.id,
-            recipient_id = form.data['recipient_id'],
+            participant_id = form.data['participant_id'],
             result_id = form.data['result_id']
         ).first()
         if existing_bravo is not None:
@@ -53,7 +53,7 @@ def post_bravo(challenge_id, result_id):
         
         bravo = Bravo(
             user_id = current_user.id,
-            recipient_id = form.data['recipient_id'],
+            participant_id = form.data['participant_id'],
             result_id = form.data['result_id']
         )
         db.session.add(bravo)

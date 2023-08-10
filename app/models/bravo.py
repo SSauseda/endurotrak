@@ -10,13 +10,13 @@ class Bravo(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    recipient_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    participant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('challenge_participants.id')), nullable=False)
     result_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('challenge_results.id')), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     user = db.relationship('User', back_populates='given_bravos', foreign_keys=[user_id])
-    recipient = db.relationship('User', back_populates='received_bravos', foreign_keys=[recipient_id])
+    participant = db.relationship('ChallengeParticipant', back_populates='bravos')
 
     result = db.relationship('ChallengeResult', back_populates='bravos')
 
@@ -25,6 +25,6 @@ class Bravo(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'recipient_id': self.recipient_id,
+            'participant_id': self.participant_id,
             'result_id': self.result_id,
         }

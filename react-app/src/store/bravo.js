@@ -1,5 +1,5 @@
-const SET_BRAVOS = 'bravos/SET_BRAVOS';
-const ADD_BRAVO = 'bravos/ADD_BRAVO';
+const SET_BRAVOS = 'SET_BRAVOS';
+const ADD_BRAVO = 'ADD_BRAVO';
 
 
 const setBravos = (bravos) => ({
@@ -17,7 +17,8 @@ export const fetchBravos = (challengeId, resultId) => async (dispatch) => {
 
     if (response.ok) {
         const bravos = await response.json();
-        dispatch(setBravos(bravos));
+        console.log("Fetched bravos:", bravos.bravos);
+        dispatch(setBravos(bravos.bravos));
     }
 };
 
@@ -29,7 +30,8 @@ export const createBravo = (challengeId, resultId, bravoData) => async (dispatch
     });
 
     if (response.ok) {
-        const bravo = await response.json();
+    const bravo = await response.json();
+        console.log("BRAVOTHUNK", bravo.bravo)
         dispatch(addBravo(bravo));
         return null;
     } else {
@@ -44,8 +46,12 @@ export const createBravo = (challengeId, resultId, bravoData) => async (dispatch
 const initialState = [];
 
 const bravoReducer = (state = initialState, action) => {
+    console.log("Current state:", state);
+    console.log("Action:", action);
+    
     switch (action.type) {
         case SET_BRAVOS:
+            // console.log('setbravos', action.bravos)
             return action.bravos;
         case ADD_BRAVO:
             return [...state, action.bravo];

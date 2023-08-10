@@ -1,4 +1,4 @@
-from app.models import db, Bravo, User, ChallengeResult, environment, SCHEMA
+from app.models import db, Bravo, User, ChallengeResult, ChallengeParticipant, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
@@ -15,6 +15,9 @@ def seed_bravos():
     user9 = User.query.get(9)
     user10 = User.query.get(10)
 
+    participant1 = ChallengeParticipant.query.filter_by(user_id=1).first()
+    
+
     result1 = ChallengeResult.query.get(1)
     result2 = ChallengeResult.query.get(2)
     result3 = ChallengeResult.query.get(3)
@@ -26,37 +29,37 @@ def seed_bravos():
     # User 2 gives Bravo to User 1 for Result 1
     bravo1 = Bravo(
         user_id=user2.id,
-        recipient_id=user1.id,
+        participant_id=participant1.id,
         result_id=result1.id,
     )
 
     bravo2 = Bravo(
         user_id=user8.id,
-        recipient_id=user1.id,
+        participant_id=participant1.id,
         result_id=result2.id,
     )
 
     bravo3 = Bravo(
         user_id=user3.id,
-        recipient_id=user1.id,
+        participant_id=participant1.id,
         result_id=result3.id,
     )
 
     bravo4 = Bravo(
         user_id=user4.id,
-        recipient_id=user1.id,
+        participant_id=participant1.id,
         result_id=result4.id,
     )
 
     bravo5 = Bravo(
         user_id=user7.id,
-        recipient_id=user1.id,
+        participant_id=participant1.id,
         result_id=result5.id,
     )
 
     bravo6 = Bravo(
         user_id=user9.id,
-        recipient_id=user1.id,
+        participant_id=participant1.id,
         result_id=result6.id,
     )
 

@@ -15,6 +15,7 @@ const ResultModal = () => {
 
     const user = useSelector((state) => state.session.user);
     const result = useSelector((state) => state.results[resultId]);
+    const results = useSelector((state) => Object.values(state.results));
   
     
     useEffect(() => {
@@ -27,9 +28,10 @@ const ResultModal = () => {
         dispatch(fetchBravos(challengeId, resultId));
     }, [dispatch])
     
-    const bravos = useSelector((state) => Object.values(state.bravos));
-    const bravosForCurrentResult = bravos.flat().filter(bravo => bravo.result_id === parseInt(resultId));
-    console.log("BRAVOS", bravosForCurrentResult)
+    const bravos = useSelector((state) => state.bravos);
+    console.log("BRAVOLENGTH", bravos.length)
+    // const bravosForCurrentResult = bravos.flat().filter(bravo => bravo.result_id === parseInt(resultId));
+
 
     if (!result) {
         return <div>Loading...</div>;
@@ -38,7 +40,7 @@ const ResultModal = () => {
     const handleBravoClick = async () => {
         const bravoData = {
             user_id: user.id,
-            recipient_id: result.user_id,
+            participant_id: results[0].participant_id,
             result_id: resultId
         };
 
@@ -57,7 +59,7 @@ const ResultModal = () => {
             <p><strong>Duration:</strong> {result.duration}</p>
             <p><strong>Pace:</strong> {result.pace}</p>
             <div>
-                {bravosForCurrentResult.length} {bravosForCurrentResult.length === 1 ? 'bravo' : 'bravos'}
+                {bravos.length} {bravos.length === 1 ? 'bravo' : 'bravos'}
                 {/* {bravosForCurrentResult.length > 0 && 
             `${bravosForCurrentResult.length} ${bravosForCurrentResult.length === 1 ? 'bravo' : 'bravos'}`} */}
             </div>

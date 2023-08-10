@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
 
     comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan', lazy='joined')
     given_bravos = db.relationship('Bravo', back_populates='user', foreign_keys='Bravo.user_id', cascade='all, delete-orphan')
-    received_bravos = db.relationship('Bravo', back_populates='recipient', foreign_keys='Bravo.recipient_id', cascade='all, delete-orphan')
+    # received_bravos = db.relationship('Bravo', back_populates='participant', foreign_keys='Bravo.participant_id', cascade='all, delete-orphan')
     created_challenges = db.relationship('Challenge', back_populates='user', cascade='all, delete-orphan')
     challenge_participants = db.relationship('ChallengeParticipant', back_populates='user', cascade='all, delete-orphan')
     # instance where user is following another user
@@ -87,7 +87,7 @@ class User(db.Model, UserMixin):
             'followings': [following.to_dict() for following in self.followings],
             'comments': [comment.to_dict() for comment in self.comments],
             'givenBravos': len(self.given_bravos),
-            'receivedBravos': len(self.received_bravos),
+            # 'receivedBravos': len(self.received_bravos),
             'totalDistanceRunning': self.total_distance_running,
             'totalDistanceCycling': self.total_distance_cycling,
             'createdChallenges': [challenge.to_dict() for challenge in self.created_challenges],

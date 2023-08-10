@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 9cbde8fa4b38
+Revision ID: b3e71c33a7e7
 Revises: 
-Create Date: 2023-07-27 19:14:47.085263
+Create Date: 2023-08-09 18:02:02.166678
 
 """
 from alembic import op
@@ -13,8 +13,9 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
+
 # revision identifiers, used by Alembic.
-revision = '9cbde8fa4b38'
+revision = 'b3e71c33a7e7'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,7 +32,7 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('location', sa.String(length=255), nullable=False),
     sa.Column('about', sa.String(length=255), nullable=False),
-    sa.Column('profile_image', sa.String(length=255), nullable=True, default='https://i.imgur.com/2PrwK1S.png'),
+    sa.Column('profile_image', sa.String(length=255), nullable=True),
     sa.Column('banner_image1', sa.String(length=255), nullable=True),
     sa.Column('banner_image2', sa.String(length=255), nullable=True),
     sa.Column('banner_image3', sa.String(length=255), nullable=True),
@@ -113,11 +114,11 @@ def upgrade():
     op.create_table('bravos',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('recipient_id', sa.Integer(), nullable=False),
+    sa.Column('participant_id', sa.Integer(), nullable=False),
     sa.Column('result_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['recipient_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['participant_id'], ['challenge_participants.id'], ),
     sa.ForeignKeyConstraint(['result_id'], ['challenge_results.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
