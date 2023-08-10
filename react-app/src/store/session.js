@@ -1,6 +1,8 @@
 // constants
 const SET_USER = "session/SET_USER";
 export const REMOVE_USER = "session/REMOVE_USER";
+const SET_USERS = "session/SET_USERS";
+const SET_SINGLE_USER = "session/SET_SINGLE_USER";
 // const GET_PARTICIPATING_CHALLENGES = "session/GET_PARTICIPATING_CHALLENGES";
 const SET_SEARCH_RESULTS = "session/SET_SEARCH_RESULTS";
 
@@ -11,6 +13,16 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
 	type: REMOVE_USER,
+});
+
+const setUsers = (users) => ({
+	type: SET_USERS,
+	payload: users,
+});
+
+const setSingleUser = (user) => ({
+	type: SET_SINGLE_USER,
+	payload: user,
 });
 
 // const getParticipatingChallenges = (challenges) => ({
@@ -125,6 +137,30 @@ export const signUp = (username,
 	}
 };
 
+export const fetchAllUsers = () => async (dispatch) => {
+	const response = await fetch("/api/users/");
+
+	if (response.ok) {
+		const { users } = await response.json();
+		dispatch(setUsers(users));
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
+export const fetchSingleUser = (userId) => async (dispatch) => {
+	const response = await fetch(`/api/users/${userId}`);
+
+	if (response.ok) {
+		const user  = await response.json();
+		dispatch(setSingleUser(user));
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+}
+
 
 export const searchUsers = (search) => async (dispatch) => {
 	const response = await fetch(`/api/users/search?search=${search}`);
@@ -150,6 +186,10 @@ export default function reducer(state = initialState, action) {
 			return { ...state, user: action.payload };
 		case REMOVE_USER:
 			return { ...state, user: null };
+		case SET_USERS:
+			return { ...state, users: action.payload };
+		case SET_SINGLE_USER:
+			return { ...state, singleUser: action.payload };
 		case SET_SEARCH_RESULTS:
 			return { ...state, searchResults: action.payload };
 		default:

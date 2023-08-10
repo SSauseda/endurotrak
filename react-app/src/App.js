@@ -13,6 +13,8 @@ import EditChallengeForm from "./components/EditChallenges";
 import ManageChallenges from "./components/ManageChallenges";
 import ResultModal from "./components/ResultModal";
 import Homepage from "./components/Homepage";
+import AthletePage from "./components/AthletePage";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +33,9 @@ function App() {
           </Route>
           <Route exact path="/athlete">
             <UserProfile />
+          </Route>
+          <Route exact path="/athlete/:userId">
+            <AthletePage />
           </Route>
           <Route exact path="/user/challenges">
             <ManageChallenges />
