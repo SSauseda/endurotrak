@@ -35,6 +35,12 @@ const AddChallengeForm = () => {
             return url.match(/\.(jpeg|jpg|png)$/) !== null;
         }
 
+        const startDateObj = new Date(startDate);
+        const endDateObj = new Date(endDate);
+
+        if (startDateObj > endDateObj) {
+            errorMessages.push('Start date must be before end date');
+        }
 
         if (title.length > 100) {
             errorMessages.push('Title must be 100 characters or less');

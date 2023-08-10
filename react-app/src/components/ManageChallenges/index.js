@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchChallenges } from '../../store/challenge';
 import ChallengeCard from '../ChallengeCards';
+import { removeChallenge } from '../../store/challenge';
 
 
 const ManageChallenges = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const userId = useSelector((state) => state.session.user.id);
+    const user = useSelector((state) => state.session.user);
+    const userId = user ? user.id : null;
+
 
     useEffect(() => {
         dispatch(fetchChallenges())
@@ -18,6 +21,12 @@ const ManageChallenges = () => {
     const allChallenges = useSelector((state) => Object.values(state.challenges));
 
     const myChallenges = allChallenges.filter(challenge => challenge.user_id === userId);
+
+    useEffect(() => {
+        if (!user) {
+            history.push('/');
+        }
+    }, [user, history])
 
 
     return (

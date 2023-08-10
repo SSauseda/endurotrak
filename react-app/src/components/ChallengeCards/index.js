@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 // import { joinChallenge, leaveChallenge } from '../../store/participant';
 import { fetchChallenges, joinChallenge, leaveChallenge, removeChallenge } from '../../store/challenge';
@@ -10,6 +10,8 @@ import './ChallengeCards.css';
 const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
+    
     const { openModal, closeModal } = useModal();
     const user = useSelector((state) => state.session.user);
 
@@ -71,7 +73,7 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                     <div className="card-participants">{challenge.participants.length}</div>
                 </div>
                 </Link>
-                {isChallengePage && (
+                {location.pathname === '/challenges' && (
                     challenge.isUserParticipant ? (
                         <button
                             className='leave-challenge-button'
@@ -89,6 +91,22 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                             Join Challenge
                         </button>
                     )
+                )}
+                {location.pathname === '/user/challenges' && user.id === challenge.user_id && (
+                    <>
+                        <button
+                            className="delete-challenge-button"
+                            onClick={deleteChallengeHandler}
+                        >
+                            Delete Challenge
+                        </button>
+                        <button
+                            className="edit-challenge-button"
+                            onClick={editChallengeHandler}
+                        >
+                            Edit Challenge
+                        </button>
+                    </>
                 )}
                 {/* {isManagePage && user.id === challenge.user_id && (
                     <>

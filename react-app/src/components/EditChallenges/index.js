@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Redirect } from 'react-router-dom';
 import { editChallenge } from '../../store/challenge';
 
 
@@ -9,6 +9,9 @@ const EditChallengeForm = () => {
     const history = useHistory();
     const { challengeId } = useParams();
     const challenge = useSelector((state) => state.challenges[challengeId]);
+    // const user = useSelector((state) => state.session.user && state.session.user.id);
+
+    
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -104,6 +107,8 @@ const EditChallengeForm = () => {
     const handleCancel = () => {
         history.push(`/user/challenges`);
     }
+
+    // if (!user) return <Redirect to="/" />;
 
     return (
         <form onSubmit={handleSubmit}>
