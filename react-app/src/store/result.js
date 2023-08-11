@@ -67,8 +67,10 @@ export const addChallengeResult = (challengeId, result) => async (dispatch) => {
         if (response.ok) {
             const result = await response.json();
             dispatch(createChallengeResult(result));
+            return null
         } else {
-            console.error('Error creating result', response.status, response.statusText)
+            const data = await response.json();
+            return data.errors
         }
     } catch (err) {
         console.error(err);

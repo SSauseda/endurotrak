@@ -23,9 +23,9 @@ const CreateResultModal= ({challenge}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("CHALLENGEID", challenge.id)
+        console.log("CHALLENGEID", challenge.id);
     
-        user.challengeParticipants.forEach(participant => {
+        for (const participant of user.challengeParticipants) {
             if (participant.user_id === user.id && participant.challenge_id === challenge.id) {
                 console.log("PARTICIPANTID", participant.id);
     
@@ -37,18 +37,55 @@ const CreateResultModal= ({challenge}) => {
                     goal_unit: goalUnit,
                     duration,
                     pace: parseFloat(pace),
-                }
-                const newResult = dispatch(addChallengeResult(challenge.id, result));
+                };
+                
+
+                const newResult = await dispatch(addChallengeResult(challenge.id, result));
+                
+                console.log("CREATERESULT", newResult);
+                
                 setCreateResult(newResult);
-                if (newResult.errors) {
-                    console.log("ERRORS", newResult.errors)
+                
+                if (newResult && newResult.errors) {
+                    console.log("ERRORS", newResult.errors);
                     setErrors(newResult.errors);
                 }
             }
-        })
+        }
+    
         closeModal();
     }
- 
+    
+
+    const calculatePace = (distance, duration, goalUnit) => {
+        if (!distance || !duration) return;
+
+        const distanceInKm = goalUnit === 'mi' ? distance * 1.60934 : distance;
+
+        const [hours, mintues] = duration.split(':').map(Number);
+        const totalMinutes = (hours * 60) + mintues;
+
+        return (totalMinutes / distanceInKm).toFixed(2);
+    }
+
+    const handleDistanceChange = (e) => {
+        setDistance(e.target.value);
+        const updatedPace = calculatePace(e.target.value, duration, goalUnit);
+        setPace(updatedPace);
+    }
+
+    const handleDurationChange = (e) => {
+        setDuration(e.target.value);
+        const updatedPace = calculatePace(distance, e.target.value, goalUnit);
+        setPace(updatedPace);
+    }
+
+    const handleUnitChange = (e) => {
+        setGoalUnit(e.target.value);
+        const updatedPace = calculatePace(distance, duration, e.target.value);
+        setPace(updatedPace);
+    }
+
 
     return (
         <form onSubmit={handleSubmit}>
@@ -64,14 +101,14 @@ const CreateResultModal= ({challenge}) => {
                 <input 
                     type='number'
                     value={distance}
-                    onChange={(e) => setDistance(e.target.value)}
+                    onChange={handleDistanceChange}
                 />
             </label>
             <label>
                 Goal Unit
                 <select
                     value={goalUnit}
-                    onChange={(e) => setGoalUnit(e.target.value)}
+                    onChange={handleUnitChange}
                 >
                     <option value='mi'>Miles</option>
                     <option value='km'>Kilometers</option>
@@ -82,7 +119,7 @@ const CreateResultModal= ({challenge}) => {
                 <input
                     type='time'
                     value={duration}
-                    onChange={(e) => setDuration(e.target.value)}
+                    onChange={handleDurationChange}
                 />
             </label>
             <label>
@@ -91,6 +128,7 @@ const CreateResultModal= ({challenge}) => {
                     type='number'
                     value={pace}
                     onChange={(e) => setPace(e.target.value)}
+                    readOnly
                 />
             </label>
             <button type='submit'>submit</button>

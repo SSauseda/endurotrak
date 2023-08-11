@@ -61,7 +61,7 @@ const Leaderboard = ({ challengeId }) => {
                     <div className='result-name'>{result.participant_username}</div>
                     <div className='result-distance'>{result.distance}{result.goal_unit}</div>
                     <div className='result-duration'>{result.duration}</div>
-                    <div className='result-pace'>{result.pace}km/hr</div>
+                    <div className='result-pace'>{result.pace}min/km</div>
                     {currentUser && currentUser.challengeParticipants.find(cp => cp.id === result.participant_id) && 
                         <button onClick={() => handleDelete(challengeId, result.id)}>Delete</button>}
                 </div>
