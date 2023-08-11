@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import CreateResultModal from '../CreateResultModal';
 import { fetchChallenges } from '../../store/challenge';
+import './ChallengePage.css';
 
 
 const ChallengePage = () => {
@@ -38,24 +39,27 @@ const ChallengePage = () => {
     }
 
     return (
-        <div>
-            <h1>Challenge Page</h1>
-            <div>
-                {challenge && formatDate(challenge.start_date)}
-            </div>
-            <div>
-                {challenge && formatDate(challenge.end_date)}
-            </div>
-            <div>
-                {isUserParticipant &&
-                    <OpenModalButton
-                    buttonText="Add result"
-                    modalComponent={<CreateResultModal  challenge={challenge}/>}
-                  />
-                 }
-                <Leaderboard challengeId={challengeId}/>
-            </div>
-        </div>
+        <div className="challenge-container">
+    <h1>{challenge && challenge.title}</h1>
+    <img src={challenge && challenge.image_url} alt="Challenge" className="challenge-image"/>
+    <p className="challenge-description">{challenge && challenge.description}</p>
+    <div className="challenge-dates">
+        <span>Start Date: {challenge && formatDate(challenge.start_date)}</span>
+        <span>End Date: {challenge && formatDate(challenge.end_date)}</span>
+    </div>
+    <p>Activity Type: {challenge && challenge.activity_type}</p>
+    <p>Goal: {challenge && challenge.goal} {challenge && challenge.goal_unit}</p>
+    <p>Rules: {challenge && challenge.rules}</p>
+
+    {isUserParticipant &&
+        <OpenModalButton
+            buttonText="Add result"
+            modalComponent={<CreateResultModal  challenge={challenge}/>}
+            className='add-result-button'
+        />
+    }
+    <Leaderboard challengeId={challengeId}/>
+</div>
     )
 }
 

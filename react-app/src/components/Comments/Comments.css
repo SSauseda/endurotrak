@@ -1,7 +1,7 @@
 .comment-container {
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
+    margin-left: -20px;
     padding: 20px;
     background-color: #f4f4f4;
     border-radius: 8px;

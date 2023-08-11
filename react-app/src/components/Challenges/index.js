@@ -32,7 +32,7 @@ const Challenge = () => {
     return (
         <div className="challenge-container">
           <h1 className="challenge-header">Challenges</h1>
-          <button className="create-button" onClick={handleButtonClick}>Create a challenge</button>
+          <button className="nav-challenge-button" onClick={handleButtonClick}>Create a challenge</button>
           <div className="challenge-cards">
             {challenges.map(challenge => (
                 <ChallengeCard challenge={challenge} isChallengePage={true}/>

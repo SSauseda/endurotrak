@@ -5,6 +5,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import Comments from '../Comments';
 import { fetchBravos, createBravo } from '../../store/bravo';
+import './ResultModal.css';
 
 
 const ResultModal = () => {
@@ -32,6 +33,8 @@ const ResultModal = () => {
     console.log("BRAVOLENGTH", bravos.length)
     // const bravosForCurrentResult = bravos.flat().filter(bravo => bravo.result_id === parseInt(resultId));
 
+    const hasGivenBravo = Boolean(bravos.find(bravo => bravo.user_id === user.id))
+    console.log(hasGivenBravo)
 
     if (!result) {
         return <div>Loading...</div>;
@@ -52,22 +55,27 @@ const ResultModal = () => {
 
 
     return (
-        <div>
-            <h2>Challenge Result</h2>
-            <p><strong>Description:</strong> {result.result_description}</p>
-            <p><strong>Distance:</strong> {result.distance} {result.goal_unit}</p>
-            <p><strong>Duration:</strong> {result.duration}</p>
-            <p><strong>Pace:</strong> {result.pace}</p>
-            <div>
-                {bravos.length} {bravos.length === 1 ? 'bravo' : 'bravos'}
-                {/* {bravosForCurrentResult.length > 0 && 
-            `${bravosForCurrentResult.length} ${bravosForCurrentResult.length === 1 ? 'bravo' : 'bravos'}`} */}
+        <div className="result-modal">
+            <h2 className="result-title">Challenge Result</h2>
+            <div className="result-details">
+                <p><strong>Description:</strong> {result.result_description}</p>
+                <p><strong>Distance:</strong> {result.distance} {result.goal_unit}</p>
+                <p><strong>Duration:</strong> {result.duration}</p>
+                <p><strong>Pace:</strong> {result.pace}</p>
             </div>
-            <button onClick={handleBravoClick}>Give Bravo</button>
-            <div>
+            <div className="bravos-count">
+                {bravos.length} {bravos.length === 1 ? 'bravo' : 'bravos'}
+            </div>
+            <button className="bravo-button" 
+            onClick={handleBravoClick}
+            disabled={hasGivenBravo}
+            >
+                Give Bravo
+                </button>
+            <div className="comments-section">
                 <Comments />
             </div>
-            <button onClick={() => history.push(`/challenges/${challengeId}`)}>Return</button>
+            <button className="return-button" onClick={() => history.push(`/challenges/${challengeId}`)}>Return</button>
         </div>
     )
 }

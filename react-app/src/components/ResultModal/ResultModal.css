@@ -1,0 +1,52 @@
+.result-modal {
+    width: 90%;
+    max-width: 500px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.result-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.result-details p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.bravos-count {
+    font-size: 18px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.bravo-button, .return-button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.bravo-button:hover, .return-button:hover {
+    background-color: #0056b3;
+}
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.bravo-button:disabled {
+    background-color: #43cf43;
+    cursor: not-allowed;
+}

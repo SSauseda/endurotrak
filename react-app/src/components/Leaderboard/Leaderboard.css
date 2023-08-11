@@ -49,4 +49,19 @@
     object-fit: cover;
 }
 
+.result-delete-button {
+    background: #5271ff;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 5px 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+  .nav-challenge-button:hover {
+    background-color: #3c5be8;
+  }
+
 
