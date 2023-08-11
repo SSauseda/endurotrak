@@ -81,5 +81,5 @@ def delete_comment(challenge_id, result_id, comment_id):
 @comment_routes.route('/<int:challenge_id>/results/<int:result_id>/comments', methods=['GET'])
 @login_required
 def get_all_comments(challenge_id, result_id):
-    comments = Comment.query.filter_by(result_id=result_id).all()
+    comments = Comment.query.filter_by(result_id=result_id).order_by(Comment.created_at.desc()).all()
     return jsonify([comment.to_dict() for comment in comments])

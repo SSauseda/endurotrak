@@ -109,7 +109,10 @@ const commentReducer = (state = initialState, action) => {
         case GET_COMMENT:
             return [...state, action.comment];
         case ADD_COMMENT:
-            return [...state, action.comment];
+            return [
+                action.comment,
+                ...state
+            ].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         case EDIT_COMMENT:
             return state.map((comment) => comment.id === action.comment.id ? action.comment : comment);
         case DELETE_COMMENT:

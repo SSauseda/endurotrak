@@ -22,16 +22,18 @@ const Comments = () => {
     const comments = useSelector((state) => state.comments);
     console.log("HELLOOOOOOO", comments)
 
+    const sortedComments = [...comments].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
 
     return (
         <div className="comment-container">
             <h1 className="comment-header">Comments</h1>
             <CommentForm challengeId={challengeId} resultId={resultId}/>
-            {comments.length === 0 ? (
+            {sortedComments.length === 0 ? (
                 <div className="no-comment">No comments yet</div>
             ) : (
                 <ul className="comment-list">
-                {comments.map(comment => (
+                {sortedComments.map(comment => (
                     <CommentItem key={comment.id} comment={comment} />
                 ))}
             </ul>

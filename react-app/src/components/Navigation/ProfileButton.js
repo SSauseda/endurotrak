@@ -65,7 +65,7 @@ function ProfileButton({ user }) {
             </li>
             <li className="dropdown-item-profile">
               <NavLink onClick={closeMenuAndNavigate} to='/user/challenges'>
-                My Challenges
+                My Created Challenges
               </NavLink>
             </li>
             <li className="log-out">
