@@ -19,6 +19,8 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const [inputError, setInputError] = useState('');
+	const [textareaError, setTextareaError] = useState('');
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 	
@@ -120,9 +122,18 @@ function SignupFormModal() {
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
+						onInput={(e) => {
+							if (e.target.value.length >= 20) {
+								setInputError('Maximum input length reached!')
+							} else {
+								setInputError('')
+							}
+						}}
 						required
 						placeholder="Create a username"
+						maxLength="20"
 					/>
+				{inputError && <div className="input-error">{inputError}</div>}
 				</label>
 				<div className="field-group">
 					<div className="field-half">
@@ -186,14 +197,24 @@ function SignupFormModal() {
 				</div>
 				<label className="signup-label">
 					Tell us about yourself
-					<input
+					<textarea
 						className="signup-input"
 						type="text"
 						value={about}
 						onChange={(e) => setAbout(e.target.value)}
+						onInput={(e) => {
+							if (e.target.value.length >= 255) {
+								setTextareaError('Maximum input length reached!')
+							} else {
+								setTextareaError('')
+							}
+						}}
 						required
 						placeholder="Enter a short bio"
+						min="10"
+						maxLength="255"
 					/>
+				{textareaError && <div className="input-error">{textareaError}</div>}
 				</label>
 				<label className="signup-label">
 					Profile Image 
