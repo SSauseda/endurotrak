@@ -30,6 +30,12 @@
     justify-items: end; 
     /* display: flex; */
     align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.result-card:hover {
+    background-color: #b2b2b2; /* a light gray shade */
+    cursor: pointer;
 }
 
 .result-name, .result-distance, .result-duration, .result-pace {

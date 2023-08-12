@@ -48,6 +48,7 @@ function LoginFormPage() {
     <>
     <div className="login-form-container">
       <h1 className="login-header">Sweat. Share. Bravo.</h1>
+      <h2 className="login-description">Join our running and cycling community! <br></br> Create challenges, track your progress, and compete on leaderboards to push your limits and celebrate achievements together.</h2>
       <form className={`login-form-page ${isSignupModalOpen ? 'no-pointer-events' : ''}`} onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
@@ -78,7 +79,7 @@ function LoginFormPage() {
         </label>
         <button className="login-button" type="submit">Log In</button>
         <button onClick={demoLogin} className="demoLogin">Demo User</button>
-        <div className="new-member">
+        {/* <div className="new-member">
           <p className="member-signup">Not a member?</p>
           <OpenModalButton
               buttonText="Sign Up"
@@ -89,7 +90,7 @@ function LoginFormPage() {
               onModalClose={() => setIsSignupModalOpen(false)}
               modalComponent={<SignupFormModal />}
               />
-        </div>
+        </div> */}
       </form>
     </div>
     </>

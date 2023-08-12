@@ -27,6 +27,9 @@ const AddChallengeForm = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [rules, setRules] = useState('');
     const [newChallenge, setNewChallenge] = useState(null);
+    const [titleErrors, setTitleErrors] = useState('');
+    const [descriptionErrors, setDescriptionErrors] = useState('');
+    const [rulesErrors, setRulesErrors] = useState('');
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -115,10 +118,18 @@ const AddChallengeForm = () => {
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    onInput={(e) => {
+                        if (e.target.value.length >= 100) {
+                            setTitleErrors('Title must be 100 characters or less');
+                        } else {
+                            setTitleErrors('');
+                        }
+                    }}
                     placeholder="Title"
                     required
                     maxLength="100"
                     />
+                    {titleErrors && <div className='input-error'>{titleErrors}</div>}
             </label>
             <label className='challenge-form-label'>
                 Description
@@ -127,10 +138,18 @@ const AddChallengeForm = () => {
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    onInput={(e) => {
+                        if (e.target.value.length >= 250) {
+                            setDescriptionErrors('Description must be 250 characters or less');
+                        } else {
+                            setDescriptionErrors('');
+                        }
+                    }}
                     placeholder="Description"
                     required
                     maxLength="250"
-                    />          
+                    />
+                    {descriptionErrors && <div className='input-error'>{descriptionErrors}</div>}          
             </label>
             <label className='challenge-form-label'>
                 Activity Type
@@ -222,10 +241,18 @@ const AddChallengeForm = () => {
                     type="text"
                     value={rules}
                     onChange={(e) => setRules(e.target.value)}
+                    onInput={(e) => {
+                        if (e.target.value.length >= 255) {
+                            setRulesErrors('Rules must be 255 characters or less');
+                        } else {
+                            setRulesErrors('');
+                        }
+                    }}
                     placeholder="Rules"
                     required
                     maxLength="255"
                 />
+                {rulesErrors && <div className='input-error'>{rulesErrors}</div>}
             </label>
             <button className='challenge-submit' type="submit">Create Challenge</button>
         </form>

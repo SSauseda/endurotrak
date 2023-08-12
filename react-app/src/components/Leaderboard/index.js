@@ -28,8 +28,10 @@ const Leaderboard = ({ challengeId }) => {
     const result = useSelector((state) => state.results[selectedResult]);
     console.log("RESULTS LEADERBOARD", results)
 
-    const handleDelete = (challengeId, resultId) => {
+    const handleDelete = (e, challengeId, resultId) => {
+        e.stopPropagation();
         dispatch(removeChallengeResult(challengeId, resultId));
+        history.push(`/challenges/${challengeId}`)
     }
 
     const handleOpenModal = (challengeId, resultId) => {
@@ -63,7 +65,13 @@ const Leaderboard = ({ challengeId }) => {
                     <div className='result-duration'>{result.duration}</div>
                     <div className='result-pace'>{result.pace}min/km</div>
                     {currentUser && currentUser.challengeParticipants.find(cp => cp.id === result.participant_id) && 
-                        <button className='result-delete-button' onClick={() => handleDelete(challengeId, result.id)}>Delete</button>}
+                        <button 
+                        className='result-delete-button' 
+                        onClick={(e) => handleDelete(e, challengeId, result.id)}
+                        >
+                            Delete
+                        </button>
+                    }
                 </div>
             )) : <p>Loading ...</p>}
             </div>

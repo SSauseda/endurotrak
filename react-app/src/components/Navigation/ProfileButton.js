@@ -49,28 +49,30 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <div className="profile-button-container">
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+    <div className="profile-button-container" onMouseLeave={() => setShowMenu(false)}>
+      <button className="profile-button" onMouseEnter={openMenu}>
+      <i class="fas fa-user"></i>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>Hello! {user.firstName}</li>
+          <div className="logged-in-container">
+            <li className="user-greeting">Hello! {user.firstName}</li>
             {/* <li>{user.email}</li> */}
             <li className="dropdown-item-profile">
-              <Link onClick={closeMenuAndNavigate} to='/athlete'>
-                My Profile
-              </Link>
-            </li>
-            <li className="dropdown-item-profile">
-              <NavLink onClick={closeMenuAndNavigate} to='/user/challenges'>
-                My Created Challenges
-              </NavLink>
-            </li>
+  <Link onClick={closeMenuAndNavigate} to='/athlete'>
+    <div>My Profile</div>
+  </Link>
+</li>
+<li className="dropdown-item-profile">
+  <NavLink onClick={closeMenuAndNavigate} to='/user/challenges'>
+    <div>My Created Challenges</div>
+  </NavLink>
+</li>
             <li className="log-out">
-              <button onClick={handleLogout}>Log Out</button>
+              <button className="logoutButton" onClick={handleLogout}>Log Out</button>
             </li>
+          </div>
           </>
         ) : (
           <>

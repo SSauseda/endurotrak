@@ -68,8 +68,6 @@ li {
 }
 
 
-/* PROFILE BUTTON */
-
 .profile-button-container {
   position: relative;
 }
@@ -77,4 +75,117 @@ li {
 .profile-dropdown {
   position: absolute;
   right: 0;
+  top: 35px;
+  /* border: 2px solid #333; */
+}
+
+.profile-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+
+.profile-button {
+  background-color: #f3f3f3;
+  border: none;
+  border-radius: 50%; 
+  width: 50px; 
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+
+.profile-button i.fas {
+  font-size: 24px;
+  color: #666;
+}
+
+.logged-in-container {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  width: 200px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  list-style-type: none; 
+  margin: 0;
+}
+
+
+.logged-in-container li {
+  padding: 10px 15px;
+  color: #333;
+  /* cursor: pointer; */
+}
+
+.dropdown-item-profile {
+  cursor: pointer;
+}
+
+.dropdown-item-profile > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  color: #333;
+  /* border: 2px solid red; */
+  padding: 10px 0px 10px 0px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-item-profile:hover {
+  background-color: #f6f6f6; 
+}
+
+.log-out {
+  cursor: default;
+}
+
+.logoutButton {
+  cursor: pointer;
+}
+
+.logged-in-container li:hover {
+  background-color: #f6f6f6;
+}
+
+
+.logged-in-container .user-greeting {
+  font-size: 1.1em;
+  font-weight: bold;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  cursor: default;
+}
+
+.logged-in-container .user-greeting:hover, .logged-in-container .log-out:hover  {
+  background-color: inherit;
+}
+
+
+.log-out button {
+  width: 100%;
+  background-color: #db4b4b;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.log-out button:hover {
+  background-color: #c83d3d;
+}
+
+.logged-in-container a {
+  text-decoration: none;
+  color: #333;
 }

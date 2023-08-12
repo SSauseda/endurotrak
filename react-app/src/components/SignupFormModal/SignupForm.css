@@ -42,18 +42,26 @@
 }
 
 .signup-button {
-    background-color: #5271ff;
-    color: #fff;
-    padding: 10px 15px;
+    padding: 12px 20px; /* Padding around the text */
+    /* border: 2px solid red; */
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    border-radius: 2px; /* Rounded corners */
+    background-color: #007BFF; /* A primary blue color */
+    color: white; /* Text color */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Changes the cursor to a hand to show it's clickable */
+    transition: background-color 0.3s; /* Transition for a smooth color change */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for an elevated look */
+    outline: none; /* Remove default browser outline */
 }
 
 .signup-button:hover {
-    background-color: #375bfb;
+    background-color: #0056b3; /* A darker blue on hover */
+}
+
+.signup-button:active {
+    background-color: #004085; /* An even darker blue on active/click */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Reduce shadow on active to give a "pressed" look */
 }
 
 .field-group {
