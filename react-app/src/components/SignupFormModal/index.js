@@ -58,6 +58,10 @@ function SignupFormModal() {
 		if (password !== confirmPassword) {
 			newErrors.push("Passwords do not match. Please try again.");
 		}
+
+		if (username.length > 20) {
+			newErrors.push("Username must be less than 20 characters.");
+		}
 	
 		if (about.length < 10 || about.length > 255) {
 			newErrors.push("bio must be between 10 and 255 characters.");

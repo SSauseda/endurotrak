@@ -26,15 +26,19 @@ const EditChallengeForm = () => {
 
 
     useEffect(() => {
-        console.log("EDITEDITEDIT2", challengeId)
+        // console.log("EDITEDITEDIT2", challengeId)
       if (challenge) {
         setTitle(challenge.title);
         setDescription(challenge.description);
         setActivityType(challenge.activity_type);
         setGoal(challenge.goal);
         setGoalUnit(challenge.goal_unit);
-        setStartDate(challenge.start_date);
-        setEndDate(challenge.end_date);
+        const formatDate = (date) => {
+            const dateObj = new Date(date);
+            return dateObj.toISOString().split('T')[0];
+        }
+        setStartDate(formatDate(challenge.start_date));
+        setEndDate(formatDate(challenge.end_date));
         setImageUrl(challenge.image_url);
         setRules(challenge.rules);
       }

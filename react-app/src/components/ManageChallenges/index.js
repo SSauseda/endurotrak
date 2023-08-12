@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { fetchChallenges } from '../../store/challenge';
 import ChallengeCard from '../ChallengeCards';
 import { removeChallenge } from '../../store/challenge';
@@ -33,13 +33,20 @@ const ManageChallenges = () => {
         <div>
             <h1>Manage Challenges</h1>
             <div className='challenge-cards'>
-            {myChallenges.map(challenge => (
-                <div key={challenge.id}>
-                    <ChallengeCard challenge={challenge} isManagePage={true} isChallengePage={false}/>
-                </div>
-            ))}
+                {myChallenges.length > 0 ? (
+                    myChallenges.map(challenge => (
+                        <div key={challenge.id}>
+                            <ChallengeCard challenge={challenge} isManagePage={true} isChallengePage={false} />
+                        </div>
+                    ))
+                ) : (
+                    <div className="no-challenges-message">
+                        <p>You haven't created any challenges.</p>
+                        <Link to="/challenges/new-challenge">Create one now!</Link>
+                    </div>
+                )}
             </div>
-        </div> 
+        </div>
     )
     
 };

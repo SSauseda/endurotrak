@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChallenge } from '../../store/challenge';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
@@ -9,6 +9,12 @@ const AddChallengeForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
+
+    useEffect(()=> {
+        if (!sessionUser) {
+            history.push("/");
+            return;
+        }})
     // console.log("SESSIONUSER", sessionUser)
 
     const [title, setTitle] = useState('');
@@ -46,7 +52,7 @@ const AddChallengeForm = () => {
             errorMessages.push('Title must be 100 characters or less');
         }
 
-        if (description.length > 250) {
+        if (description.length > 255) {
             errorMessages.push('Description must be 250 characters or less');
         }
 
@@ -56,6 +62,10 @@ const AddChallengeForm = () => {
 
         if (goal < 0) {
             errorMessages.push('Goal must be a positive number');
+        }
+
+        if (rules.length > 255) {
+            errorMessages.push('Rules must be 255 characters or less');
         }
 
         if (!validateImageUrl(imageUrl)) {
@@ -107,6 +117,7 @@ const AddChallengeForm = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title"
                     required
+                    maxLength="100"
                     />
             </label>
             <label className='challenge-form-label'>
@@ -118,6 +129,7 @@ const AddChallengeForm = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Description"
                     required
+                    maxLength="250"
                     />          
             </label>
             <label className='challenge-form-label'>
@@ -139,9 +151,16 @@ const AddChallengeForm = () => {
                     className='challenge-form-input'
                     type="number"
                     value={goal}
-                    onChange={(e) => setGoal(parseFloat(e.target.value))}
+                    onChange={(e) => {
+                        let value = parseFloat(e.target.value);
+                        if (value < 0) value = 0;
+                        if (value > 500) value = 500;
+                        setGoal(value);
+                    }}
                     placeholder="Goal"
                     required
+                    min="0"
+                    max="500"
                 />
             </label>
             <label className='challenge-form-label'>
@@ -185,6 +204,16 @@ const AddChallengeForm = () => {
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder="Image URL"
                 />
+                {imageUrl && 
+                    <img 
+                        src={imageUrl} 
+                        alt="Preview" 
+                        style={{ width: '100px', height: '100px' }} 
+                        onError={(e) => {
+                            e.target.onError = null;
+                            setImageUrl("https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg")
+                        }}
+                    />}
             </label>
             <label className='challenge-form-label'>
                 Rules
@@ -195,6 +224,7 @@ const AddChallengeForm = () => {
                     onChange={(e) => setRules(e.target.value)}
                     placeholder="Rules"
                     required
+                    maxLength="255"
                 />
             </label>
             <button className='challenge-submit' type="submit">Create Challenge</button>

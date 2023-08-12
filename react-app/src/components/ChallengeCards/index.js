@@ -63,7 +63,15 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
         <>
             <div className='card-container' key={challenge.id}>
                 <Link to={`/challenges/${challenge.id}`}>
-                    <img className="card-img" src={challenge.image_url} alt="challenge"/>
+                    <img 
+                        className="card-img" 
+                        src={challenge.image_url} 
+                        alt="challenge"
+                        onError={(e) => {
+                            e.target.onError = null;
+                            e.target.src="https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg"
+                        }}
+                    />
                 <div className='content-container'>
                     <div className="card-title">{challenge.title}</div>
                     <div className="card-description">{challenge.description}</div>

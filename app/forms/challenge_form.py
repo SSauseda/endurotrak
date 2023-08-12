@@ -23,5 +23,5 @@ class ChallengeForm(FlaskForm):
     start_date = DateField('start_date', validators=[DataRequired()])
     end_date = DateField('end_date', validators=[DataRequired()])
     image_url = StringField('image_url', validators=[validate_image_url])
-    rules = TextAreaField('rules')
+    rules = TextAreaField('rules', validators=[DataRequired(), Length(max=255)])
     submit = SubmitField('Create Challenge')

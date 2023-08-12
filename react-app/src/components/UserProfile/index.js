@@ -42,6 +42,7 @@ const UserProfile = () => {
             <div className="profile-header">
                 <img className="profile-picture" src={user.profileImage} alt={`${user.firstName}'s profile`}/>
                 <h1>{user.firstName} {user.lastName}</h1>
+                <h2>{user.username}</h2>
                 <div className="follwers-container">
                     <div>Following {user.followingsCount}</div>
                     <div>Followers {user.followersCount}</div>
