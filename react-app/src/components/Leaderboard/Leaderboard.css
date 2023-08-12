@@ -34,7 +34,7 @@
 }
 
 .result-card:hover {
-    background-color: #b2b2b2; /* a light gray shade */
+    background-color: #b2b2b2;
     cursor: pointer;
 }
 

@@ -41,3 +41,44 @@
 .comment-text {
     color: #555;
 }
+
+.comment-button {
+    /* width: 100%; */
+    /* padding: 12px; */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+    background-color: #5271ff; 
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.edit-comment-button, .delete-comment-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-comment-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit-comment-button:hover {
+    background-color: #45a049;
+}
+
+.delete-comment-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-comment-button:hover {
+    background-color: #da190b;
+}

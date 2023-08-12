@@ -54,7 +54,7 @@ function CommentForm() {
                     onChange={e => setText(e.target.value)}
                     placeholder="Write your comment..."
                 />
-                <button type="submit">Post Comment</button>
+                <button className='comment-button' type="submit">Post Comment</button>
             </form>
         </div>
     );

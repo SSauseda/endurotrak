@@ -1,6 +1,8 @@
+
+
 .challenge-form-label {
     display: block;
-    margin-bottom: 10px;
+    margin: 5px 0 20px 0;
     font-weight: bold;
     color: #333;
     font-size: 16px;
@@ -11,7 +13,7 @@
 textarea {
     width: 100%;
     padding: 10px;
-    margin: 5px 0 20px 0;
+    /* margin: 5px 0 20px 0; */
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
@@ -26,6 +28,7 @@ textarea {
 }
 
 .challenge-submit {
+
     background-color: #5271ff;
     color: white;
     padding: 10px 15px;
@@ -34,10 +37,15 @@ textarea {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .challenge-submit:hover {
-    background-color: #2f53f4;
+    background-color: #405edc;
 }
 
 .create-form {
@@ -47,4 +55,19 @@ textarea {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: white;
     border-radius: 1px;
+}
+
+.input-error {
+    color: red;
+    font-size: 12px;
+}
+
+.sub-label {
+    font-size: 12px;
+    color: #405edc;
+}
+
+.date-container {
+    display: flex;
+    justify-content: space-between;
 }

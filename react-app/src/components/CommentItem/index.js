@@ -30,8 +30,8 @@ function CommentItem({ comment }) {
         return (
             <div>
                 <textarea value={editedText} onChange={e => setEditedText(e.target.value)} />
-                <button onClick={handleSave}>Save</button>
-                <button onClick={() => setIsEditing(false)}>Cancel</button>
+                <button className='edit-comment-button' onClick={handleSave}>Save</button>
+                <button className='delete-comment-button' onClick={() => setIsEditing(false)}>Cancel</button>
             </div>
         );
     }
@@ -42,8 +42,8 @@ function CommentItem({ comment }) {
             <div className="comment-text">{comment.text}</div>
             {currentUser && currentUser.id === comment.user_id && (
                 <>
-                <button onClick={() => setIsEditing(true)}>Edit</button>
-                <button onClick={handleDelete}>Delete</button>
+                <button className='edit-comment-button' onClick={() => setIsEditing(true)}>Edit</button>
+                <button className='delete-comment-button' onClick={handleDelete}>Delete</button>
                 </>
             )}
         </li>

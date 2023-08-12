@@ -16,6 +16,7 @@ const ResultModal = () => {
 
     const user = useSelector((state) => state.session.user);
     const result = useSelector((state) => state.results[resultId]);
+    console.log("RESULT", result)
     const results = useSelector((state) => Object.values(state.results));
   
     
@@ -56,7 +57,10 @@ const ResultModal = () => {
 
     return (
         <div className="result-modal">
-            <h2 className="result-title">Challenge Result</h2>
+            <div className='image-container'>
+            <img className="result-image" src={result.participant_image} alt="result" />
+            </div>
+            <h2 className="result-title">{result.participant_username}'s Challenge Result</h2>
             <div className="result-details">
                 <p><strong>Description:</strong> {result.result_description}</p>
                 <p><strong>Distance:</strong> {result.distance} {result.goal_unit}</p>
@@ -66,12 +70,20 @@ const ResultModal = () => {
             <div className="bravos-count">
                 {bravos.length} {bravos.length === 1 ? 'bravo' : 'bravos'}
             </div>
-            <button className="bravo-button" 
+            {/* <button className="bravo-button" 
             onClick={handleBravoClick}
             disabled={hasGivenBravo}
             >
                 Give Bravo
-                </button>
+                </button> */}
+            <div className='bravo-icon-container'>
+                <i
+                    className={`fa-solid fa-cake-candles bravo-icon ${hasGivenBravo ? 'bravo-disabled' : ''}`}
+                    onClick={handleBravoClick}
+                    title="Give Bravo"
+                    >
+                </i>
+            </div>
             <div className="comments-section">
                 <Comments />
             </div>

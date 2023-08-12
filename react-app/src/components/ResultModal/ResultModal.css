@@ -8,6 +8,12 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.image-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .result-title {
     font-size: 24px;
     margin-bottom: 20px;
@@ -26,7 +32,7 @@
 }
 
 .bravo-button, .return-button {
-    background-color: #007bff;
+    background-color: #5271ff;
     color: #ffffff;
     padding: 10px 20px;
     border: none;
@@ -49,4 +55,42 @@
 .bravo-button:disabled {
     background-color: #43cf43;
     cursor: not-allowed;
+}
+
+.result-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 10%;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.bravo-icon {
+    font-size: 40px;
+    cursor: pointer;
+    color: #5271ff;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.bravo-icon:hover {
+    color: #2ad25c;
+    transform: scale(1.2);
+}
+
+.bravo-disabled {
+    color: #AAA;
+    cursor: not-allowed;
+}
+
+.bravo-disabled:hover {
+    color: #AAA;
+    transform: none;
+}
+
+.bravo-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
 }

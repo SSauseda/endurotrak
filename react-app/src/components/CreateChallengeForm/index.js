@@ -115,6 +115,9 @@ const AddChallengeForm = () => {
                 Title
                 <input
                     className='challenge-form-input'
+                    style={{ 
+                        color: titleErrors ? 'red' : 'initial',
+                    }}
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -129,12 +132,15 @@ const AddChallengeForm = () => {
                     required
                     maxLength="100"
                     />
-                    {titleErrors && <div className='input-error'>{titleErrors}</div>}
+                    {titleErrors && <div className='input-error'>Error: {titleErrors}</div>}
             </label>
             <label className='challenge-form-label'>
                 Description
                 <textarea
                     className='challenge-form-input'
+                    style={{ 
+                        color: titleErrors ? 'red' : 'initial',
+                    }}
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -149,7 +155,7 @@ const AddChallengeForm = () => {
                     required
                     maxLength="250"
                     />
-                    {descriptionErrors && <div className='input-error'>{descriptionErrors}</div>}          
+                    {descriptionErrors && <div className='input-error'>Error: {descriptionErrors}</div>}          
             </label>
             <label className='challenge-form-label'>
                 Activity Type
@@ -166,6 +172,7 @@ const AddChallengeForm = () => {
             </label>
             <label className='challenge-form-label'>
                 Goal
+                
                 <input
                     className='challenge-form-input'
                     type="number"
@@ -181,6 +188,7 @@ const AddChallengeForm = () => {
                     min="0"
                     max="500"
                 />
+                <div className='sub-label'>(Max 500)</div>
             </label>
             <label className='challenge-form-label'>
                 Goal Unit
@@ -193,8 +201,9 @@ const AddChallengeForm = () => {
                     <option value="mi">Miles</option>
                     <option value="km">Kilometers</option>
                 </select>
-                all paces will be converted to km for ranking purposes
+                <div className='sub-label'>All paces will be converted to km for ranking purposes</div>
             </label>
+            <div className='date-container'>
             <label className='challenge-form-label'>
                 Start Date
                 <input
@@ -202,7 +211,7 @@ const AddChallengeForm = () => {
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     required
-                />
+                    />
             </label>
             <label className='challenge-form-label'>
                 End Date
@@ -211,11 +220,11 @@ const AddChallengeForm = () => {
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     required
-                />
+                    />
             </label>
+            </div>
             <label className='challenge-form-label'>
                 Challenge Banner Image
-                <div className="image-validation">(must end in .jpeg, .jpg, or .png)</div>
                 <input
                     className='challenge-form-input'
                     type="text"
@@ -223,6 +232,7 @@ const AddChallengeForm = () => {
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder="Image URL"
                 />
+                {/* <div className="sub-label">(Must end in .jpeg, .jpg, or .png)</div> */}
                 {imageUrl && 
                     <img 
                         src={imageUrl} 
