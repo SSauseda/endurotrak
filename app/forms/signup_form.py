@@ -31,7 +31,7 @@ def validate_image_url(form, field):
 
 
 class SignUpForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired(message="Please create a username"), username_exists, length(max=20, message="Username must be less than 20 characters")])
+    username = StringField('username', validators=[DataRequired(message="Please create a username"), username_exists, Length(max=20, message="Username must be less than 20 characters")])
     first_name = StringField('first_name',validators=[DataRequired(message="Please enter your first name")])
     last_name = StringField('last_name',validators=[DataRequired(message="Please enter your last name")])
     location = StringField('location',validators=[DataRequired(message="Please enter your location")])
