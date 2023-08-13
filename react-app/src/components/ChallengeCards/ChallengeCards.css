@@ -56,6 +56,7 @@
     background-color: rgb(233, 104, 104);
     padding: 5px 10px;
     border-radius: 5px;
+    width: 200px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -68,6 +69,7 @@
 .edit-challenge-button {
     padding: 5px 10px;
     border-radius: 5px;
+    width: 200px;
     border: none;
     cursor: pointer;
     background-color: #5271ff;
@@ -78,9 +80,12 @@
 
 .leave-challenge-button:hover,
 .join-challenge-button:hover,
-.delete-challenge-button:hover,
 .edit-challenge-button:hover {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #3c5be8;
+}
+
+.delete-challenge-button:hover {
+    background-color: rgb(233, 104, 104);
 }
 
 .join-challenge-button:hover {

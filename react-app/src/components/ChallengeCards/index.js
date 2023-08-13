@@ -103,16 +103,16 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                 {location.pathname === '/user/challenges' && user.id === challenge.user_id && (
                     <>
                         <button
-                            className="delete-challenge-button"
-                            onClick={deleteChallengeHandler}
-                        >
-                            Delete Challenge
-                        </button>
-                        <button
                             className="edit-challenge-button"
                             onClick={editChallengeHandler}
                         >
                             Edit Challenge
+                        </button>
+                        <button
+                            className="delete-challenge-button"
+                            onClick={deleteChallengeHandler}
+                        >
+                            Delete Challenge
                         </button>
                     </>
                 )}
