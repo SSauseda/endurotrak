@@ -36,7 +36,15 @@ const ChallengePage = () => {
     return (
         <div className="challenge-container">
             <h1>{challenge && challenge.title}</h1>
-            <img src={challenge && challenge.image_url} alt="Challenge" className="challenge-image"/>
+            <img
+            className="card-img" 
+            src={challenge.image_url} 
+            alt="challenge"
+            onError={(e) => {
+                e.target.onError = null;
+                e.target.src="https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg"
+            }}
+            />
             <p className="challenge-description">{challenge && challenge.description}</p>
             <div className="challenge-dates">
                 <span>Start Date: {challenge && formatDate(challenge.start_date)}</span>
