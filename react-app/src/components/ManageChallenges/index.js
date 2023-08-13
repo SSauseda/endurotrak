@@ -4,6 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { fetchChallenges } from '../../store/challenge';
 import ChallengeCard from '../ChallengeCards';
 import { removeChallenge } from '../../store/challenge';
+import './ManageChallenges.css';
 
 
 const ManageChallenges = () => {
@@ -31,7 +32,7 @@ const ManageChallenges = () => {
 
     return (
         <div>
-            <h1>Manage Challenges</h1>
+            <h1 className='manage-challenge-header'>Manage Challenges</h1>
             <div className='challenge-cards'>
                 {myChallenges.length > 0 ? (
                     myChallenges.map(challenge => (

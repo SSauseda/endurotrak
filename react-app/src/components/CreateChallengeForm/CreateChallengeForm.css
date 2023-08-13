@@ -71,3 +71,10 @@ textarea {
     display: flex;
     justify-content: space-between;
 }
+
+.challenge-form-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}

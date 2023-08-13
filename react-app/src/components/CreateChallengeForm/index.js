@@ -109,6 +109,10 @@ const AddChallengeForm = () => {
     
 
     return (
+        <>
+        <h1 className='challenge-form-header'>
+            Create a Challenge
+        </h1>
         <form className='create-form' onSubmit={handleSubmit}>
             {errors && errors.map((error, idx) => <p style={{color: 'red'}} key={idx}>{error}</p>)}
             <label className='challenge-form-label'>
@@ -266,6 +270,7 @@ const AddChallengeForm = () => {
             </label>
             <button className='challenge-submit' type="submit">Create Challenge</button>
         </form>
+        </>
     )
 }
 

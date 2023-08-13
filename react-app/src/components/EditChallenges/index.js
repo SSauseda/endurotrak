@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
 import { editChallenge } from '../../store/challenge';
+import './EditChallenges.css'
 
 
 const EditChallengeForm = () => {
@@ -22,6 +23,7 @@ const EditChallengeForm = () => {
     const [endDate, setEndDate] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [rules, setRules] = useState('');
+    const [rulesErrors, setRulesErrors] = useState('');
     const [errors, setErrors] = useState([]);
 
 
@@ -115,11 +117,14 @@ const EditChallengeForm = () => {
     // if (!user) return <Redirect to="/" />;
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
+        <h1 className='challenge-form-header'>Edit your challenge</h1>
+        <form className='create-form' onSubmit={handleSubmit}>
             {errors && errors.map((error, idx) => <p key={idx}>{error}</p>)}
-            <label>
+            <label className='challenge-form-label'>
                 Title
                 <input
+                    className='challenge-form-input'
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -127,9 +132,10 @@ const EditChallengeForm = () => {
                     required
                     />
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Description
                 <textarea
+                    className='challenge-form-input'
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -137,9 +143,10 @@ const EditChallengeForm = () => {
                     required
                     />          
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Activity Type
                 <select
+                    className='challenge-form-select'
                     value={activityType}
                     onChange={(e) => setActivityType(e.target.value)}
                     required
@@ -149,19 +156,24 @@ const EditChallengeForm = () => {
                     <option disabled value="">--More activites coming soon--</option>
                 </select>
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Goal
                 <input
+                    className='challenge-form-input'
                     type="number"
                     value={goal}
                     onChange={(e) => setGoal(parseFloat(e.target.value))}
                     placeholder="Goal"
                     required
+                    min="0"
+                    max="500"
                 />
+                <div className='sub-label'>(Max 500)</div>
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Goal Unit
                 <select
+                    className='challenge-form-select'
                     value={goalUnit}
                     onChange={(e) => setGoalUnit(e.target.value)}
                     required
@@ -169,48 +181,72 @@ const EditChallengeForm = () => {
                     <option value="mi">Miles</option>
                     <option value="km">Kilometers</option>
                 </select>
-                all paces will be converted to km for ranking purposes
+                <div className='sub-label'>All paces will be converted to km for ranking purposes</div>
             </label>
-            <label>
+            <div className='date-container'>
+            <label className='challenge-form-label'>
                 Start Date
                 <input
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     required
-                />
+                    />
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 End Date
                 <input
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     required
-                />
+                    />
             </label>
-            <label>
+            </div>
+            <label className='challenge-form-label'>
                 Challenge Banner Image
                 <input
+                    className='challenge-form-input'
                     type="text"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder="Image URL"
                 />
+                {imageUrl && 
+                    <img 
+                        src={imageUrl} 
+                        alt="Preview" 
+                        style={{ width: 'auto', height: '100px', border: '2px dotted #333' }} 
+                        onError={(e) => {
+                            e.target.onError = null;
+                            setImageUrl("https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg")
+                        }}
+                    />}
             </label>
-            <label>
+            <label className='challenge-form-label'>
                 Rules
                 <textarea
+                    className='challenge-form-input'
                     type="text"
                     value={rules}
                     onChange={(e) => setRules(e.target.value)}
+                    onInput={(e) => {
+                        if (e.target.value.length >= 255) {
+                            setRulesErrors('Rules must be 255 characters or less');
+                        } else {
+                            setRulesErrors('');
+                        }
+                    }}
                     placeholder="Rules"
                     required
                 />
             </label>
-            <button type="submit">Edit Challenge Challenge</button>
-            <button type="button" onClick={handleCancel}>Cancel</button>
+            <div className='button-container'>
+            <button className='challenge-edit' type="submit">Edit Challenge Challenge</button>
+            <button className='challenge-cancel' type="button" onClick={handleCancel}>Cancel</button>
+            </div>
         </form>
+        </>
     )
 
 }

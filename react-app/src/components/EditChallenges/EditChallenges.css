@@ -1,0 +1,35 @@
+.buttons-container {
+    display: flex;
+    justify-content: center;
+}
+
+.challenge-edit, 
+.challenge-cancel {
+    padding: 10px 20px;
+    width: 240px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 5px;
+    transition: background-color 0.3s;
+}
+
+.challenge-edit {
+    background-color: #5271ff;
+    color: #fff;
+}
+
+.challenge-cancel {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.challenge-edit:hover {
+    background-color: #3c5be8;
+}
+
+.challenge-cancel:hover {
+    background-color: #c82333;
+}
+
