@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
+import { image1, image2, image3, image4, image5, image6, image7 } from '../LoginFormPage/LoginImages';
 import './SignupForm.css';
 
 function SignupFormPage() {
-  const dispatch = useDispatch();
-  const history = useHistory();
+	const dispatch = useDispatch();
+  	const history = useHistory();
+  	const images = [image1, image2, image3, image4, image5, image6, image7];
+  	const [randomImage, setRandomImage] = useState(images[Math.floor(Math.random() * images.length)]);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [location, setLocation] = useState("");
@@ -106,8 +109,9 @@ function SignupFormPage() {
 
 	return (
 		<>
+		<div className="signup-page-container" style={{ backgroundImage: `url(${randomImage})`}}>
 		<div className="signup-form-container">
-			<h1 className="signup-header">Sign Up</h1>
+			<h1 className="signup-header">Become a member!</h1>
 			<form className="signup-form-box" onSubmit={handleSubmit}>
 				<ul className="errors">
 					{errors.map((error, idx) => (
@@ -264,6 +268,7 @@ function SignupFormPage() {
 				</label>
 				<button className="signup-page-button" type="submit">Sign Up</button>
 			</form>
+		</div>
 		</div>
 		</>
 	);

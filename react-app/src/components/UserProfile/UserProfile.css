@@ -1,52 +1,142 @@
 .profile-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.top-section {
+    display: flex;
+    gap: 40px; 
+    align-items: flex-start;
 }
 
+
 .profile-header {
+    flex-basis: 25%;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
-    font-size: 10px;
+    /* color: #5271ff; */
+    position: relative;
+    padding-top: 40px;
+    margin-top: 110px;
+    /* height: 500px; */ /* makes the profile header longer for more information */
 }
 
 .profile-picture {
-    width: 80px;
-    height: 80px;
-    border-radius: 10%;
-    margin-right: 20px;
-    margin-bottom: 10px;
+    position: absolute;
+    top: -50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 20%;
     object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.9);
+}
+
+.user-info h1{
+    margin: 30px 0;
+    text-align: center;
+}
+
+.user-name {
+    color: #5271ff;
+}
+
+.user-about {
+    color: #333;
+    text-align: start;
+}
+
+.followers-container {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.follow-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.follow-group:first-child {
+    border-right: 1px solid rgba(87, 87, 87, 0.3);
+    padding-right: 20px;
+    margin-right: 0;
+}
+
+.follow-header {
+    margin: 0;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.follow-count {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #96d65e;
+}
+
+.user-challenges-header {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #5271ff;
+    /* border: 1px solid red; */
 }
 
 .user-challenges-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    flex-grow: 1;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    /* border: 1px solid red; */
 }
 
+.user-challenges-container a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease-in-out;
+    padding-left: 60px;
+}
+
+.user-challenges-container a:hover {
+    color: #5271ff;
+}
+
+
 .card-container {
-    border: 1px solid #e0e0e0;
     border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
     overflow: hidden;
-    transition: box-shadow 0.3s;
 }
 
 .card-container:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
 }
 
 .card-img {
+    display: block;
     width: 100%;
-    height: 150px;
-    object-fit: cover;
+    border-radius: 8px 8px 0 0;
 }
 
 .card-title {
-    padding: 10px;
-    font-weight: bold;
+    padding: 8px 12px;
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+.user-distance-header {
+    color: #5271ff;
     text-align: center;
 }
 
@@ -58,8 +148,13 @@
     overflow: hidden;
 }
 
+.running-distance, .cycling-distance {
+    color: #333;
+    text-align: center;
+}
+
 .progress-bar-fill {
     height: 100%;
-    background-color: #4caf50;
-    transition: width 0.4s ease-in-out;
+    background-color: #96d65e;
+    border-radius: 10px;
 }

@@ -9,16 +9,29 @@
 
 .challenge-image {
     width: 100%;
-    max-height: 400px;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.card-img {
+    width: 100%;
+    max-height: 200px;
     object-fit: cover;
     margin: 20px 0;
     border-radius: 5px;
 }
 
-.challenge-description {
-    color: #666;
-    margin: 15px 0;
+.challenge-card-description {
+    font-size: 16px;
+    color: #333;
+    margin: 8px 0; 
+    line-height: 1.5;
+    display: block;
 }
+
 
 .challenge-dates {
     display: flex;

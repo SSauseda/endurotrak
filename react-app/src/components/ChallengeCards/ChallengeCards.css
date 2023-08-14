@@ -20,11 +20,17 @@
 
 .content-container {
     width: 100%;
-    background-color: white;
+    background-color: #f6f6f6;
     padding: 10px;
     text-align: center;
+    line-height: 1.4;
+    color: #555;
+    transition: color 0.3s;
 }
 
+.content-container:hover {
+    color: #333;
+}
 
 .card-title,
 .card-description,
@@ -32,23 +38,45 @@
 .card-start,
 .card-end,
 .card-participants {
-    margin: 5px;
+    margin: 6px;
+    transition: color 0.3s;
+    text-decoration: none;
 }
 
 .card-title {
-    font-size: 1.2em;
+    color: #5271ff;
+}
+
+.card-title:hover {
+    color: #222;
+}
+
+.card-title {
+    font-size: 1.3em;
     font-weight: bold;
 }
 
 .card-description {
-    font-size: 0.9em;
+    font-size: 0.95em;
 }
 
 .card-activity,
 .card-start,
 .card-end,
 .card-participants {
-    font-size: 0.8em;
+    font-size: 0.85em;
+}
+
+
+.card-container a,
+.card-container a:visited { 
+    text-decoration: none;
+    color: inherit;
+}
+
+.content-container a:hover {
+    text-decoration: none;
+    color: #333;
 }
 
 

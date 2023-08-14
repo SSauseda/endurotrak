@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import SignupFormModal from "../SignupFormModal";
+import { image1, image2, image3, image4, image5, image6, image7, ElectroTrak } from './LoginImages';
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -17,8 +18,12 @@ function LoginFormPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
+  
   // if (sessionUser) return <Redirect to="/" />;
+  const images = [image1, image2, image3, image4, image5, image6, image7];
+  const [randomImage, setRandomImage] = useState(images[Math.floor(Math.random() * images.length)]);
+
+  // const randomImage = images[Math.floor(Math.random() * images.length)];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +51,7 @@ function LoginFormPage() {
 
   return (
     <>
+    <div className="login-page-container" style={{ backgroundImage: `url(${randomImage})`}}>
     <div className="login-form-container">
       <h1 className="login-header">Sweat. Share. Bravo.</h1>
       <h2 className="login-description">Join our running and cycling community! <br></br> Create challenges, track your progress, and compete on leaderboards to push your limits and celebrate achievements together.</h2>
@@ -92,6 +98,7 @@ function LoginFormPage() {
               />
         </div> */}
       </form>
+    </div>
     </div>
     </>
   );

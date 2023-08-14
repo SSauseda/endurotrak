@@ -1,3 +1,17 @@
+.signup-page-container {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* align-items: flex-start; */
+    background-color: rgba(0, 0, 0, 0.5); 
+    background-blend-mode: overlay;
+}
+
 .signup-page-button {
     width: 100%;
     padding: 12px;

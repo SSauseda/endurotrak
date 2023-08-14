@@ -37,9 +37,10 @@ const UserSearch = () => {
                         type="text" 
                         value={query} 
                         onChange={e => setQuery(e.target.value)} 
-                        placeholder="Search for users..." 
+                        placeholder="Search feature coming soon.."
+                        disabled 
                     />
-                    <button className='search-button' type="submit">Search</button>
+                    <button className='search-button' type="submit" disabled>Search</button>
                 </form>
             </div>
             
