@@ -82,3 +82,7 @@
 .delete-comment-button:hover {
     background-color: #da190b;
 }
+
+.success-message {
+    color: #4CAF50;
+}

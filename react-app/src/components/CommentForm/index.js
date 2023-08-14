@@ -44,7 +44,7 @@ function CommentForm() {
     return (
         <div>
             {errors && errors.map((error, idx) => (
-                <p key={idx} className="error-message">{error}</p>
+                <p key={idx} className="errors">{error}</p>
             ))}
             {successMessage && <p className="success-message">{successMessage}</p>}
 

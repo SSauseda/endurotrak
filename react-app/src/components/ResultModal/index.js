@@ -34,7 +34,7 @@ const ResultModal = () => {
     console.log("BRAVOLENGTH", bravos.length)
     // const bravosForCurrentResult = bravos.flat().filter(bravo => bravo.result_id === parseInt(resultId));
 
-    const hasGivenBravo = Boolean(bravos.find(bravo => bravo.user_id === user.id))
+    const hasGivenBravo = user && Boolean(bravos.find(bravo => bravo.user_id === user.id))
     console.log(hasGivenBravo)
 
     if (!result) {
