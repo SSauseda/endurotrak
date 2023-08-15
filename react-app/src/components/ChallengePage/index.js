@@ -52,7 +52,7 @@ const ChallengePage = () => {
 
     return (
         <div className="challenge-container">
-            <h1>{challenge && challenge.title}</h1>
+            <h1 className='challenge-page-title'>{challenge && challenge.title}</h1>
             <img
             className="challenge-image" 
             src={challenge && challenge.image_url} 

@@ -1,5 +1,5 @@
 .search-bar {
-    width: 200px;
+    width: 215px;
     height: 30px;
     border: none;
     border-radius: 5px;
@@ -26,4 +26,13 @@
     background-color: #3c5be8;
 }
 
+@media (max-width: 768px) {
+    .search-bar {
+        display: none;
+    }
+
+    .search-button {
+        display: none;
+    }
+}
 
