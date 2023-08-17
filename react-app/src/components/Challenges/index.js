@@ -12,7 +12,7 @@ const Challenge = () => {
     const history = useHistory();
 
     const challenges = useSelector((state) => Object.values(state.challenges));
-    console.log("CHALLENGES", typeof challenges)
+    console.log("CHALLENGES", challenges)
 
     // const [buttonText, setButtonText] = useState('Challenge Joined');
 
