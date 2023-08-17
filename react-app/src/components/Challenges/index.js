@@ -12,7 +12,7 @@ const Challenge = () => {
     const history = useHistory();
 
     const challenges = useSelector((state) => Object.values(state.challenges));
-    console.log("CHALLENGES", typeof challenges)
+    console.log("CHALLENGES", challenges)
 
     // const [buttonText, setButtonText] = useState('Challenge Joined');
 
@@ -32,7 +32,7 @@ const Challenge = () => {
     return (
         <div className="challenge-container">
           <h1 className="challenge-header">Challenges</h1>
-          <button className="nav-challenge-button" onClick={handleButtonClick}>Create a challenge</button>
+          <button className="challenge-page-button" onClick={handleButtonClick}>Create a challenge</button>
           <div className="challenge-cards">
             {challenges.map(challenge => (
                 <ChallengeCard challenge={challenge} isChallengePage={true}/>

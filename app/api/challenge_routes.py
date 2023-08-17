@@ -151,3 +151,14 @@ def get_challenges_by_participant():
     challenges = Challenge.query.filter(Challenge.id.in_(challenge_ids)).all()
 
     return jsonify([challenge.to_dict() for challenge in challenges])
+
+
+# GET CHALLENGES FOR USER BY USER ID
+@challenge_routes.route('/user-challenges/<int:user_id>')
+@login_required
+def get_challenges_by_user_id(user_id):
+    challenge_participant_instances = ChallengeParticipant.query.filter_by(user_id=user_id).all()
+    challenge_ids = [instance.challenge_id for instance in challenge_participant_instances]
+    challenges = Challenge.query.filter(Challenge.id.in_(challenge_ids)).all()
+
+    return jsonify([challenge.to_dict() for challenge in challenges])
