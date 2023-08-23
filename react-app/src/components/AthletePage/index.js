@@ -34,6 +34,12 @@ const AthletePage = () => {
         return <div>Loading...</div>
     }
 
+    const maxRunningDistance = 150;
+    const maxCyclingDistance = 1000;
+
+    const runningPercentage = (user.totalDistanceRunning / maxRunningDistance) * 100;
+    const cyclingPercentage = (user.totalDistanceCycling / maxCyclingDistance) * 100;
+
 
     return (
         <div className='athlete-page-container'>
@@ -61,6 +67,23 @@ const AthletePage = () => {
                     </Link>
                     ))}
                 </ul>
+                <div className="user-distance-container">
+                <h1 className="user-distance-header">{user.firstName}'s Total Distance</h1>
+                <div className="running-distance">
+                    Monthy running distance: {user.totalDistanceRunning} Kilometers / {maxRunningDistance} Kilometers
+                    <div className="progress-bar">
+                        <div className="progress-bar-fill" style={{width: `${runningPercentage}%`}}></div>
+                    </div>
+                </div>
+                <br>
+                </br>
+                <div className="cycling-distance"> 
+                    Monthly cycling distance: {user.totalDistanceCycling} Kilometers / {maxCyclingDistance} Kilometers
+                    <div className="progress-bar">
+                        <div className="progress-bar-fill" style={{width: `${cyclingPercentage}%`}}></div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     )
