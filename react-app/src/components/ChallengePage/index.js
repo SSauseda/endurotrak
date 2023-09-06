@@ -18,7 +18,11 @@ const ChallengePage = () => {
     const challenge = useSelector((state) => state.challenges[challengeId]);
     const currentUser = useSelector((state) => state.session.user);
     const isUserParticipant = challenge && challenge.isUserParticipant;
+    // console.log("PARTICIPANT", isUserParticipant)
     const results = useSelector((state) => Object.values(state.results));
+    const userHasPostedResult = currentUser && results.some(result => result.participant_username === currentUser.username)
+    // console.log("CHALLENGE REUSULTS", userHasPostedResult)
+
 
     // useEffect(() => {
     //     const fetchData = async () => {
@@ -71,7 +75,7 @@ const ChallengePage = () => {
             <p className='challenge-card-description'>Goal: {challenge && challenge.goal} {challenge && challenge.goal_unit}</p>
             <p className='challenge-card-description'>Rules: {challenge && challenge.rules}</p>
 
-            {isUserParticipant &&
+            {isUserParticipant && !userHasPostedResult && 
                 <OpenModalButton
                     buttonText="Add result"
                     modalComponent={<CreateResultModal  challenge={challenge}/>}

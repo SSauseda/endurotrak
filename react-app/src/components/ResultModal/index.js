@@ -16,7 +16,7 @@ const ResultModal = () => {
 
     const user = useSelector((state) => state.session.user);
     const result = useSelector((state) => state.results[resultId]);
-    console.log("RESULT", result)
+    // console.log('USER RESULT', result)
     const results = useSelector((state) => Object.values(state.results));
   
     
