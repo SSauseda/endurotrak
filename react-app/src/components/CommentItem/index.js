@@ -10,7 +10,7 @@ function CommentItem({ comment }) {
     const dispatch = useDispatch();
     const { challengeId, resultId } = useParams();
     const currentUser = useSelector((state) => state.session.user);
-    console.log("COMMENTEDIT", comment.id)
+    // console.log("COMMENTEDIT", comment)
 
     const handleSave = () => {
 
@@ -38,13 +38,16 @@ function CommentItem({ comment }) {
 
     return (
         <li className='individual-comment'>
+            <div className='comment-content'>
+            <div></div>
             <div className="comment-user">{comment.user_username}</div>
             <div className="comment-text">{comment.text}</div>
+            </div>
             {currentUser && currentUser.id === comment.user_id && (
-                <>
+                <div className='comment-actions'>
                 <button className='edit-comment-button' onClick={() => setIsEditing(true)}>Edit</button>
                 <button className='delete-comment-button' onClick={handleDelete}>Delete</button>
-                </>
+                </div>
             )}
         </li>
     );

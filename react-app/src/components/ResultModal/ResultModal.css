@@ -15,28 +15,64 @@
 }
 
 .result-title {
-    font-size: 24px;
+    font-size: 1.5em;
+    text-align: center;
     margin-bottom: 20px;
+    color: #333;
+}
+
+.result-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.result-user-post {
+    width: 100%;
+    margin-bottom: 15px;
+    color: #34495e;
+    font-style: italic;
     text-align: center;
 }
 
-.result-details p {
-    margin: 10px 0;
-    font-size: 16px;
+.section-one,
+.section-two{
+    min-width: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+.section-three {
+    font-weight: bold;
+}
+
+.result-description {
+    font-weight: bold;
+    color: #5271ff;
+    margin-bottom: 5px;
+}
+
+.result-information {
+    color: #333;
 }
 
 .bravos-count {
-    font-size: 18px;
-    margin: 20px 0;
     text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #e74c3c;
 }
 
-.bravo-button, .return-button {
+
+.return-button {
     background-color: #5271ff;
     color: #ffffff;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 10px 0;
     cursor: pointer;
     display: block;
@@ -44,9 +80,11 @@
     transition: background-color 0.3s ease;
 }
 
-.bravo-button:hover, .return-button:hover {
+.return-button:hover {
     background-color: #0056b3;
 }
+
+
 
 .comments-section {
     margin-top: 20px;
@@ -58,10 +96,10 @@
 }
 
 .result-image {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 10%;
-    margin-right: 20px;
+    /* margin-right: 10px; */
     margin-bottom: 10px;
     object-fit: cover;
 }
@@ -79,7 +117,7 @@
 }
 
 .bravo-disabled {
-    color: #AAA;
+    color: #bdc3c7;
     cursor: not-allowed;
 }
 

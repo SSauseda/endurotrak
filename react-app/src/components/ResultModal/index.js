@@ -16,7 +16,7 @@ const ResultModal = () => {
 
     const user = useSelector((state) => state.session.user);
     const result = useSelector((state) => state.results[resultId]);
-    // console.log('USER RESULT', result)
+    console.log('USER RESULT', result)
     const results = useSelector((state) => Object.values(state.results));
   
     
@@ -31,11 +31,11 @@ const ResultModal = () => {
     }, [dispatch])
     
     const bravos = useSelector((state) => state.bravos);
-    // console.log("BRAVOLENGTH", bravos.length)
+    console.log("BRAVOLENGTH", bravos.length)
     // const bravosForCurrentResult = bravos.flat().filter(bravo => bravo.result_id === parseInt(resultId));
 
     const hasGivenBravo = user && Boolean(bravos.find(bravo => bravo.user_id === user.id))
-    // console.log(hasGivenBravo)
+    console.log(hasGivenBravo)
 
     if (!result) {
         return <div>Loading...</div>;
@@ -62,10 +62,20 @@ const ResultModal = () => {
             </div>
             <h2 className="result-title">{result.participant_username}'s Challenge Result</h2>
             <div className="result-details">
-                <p><strong>Description:</strong> {result.result_description}</p>
-                <p><strong>Distance:</strong> {result.distance} {result.goal_unit}</p>
-                <p><strong>Duration:</strong> {result.duration}</p>
-                <p><strong>Pace:</strong> {result.pace}</p>
+                {/* <p className='result-description'>Description:</p> */}
+                <p className='result-user-post'>{result.result_description}</p>
+                <div className='section-one'>
+                <p className='result-description'>Distance</p>
+                <p className='result-information'>{result.distance} {result.goal_unit}</p>
+                </div>
+                <div className='section-two'>
+                <p className='result-description'>Duration</p>
+                <p className='result-information'>{result.duration}</p>
+                </div>
+                <div className='section-three'>
+                <p className='result-description'>Pace</p>
+                <p className='result-information'>{result.pace} min/km</p>
+                </div>
             </div>
             <div className="bravos-count">
                 {bravos.length} {bravos.length === 1 ? 'bravo' : 'bravos'}
@@ -78,7 +88,7 @@ const ResultModal = () => {
                 </button> */}
             <div className='bravo-icon-container'>
                 <i
-                    className={`fa-solid fa-cake-candles bravo-icon ${hasGivenBravo ? 'bravo-disabled' : ''}`}
+                    className={`fa-solid fa-hands-clapping bravo-icon ${hasGivenBravo ? 'bravo-disabled' : ''}`}
                     onClick={handleBravoClick}
                     title="Give Bravo"
                     >
