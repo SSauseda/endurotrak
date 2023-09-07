@@ -1,73 +1,88 @@
 .leaderboard-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .leaderboard-header {
+    font-size: 24px;
     text-align: center;
-    font-size: 1.5em;
     margin-bottom: 20px;
+    color: #96d65e;
+    font-weight: 600;
 }
 
 .result-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    width: 100%;
 }
 
 .result-card{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    padding: 20px; 
-    /* border: 1px solid #ddd; */
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    justify-items: end; 
-    /* display: flex; */
+    display: flex;
     align-items: center;
-    transition: background-color 0.3s ease;
+    justify-content: space-around;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .result-card:hover {
-    background-color: #b2b2b2;
-    cursor: pointer;
-}
-
-.result-name, .result-distance, .result-duration, .result-pace {
-    text-align: center;
+    background-color: #f7f7f7;
 }
 
 .result-card.header {
-    box-shadow: none;
-    background-color: transparent;
-    font-weight: bold;
+    font-weight: 600;
+    cursor: default;
+    background-color: #f0f0f0;
 }
 
 .profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border-radius: 10%;
+margin-bottom: 10px;
     object-fit: cover;
 }
 
-.result-delete-button {
-    background: #5271ff;
-    color: white;
-    border: none;
-    border-radius: 2px;
-    padding: 5px 10px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.result-name,
+.result-distance,
+.result-duration,
+.result-pace {
+    flex: 1;
+    text-align: center;
+    margin-left: 105px;
 }
-  
-  .nav-challenge-button:hover {
-    background-color: #3c5be8;
-  }
 
+.result-pace {
+    margin-right: 20px;
+}
 
+.result-delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.result-delete-button:hover {
+    background-color: #c0392b;
+}
+
+.result-delete-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.5);
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

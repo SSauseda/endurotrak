@@ -31,11 +31,11 @@ const ResultModal = () => {
     }, [dispatch])
     
     const bravos = useSelector((state) => state.bravos);
-    console.log("BRAVOLENGTH", bravos.length)
+    // console.log("BRAVOLENGTH", bravos.length)
     // const bravosForCurrentResult = bravos.flat().filter(bravo => bravo.result_id === parseInt(resultId));
 
     const hasGivenBravo = user && Boolean(bravos.find(bravo => bravo.user_id === user.id))
-    console.log(hasGivenBravo)
+    // console.log(hasGivenBravo)
 
     if (!result) {
         return <div>Loading...</div>;

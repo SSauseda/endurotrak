@@ -66,14 +66,21 @@ const ChallengePage = () => {
                 e.target.src="https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg"
             }}
             />
-            <p className="challenge-card-description">{challenge && challenge.description}</p>
+            <div className='challenge-info'>
+            <p className="challenge-card-title">{challenge && challenge.description}</p>
             <div className="challenge-dates">
-                <span className='challenge-card-description'>Start Date: {challenge && formatDate(challenge.start_date)}</span>
-                <span className='challenge-card-description'>End Date: {challenge && formatDate(challenge.end_date)}</span>
+                <p className='challenge-card-description'>Start Date: </p>
+                <p className='challenge-date'>{challenge && formatDate(challenge.start_date)}</p>
+                <p className='challenge-card-description'>End Date:</p>
+                <p className='challenge-date'>{challenge && formatDate(challenge.end_date)}</p>
             </div>
-            <p className='challenge-card-description'>Activity Type: {challenge && challenge.activity_type}</p>
-            <p className='challenge-card-description'>Goal: {challenge && challenge.goal} {challenge && challenge.goal_unit}</p>
-            <p className='challenge-card-description'>Rules: {challenge && challenge.rules}</p>
+            <p className='challenge-card-description'>Activity Type:</p>
+            <p className='challenge-card-info'>{challenge && challenge.activity_type}</p>
+            <p className='challenge-card-description'>Goal: </p>
+            <p className='challenge-card-info'>{challenge && challenge.goal} {challenge && challenge.goal_unit}</p>
+            <p className='challenge-card-description'>Rules: </p>
+            <p className='challenge-card-info'>{challenge && challenge.rules}</p>
+            </div>
 
             {isUserParticipant && !userHasPostedResult && 
                 <OpenModalButton
@@ -83,13 +90,15 @@ const ChallengePage = () => {
                 />
             }
 
+            <div className='leaderboard'>
             {results.length > 0 ? (
                 <Leaderboard challengeId={challengeId}/>
-            ) : (
-                <div className="no-results-message">
+                ) : (
+                    <div className="no-results-message">
                     <p>No results have been posted yet.</p>
                 </div>
             )}
+            </div>
         </div>
     )
 }

@@ -146,11 +146,13 @@
     background-color: #e0e0e0;
     border-radius: 10px;
     overflow: hidden;
+    margin-top: 20px;
 }
 
 .running-distance, .cycling-distance {
     color: #333;
     text-align: center;
+    /* text-decoration: underline; */
 }
 
 .progress-bar-fill {

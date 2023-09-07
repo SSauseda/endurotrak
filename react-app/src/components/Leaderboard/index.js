@@ -48,6 +48,7 @@ const Leaderboard = ({ challengeId }) => {
             <h1 className='leaderboard-header'>Leaderboard</h1>
             <div className='result-container'>
                 <div className='result-card header'>
+                    <br></br>
                     <div>Participant</div>
                     <div>Distance</div>
                     <div>Duration</div>
@@ -59,11 +60,8 @@ const Leaderboard = ({ challengeId }) => {
                     key={result.id}
                     onClick={() => handleOpenModal(challengeId, result.id)}
                  >
+                    <div className='profile-section'>
                     <img className='profile-img' src={result.participant_image} alt='participantImage'/>
-                    <div className='result-name'>{result.participant_username}</div>
-                    <div className='result-distance'>{result.distance}{result.goal_unit}</div>
-                    <div className='result-duration'>{result.duration}</div>
-                    <div className='result-pace'>{result.pace}min/km</div>
                     {currentUser && currentUser.challengeParticipants && currentUser.challengeParticipants.find(cp => cp.id === result.participant_id) && 
                         <button 
                         className='result-delete-button' 
@@ -72,6 +70,11 @@ const Leaderboard = ({ challengeId }) => {
                             Delete
                         </button>
                     }
+                    </div>
+                    <div className='result-name'>{result.participant_username}</div>
+                    <div className='result-distance'>{result.distance}{result.goal_unit}</div>
+                    <div className='result-duration'>{result.duration}</div>
+                    <div className='result-pace'>{result.pace}min/km</div>
                 </div>
             )) : <p>Loading ...</p>}
             </div>

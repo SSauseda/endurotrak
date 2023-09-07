@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { addChallengeResult } from '../../store/result';
-
+import './ResultModal.css'
 
 
 const CreateResultModal= ({challenge}) => {
@@ -19,11 +19,31 @@ const CreateResultModal= ({challenge}) => {
     const [duration, setDuration] = useState('');
     const [pace, setPace] = useState('');
     const [createResult, setCreateResult] = useState(null);
+    const [resultDescriptionErrors, setResultDescriptionErrors] = useState('');
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("CHALLENGEID", challenge.id);
+
+        let errorMessages = [];
+
+        if (resultDescription.length > 255) {
+            errorMessages.push('Description must be less than 255 characters');
+        }
+
+        if (isNaN(distance)) {
+            errorMessages.push('Goal must be a number');
+        }
+
+        if (distance < 0) {
+            errorMessages.push('Goal must be greater than 0');
+        }
+
+        if (errorMessages.length > 0) {
+            setErrors(errorMessages);
+            return;
+        }
+        // console.log("CHALLENGEID", challenge.id);
     
         for (const participant of user.challengeParticipants) {
             if (participant.user_id === user.id && participant.challenge_id === challenge.id) {
@@ -88,25 +108,39 @@ const CreateResultModal= ({challenge}) => {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
+        <>
+        <h1 className='result-form-header'> 
+            Post your result for 
+        </h1>
+        <h2 className='result-challenge-header'>
+            {challenge.title}
+        </h2>
+        <form className='result-create-form' onSubmit={handleSubmit}>
+        {errors && errors.map((error, idx) => <p style={{color: 'red'}} key={idx}>{error}</p>)}
+            <label className='result-form-label'>
                 Description
                 <textarea
+                    className='result-form-textarea'
+                    type='text'
                     value={resultDescription}
                     onChange={(e) => setResultDescription(e.target.value)}
+                    maxLength="255"
+                    required
                 />
             </label>
-            <label>
+            <label className='result-form-label'>
                 Distance
                 <input 
+                    className='result-form-input'
                     type='number'
                     value={distance}
                     onChange={handleDistanceChange}
                 />
             </label>
-            <label>
+            <label className='result-form-label'>
                 Goal Unit
                 <select
+                    className='result-form-select'
                     value={goalUnit}
                     onChange={handleUnitChange}
                 >
@@ -114,25 +148,28 @@ const CreateResultModal= ({challenge}) => {
                     <option value='km'>Kilometers</option>
                 </select>
             </label>
-            <label>
+            <label className='result-form-label'>
                 Duration
                 <input
+                    className='result-form-input'
                     type='time'
                     value={duration}
                     onChange={handleDurationChange}
                 />
             </label>
-            <label>
+            <label className='result-form-label'>
                 Pace
                 <input
+                    className='result-form-input'
                     type='number'
                     value={pace}
                     onChange={(e) => setPace(e.target.value)}
                     readOnly
                 />
             </label>
-            <button type='submit'>submit</button>
+            <button className='result-submit' type='submit'>submit</button>
         </form>
+        </>
     )
 }
 

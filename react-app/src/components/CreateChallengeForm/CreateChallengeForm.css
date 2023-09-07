@@ -52,9 +52,9 @@ textarea {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(164, 164, 164, 0.2);
     background-color: white;
-    border-radius: 1px;
+    border-radius: 5px;
 }
 
 .input-error {

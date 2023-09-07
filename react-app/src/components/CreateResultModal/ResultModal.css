@@ -1,0 +1,72 @@
+.result-form-label {
+    display: block;
+    margin: 5px 0 20px 0;
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+
+.result-form-input,
+.result-form-select,
+.result-form-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.result-form-input:focus,
+.result-form-select:focus,
+.result-form-textarea:focus {
+outline: dashed 1px #5271ff;
+}
+
+.result-submit {
+    background-color: #5271ff;
+    width: 50%;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.result-submit:hover {
+    background-color: #405edc;
+}
+
+.result-form-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-size: 30px;
+}
+.result-challenge-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #96d65e;
+    font-size: 30px;
+    margin-bottom: 30px;
+    width: 500px;
+}
+
+.result-create-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    /* box-shadow: 0 0 10px rgba(164, 164, 164); */
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 5px;
+}
