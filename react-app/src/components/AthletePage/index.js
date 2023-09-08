@@ -65,7 +65,7 @@ const AthletePage = () => {
                     </div>
             </div>
             <div className="user-challenges-container">
-                <h1 className="user-challenges-header">My Participating Challenges</h1>
+                <h1 className="user-challenges-header">{user.firstName}'s Active Challenges</h1>
                 {challengesArray.map(challenge => (
     <Link to={`/challenges/${challenge.id}`} key={challenge.id}>
         <div className="card-container">
@@ -85,7 +85,7 @@ const AthletePage = () => {
             </div>
             </div>
             <div className="user-distance-container">
-                <h1 className="user-distance-header">My Total Distance</h1>
+                <h1 className="user-distance-header">{user.firstName}'s Total Distance</h1>
                 <div className="running-distance">
                     Monthy running distance: {user.totalDistanceRunning} Kilometers / {maxRunningDistance} Kilometers
                     <div className="progress-bar">
