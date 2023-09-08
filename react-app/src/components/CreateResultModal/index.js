@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { addChallengeResult } from '../../store/result';
@@ -21,6 +21,33 @@ const CreateResultModal= ({challenge}) => {
     const [createResult, setCreateResult] = useState(null);
     const [resultDescriptionErrors, setResultDescriptionErrors] = useState('');
     const [errors, setErrors] = useState([]);
+    const [hours, setHours] = useState('');
+    const [minutes, setMinutes] = useState('');
+    const [seconds, setSeconds] = useState('');
+
+    useEffect(() => {
+        const initialPace = calculatePace(distance, duration, goalUnit);
+        setPace(initialPace);
+    })
+
+    const handleHoursChange = (e) => {
+        setHours(e.target.value);
+        updateDuration(e.target.value, minutes, seconds);
+    }
+    
+    const handleMinutesChange = (e) => {
+        setMinutes(e.target.value);
+        updateDuration(hours, e.target.value, seconds);
+    }
+    
+    const handleSecondsChange = (e) => {
+        setSeconds(e.target.value);
+        updateDuration(hours, minutes, e.target.value);
+    }
+    
+    const updateDuration = (hours, minutes, seconds) => {
+        setDuration(`${hours}:${minutes}:${seconds}`);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,16 +102,18 @@ const CreateResultModal= ({challenge}) => {
     
         closeModal();
     }
+
+    
     
 
     const calculatePace = (distance, duration, goalUnit) => {
         if (!distance || !duration) return;
-
+    
         const distanceInKm = goalUnit === 'mi' ? distance * 1.60934 : distance;
-
-        const [hours, mintues] = duration.split(':').map(Number);
-        const totalMinutes = (hours * 60) + mintues;
-
+    
+        const [hours = 0, minutes = 0, seconds = 0] = duration.split(':').map(Number);
+        const totalMinutes = (hours * 60) + minutes + (seconds / 60);
+    
         return (totalMinutes / distanceInKm).toFixed(2);
     }
 
@@ -125,6 +154,7 @@ const CreateResultModal= ({challenge}) => {
                     value={resultDescription}
                     onChange={(e) => setResultDescription(e.target.value)}
                     maxLength="255"
+                    placeholder='Tell us about your result'
                     required
                 />
             </label>
@@ -135,6 +165,7 @@ const CreateResultModal= ({challenge}) => {
                     type='number'
                     value={distance}
                     onChange={handleDistanceChange}
+                    placeholder='Distance'
                 />
             </label>
             <label className='result-form-label'>
@@ -149,14 +180,41 @@ const CreateResultModal= ({challenge}) => {
                 </select>
             </label>
             <label className='result-form-label'>
-                Duration
+            Duration
+            <div className='duration-fields'>
                 <input
                     className='result-form-input'
-                    type='time'
-                    value={duration}
-                    onChange={handleDurationChange}
+                    type='number'
+                    placeholder='HH'
+                    value={hours}
+                    onChange={handleHoursChange}
+                    min="0"
+                    required
                 />
-            </label>
+                :
+                <input
+                    className='result-form-input'
+                    type='number'
+                    placeholder='MM'
+                    value={minutes}
+                    onChange={handleMinutesChange}
+                    min="0"
+                    max="59"
+                    required
+                />
+                :
+                <input
+                    className='result-form-input'
+                    type='number'
+                    placeholder='SS'
+                    value={seconds}
+                    onChange={handleSecondsChange}
+                    min="0"
+                    max="59"
+                    required
+                />
+            </div>
+        </label>
             <label className='result-form-label'>
                 Pace
                 <input
@@ -167,6 +225,7 @@ const CreateResultModal= ({challenge}) => {
                     readOnly
                 />
             </label>
+            <h3 className='result-form-info'>Results will be reviewed upon submission</h3>
             <button className='result-submit' type='submit'>submit</button>
         </form>
         </>

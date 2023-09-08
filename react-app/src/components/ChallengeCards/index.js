@@ -75,12 +75,19 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                 <div className='content-container'>
                     <div className="card-title">{challenge.title}</div>
                     <div className="card-description">{challenge.description}</div>
+                    <div className='c-description'>Activity:</div>
                     <div className="card-activity">{challenge.activity_type}</div>
+                    <div className='c-description'>Start & End Date:</div>
+                    <div className='date-container'>
                     <div className="card-start">{challenge && formatDate(challenge.start_date)}</div>
+                    <div className="date-separator">-</div>
                     <div className="card-end">{challenge && formatDate(challenge.end_date)}</div>
+                    </div>
+                    <div className='c-description'>Active Participants:</div>
                     <div className="card-participants">{challenge.participants.length}</div>
                 </div>
                 </Link>
+                <div className='join-leave-button'>
                 {location.pathname === '/challenges' && (
                     challenge.isUserParticipant ? (
                         <button
@@ -99,7 +106,8 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                             Join Challenge
                         </button>
                     )
-                )}
+                    )}
+                    </div>
                 {location.pathname === '/user/challenges' && user.id === challenge.user_id && (
                     <>
                         <button

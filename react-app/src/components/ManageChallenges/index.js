@@ -31,7 +31,7 @@ const ManageChallenges = () => {
 
 
     return (
-        <div>
+        <div className='all-challenge-container'>
             <h1 className='manage-challenge-header'>Manage Challenges</h1>
             <div className='challenge-cards'>
                 {myChallenges.length > 0 ? (

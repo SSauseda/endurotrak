@@ -50,13 +50,17 @@
     margin-bottom: 5px;
 } */
 
-.challenge-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1200px;
+.all-challenge-container {
+    width: 1300px;
     margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.challenge-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
 }
 
 .challenge-header {
@@ -77,3 +81,4 @@
     cursor: pointer;
     margin-right: 20px;
   }
+

@@ -45,8 +45,12 @@ function CommentItem({ comment }) {
             </div>
             {currentUser && currentUser.id === comment.user_id && (
                 <div className='comment-actions'>
-                <button className='edit-comment-button' onClick={() => setIsEditing(true)}>Edit</button>
-                <button className='delete-comment-button' onClick={handleDelete}>Delete</button>
+                <button className='edit-comment-button' onClick={() => setIsEditing(true)}>
+                <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button className='delete-comment-button' onClick={handleDelete}>
+                <i class="fa-solid fa-trash-can"></i>
+                </button>
                 </div>
             )}
         </li>

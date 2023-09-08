@@ -70,3 +70,9 @@ outline: dashed 1px #5271ff;
     background-color: rgba(255, 255, 255, 0);
     border-radius: 5px;
 }
+
+.result-form-info {
+    color: #f35858;
+    font-size: 12px;
+    text-align: center;
+}

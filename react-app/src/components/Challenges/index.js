@@ -30,7 +30,7 @@ const Challenge = () => {
 
 
     return (
-        <div className="challenge-container">
+        <div className="all-challenge-container">
           <h1 className="challenge-header">Challenges</h1>
           <button className="challenge-page-button" onClick={handleButtonClick}>Create a challenge</button>
           <div className="challenge-cards">
