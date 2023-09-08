@@ -5,6 +5,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import Comments from '../Comments';
 import { fetchBravos, createBravo } from '../../store/bravo';
+import logo from '../LoginFormPage/LoginImages/image4.jpg'
 import './ResultModal.css';
 
 
@@ -56,6 +57,7 @@ const ResultModal = () => {
 
 
     return (
+        <div className='result-background' style={{ backgroundImage: `url(${logo})`, backgroundSize: 'cover' }}>
         <div className="result-modal">
             <div className='image-container'>
             <img className="result-image" src={result.participant_image} alt="result" />
@@ -98,6 +100,7 @@ const ResultModal = () => {
                 <Comments />
             </div>
             <button className="return-button" onClick={() => history.push(`/challenges/${challengeId}`)}>Return</button>
+        </div> 
         </div>
     )
 }
