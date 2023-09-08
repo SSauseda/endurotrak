@@ -86,6 +86,7 @@ const CreateResultModal= ({challenge}) => {
                     pace: parseFloat(pace),
                 };
                 
+                console.log("DURATION", duration);
 
                 const newResult = await dispatch(addChallengeResult(challenge.id, result));
                 
