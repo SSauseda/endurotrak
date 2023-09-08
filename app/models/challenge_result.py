@@ -30,6 +30,7 @@ class ChallengeResult(db.Model):
         return {
             'id': self.id,
             'participant_id': self.participant_id,
+            'participant_user_id': self.participant.user_id,
             'participant_username': self.participant.user.username,
             'participant_image': self.participant.user.profile_image,
             'challenge_id': self.challenge_id,

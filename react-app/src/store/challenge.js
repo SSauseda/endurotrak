@@ -9,6 +9,7 @@ const JOIN_CHALLENGE = 'challenges/JOIN_CHALLENGE';
 const LEAVE_CHALLENGE = 'challenges/LEAVE_CHALLENGE';
 const GET_MY_CHALLENGES = 'challenges/GET_MY_CHALLENGES';
 const GET_USER_CHALLENGES = 'challenges/GET_USER_CHALLENGES';
+const CLEAR_CHALLENGES = 'challenges/CLEAR_CHALLENGES'
 
 
 
@@ -46,12 +47,16 @@ const unparticipateChallenge = (challengeId, userId) => ({
 const getMyChallenges = (challenges) => ({
     type: GET_MY_CHALLENGES,
     payload: challenges
-})
+});
 
 const getUserChallenges = (challenges) => ({
     type: GET_USER_CHALLENGES,
     payload: challenges
-})
+});
+
+const clearChallenges = () => ({
+    type: CLEAR_CHALLENGES
+});
 
 
 // Thunks
@@ -219,6 +224,7 @@ export const fetchMyChallenges = () => async (dispatch) => {
 };
 
 export const fetchUserChallenges = (userId) => async (dispatch) => {
+    dispatch(clearChallenges());
     const response = await fetch(`/api/challenges/user-challenges/${userId}`);
 
     if (response.ok) {
@@ -236,6 +242,8 @@ const initialState = {};
 const challengeReducer = (state = initialState, action, getState) => {
     let newState;
     switch (action.type) {
+        case CLEAR_CHALLENGES:
+            return initialState;
         case GET_CHALLENGES:
             newState = { ...state };
             action.payload.forEach(challenge => {

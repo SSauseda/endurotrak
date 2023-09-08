@@ -16,8 +16,8 @@ const ResultModal = () => {
     const { challengeId, resultId } = useParams();
 
     const user = useSelector((state) => state.session.user);
+    console.log("USER", user)
     const result = useSelector((state) => state.results[resultId]);
-    console.log('USER RESULT', result)
     const results = useSelector((state) => Object.values(state.results));
   
     
@@ -55,11 +55,16 @@ const ResultModal = () => {
         }
     }
 
+    console.log('USER RESULT', result.participant_user_id)
+    const handleImageClick = () => {
+        history.push(`/athlete/${result.participant_user_id}`)
+    }
+
 
     return (
         <div className='result-background' style={{ backgroundImage: `url(${logo})`, backgroundSize: 'cover' }}>
         <div className="result-modal">
-            <div className='image-container'>
+            <div className='image-container' onClick={handleImageClick}>
             <img className="result-image" src={result.participant_image} alt="result" />
             </div>
             <h2 className="result-title">{result.participant_username}'s Challenge Result</h2>

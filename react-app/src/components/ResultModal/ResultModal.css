@@ -10,9 +10,16 @@
 }
 
 .image-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    text-align: center;
+    /* border: 2px solid red; */
+    width: 20%;
+    height: 100px;
+    margin:auto;
+    margin-bottom: 40px;
+}
+
+.image-container:hover {
+    cursor: pointer;
 }
 
 .result-title {
