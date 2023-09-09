@@ -211,7 +211,7 @@ function SignupFormPage() {
 						placeholder="optional"
 					/>
 				</label>
-				<label className="signup-label">
+				{/* <label className="signup-label">
 					Banner Image 1
 					<div className="profile-validation">(must end in .jpeg, .jpg, or .png)</div>
 					<input
@@ -243,7 +243,7 @@ function SignupFormPage() {
 						onChange={(e) => setBannerImage3(e.target.value)}
 						placeholder="optional"
 					/>
-				</label>
+				</label> */}
 				<label className="signup-label">
 					Password
 					<input
