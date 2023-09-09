@@ -15,6 +15,7 @@ const Leaderboard = ({ challengeId }) => {
     // console.log("USERPARTICIPANTS", currentUser.challengeParticipants.id)
 
     const [selectedResult, setSelectedResult] = useState(null);
+    const DEFAULT_PROFILE_IMAGE = 'https://i.stack.imgur.com/l60Hf.png'
 
     
 
@@ -61,7 +62,15 @@ const Leaderboard = ({ challengeId }) => {
                     onClick={() => handleOpenModal(challengeId, result.id)}
                  >
                     <div className='profile-section'>
-                    <img className='profile-img' src={result.participant_image} alt='participantImage'/>
+                    <img 
+                    className='profile-img' 
+                    src={result.participant_image} 
+                    alt='participantImage'
+                    onError={(e) => {
+                        e.target.onError = null; 
+                        e.target.src = DEFAULT_PROFILE_IMAGE;
+                    }}
+                    />
                     {currentUser && currentUser.challengeParticipants && currentUser.challengeParticipants.find(cp => cp.id === result.participant_id) && 
                         <button 
                         className='result-delete-button' 

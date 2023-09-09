@@ -25,8 +25,10 @@ def update_total_distance(user_id, challenge_result, activity_type, is_deleted=F
         distance = -distance # SUBTRACT THE DISTANCE FROM THE TOTAL
     if activity_type == 'Running':
         user.total_distance_running += distance
+        user.total_distance_running = round(user.total_distance_running, 2)
     elif activity_type == 'Cycling':
         user.total_distance_cycling += distance
+        user.total_distance_cycling = round(user.total_distance_cycling, 2)
     db.session.commit()
 
 

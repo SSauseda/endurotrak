@@ -125,6 +125,11 @@ def join_challenge(challenge_id):
     )
     db.session.add(participant)
     db.session.commit()
+
+    challenge = Challenge.query.get(challenge_id)
+    challenge_data = challenge.to_dict()
+    challenge_data['isUserParticipant'] = True
+    
     return participant.to_dict()
 
 

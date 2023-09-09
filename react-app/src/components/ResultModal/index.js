@@ -19,6 +19,8 @@ const ResultModal = () => {
     console.log("USER", user)
     const result = useSelector((state) => state.results[resultId]);
     const results = useSelector((state) => Object.values(state.results));
+
+    const DEFAULT_PROFILE_IMAGE = 'https://i.stack.imgur.com/l60Hf.png'
   
     
     useEffect(() => {
@@ -65,7 +67,15 @@ const ResultModal = () => {
         <div className='result-background' style={{ backgroundImage: `url(${logo})`, backgroundSize: 'cover' }}>
         <div className="result-modal">
             <div className='image-container' onClick={handleImageClick}>
-            <img className="result-image" src={result.participant_image} alt="result" />
+            <img 
+            className="result-image" 
+            src={result.participant_image} 
+            alt="result"
+            onError={(e) => {
+                e.target.onError = null; 
+                e.target.src = DEFAULT_PROFILE_IMAGE;
+            }} 
+            />
             </div>
             <h2 className="result-title">{result.participant_username}'s Challenge Result</h2>
             <div className="result-details">

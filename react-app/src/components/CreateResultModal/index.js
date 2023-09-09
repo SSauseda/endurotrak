@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { addChallengeResult } from '../../store/result';
+import { authenticate } from '../../store/session';
 import './ResultModal.css'
 
 
@@ -71,7 +72,8 @@ const CreateResultModal= ({challenge}) => {
             return;
         }
         // console.log("CHALLENGEID", challenge.id);
-    
+
+    if (user && Array.isArray(user.challengeParticipants)) {
         for (const participant of user.challengeParticipants) {
             if (participant.user_id === user.id && participant.challenge_id === challenge.id) {
                 console.log("PARTICIPANTID", participant.id);
@@ -95,11 +97,13 @@ const CreateResultModal= ({challenge}) => {
                 setCreateResult(newResult);
                 
                 if (newResult && newResult.errors) {
-                    console.log("ERRORS", newResult.errors);
                     setErrors(newResult.errors);
+                } else {
+                    dispatch(authenticate());
                 }
             }
         }
+    }
     
         closeModal();
     }
