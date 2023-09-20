@@ -3,6 +3,8 @@
 ## Introduction
 A social fitness platform similar to [Strava](https://www.strava.com/), where users can create challenges, log workouts, and engage with peers through comments and follows.
 
+**Live Site:** [EnduroTrak](https://endurotrak.onrender.com)
+
 # Flask React Project
 
 This is the starter for the Flask React project.
