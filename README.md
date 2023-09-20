@@ -1,5 +1,7 @@
-![EnduraTrak](https://github.com/SSauseda/endurotrak/assets/108492423/1eeea400-60b0-419e-a11f-4b8e515c2707)
+#EnduroTrak
 
+## Introduction
+A social fitness platform, similar to Strava, where users can create challenges, log workouts, and engage with peers through comments and follows.
 
 # Flask React Project
 
