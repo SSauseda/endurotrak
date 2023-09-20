@@ -55,7 +55,7 @@ export const getEachResult = (challengeId, resultId) => async (dispatch) => {
 
 export const addChallengeResult = (challengeId, result) => async (dispatch) => {
     try {
-        console.log(JSON.stringify(result)); // Here
+        console.log(JSON.stringify(result));
         const response = await fetch(`/api/challenges/${challengeId}/results`, {
             method: 'POST',
             headers: {

@@ -16,7 +16,7 @@ const EditChallengeForm = () => {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [activityType, setActivityType] = useState('');
+    const [activityType, setActivityType] = useState('Running');
     const [goal, setGoal] = useState('');
     const [goalUnit, setGoalUnit] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -89,7 +89,7 @@ const EditChallengeForm = () => {
             return;
         }
 
-        console.log("EDITEDITEDIT3", challengeId)
+        console.log("EDITEDITEDIT3", activityType)
         const updatedChallenge = await dispatch(editChallenge(
             challengeId,
             title,

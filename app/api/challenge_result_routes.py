@@ -17,12 +17,19 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 def update_total_distance(user_id, challenge_result, activity_type, is_deleted=False):
+    print('...updating total distance')
     user = User.query.get(user_id)
+    if not user:
+        print(f"User with ID {user_id} not found!")
+        return
     distance = challenge_result.distance
+    print('distance:', distance)
     if challenge_result.goal_unit == 'mi':
         distance = distance * 1.60934
     if is_deleted:
         distance = -distance # SUBTRACT THE DISTANCE FROM THE TOTAL
+    if not activity_type:
+        print('No activity type found!')
     if activity_type == 'Running':
         user.total_distance_running += distance
         user.total_distance_running = round(user.total_distance_running, 2)

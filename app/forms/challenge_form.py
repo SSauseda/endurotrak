@@ -17,7 +17,7 @@ class ChallengeForm(FlaskForm):
     # user_id = IntegerField('user_id', validators=[DataRequired()])
     title = StringField('title', validators=[DataRequired(), Length(max=100)])
     description = TextAreaField('description', validators=[DataRequired(), Length(max=255)])
-    activity_type = SelectField('activity_type', choices=[('running', 'Running'), ('cycling', 'Cycling')], validators=[DataRequired(), Length(max=50)])
+    activity_type = SelectField('activity_type', choices=[('Running', 'Running'), ('Cycling', 'Cycling')], validators=[DataRequired(), Length(max=50)])
     goal = FloatField('goal', validators=[DataRequired()])
     goal_unit = SelectField('goal_unit', choices=[('mi', 'Miles'), ('km', 'Kilometers')], validators=[DataRequired()])
     start_date = DateField('start_date', validators=[DataRequired()])

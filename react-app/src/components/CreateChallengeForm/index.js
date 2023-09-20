@@ -169,8 +169,8 @@ const AddChallengeForm = () => {
                     onChange={(e) => setActivityType(e.target.value)}
                     required
                 >
-                    <option value="running">Running</option>
-                    <option value="cycling">Cycling</option>
+                    <option value="Running">Running</option>
+                    <option value="Cycling">Cycling</option>
                     <option disabled value="">--More activites coming soon--</option>
                 </select>
             </label>
