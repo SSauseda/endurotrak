@@ -1,7 +1,7 @@
 # EnduroTrak
 
 ## Introduction
-A social fitness platform, similar to Strava, where users can create challenges, log workouts, and engage with peers through comments and follows.
+A social fitness platform similar to [Strava](https://www.strava.com/), where users can create challenges, log workouts, and engage with peers through comments and follows.
 
 # Flask React Project
 
