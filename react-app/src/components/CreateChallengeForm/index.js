@@ -19,7 +19,7 @@ const AddChallengeForm = () => {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [activityType, setActivityType] = useState('running');
+    const [activityType, setActivityType] = useState('Running');
     const [goal, setGoal] = useState('');
     const [goalUnit, setGoalUnit] = useState('mi');
     const [startDate, setStartDate] = useState('');

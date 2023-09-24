@@ -6,6 +6,7 @@ import OpenModalButton from '../OpenModalButton';
 import CreateResultModal from '../CreateResultModal';
 import { fetchChallenges } from '../../store/challenge';
 import { getAllResults } from '../../store/result';
+import { joinChallenge, leaveChallenge } from '../../store/challenge';
 import './ChallengePage.css';
 
 
@@ -50,6 +51,21 @@ const ChallengePage = () => {
         return dateObj.toUTCString().split(' ').slice(0, 4).join(' ');
     }
 
+    // const joinChallengeHandler = async () => {
+    //     const join = await dispatch(joinChallenge(challengeId));
+    //     if (join) {
+
+    //     }
+    // };
+    
+    // const leaveChallengeHandler = async () => {
+    //     const leave = await dispatch(leaveChallenge(challengeId));
+    //     if (leave) {
+
+    //     }
+    // }
+    
+
     // if (isLoading) {
     //     return <div>Loading...</div>;
     // }
@@ -66,6 +82,25 @@ const ChallengePage = () => {
                 e.target.src="https://t3.ftcdn.net/jpg/02/71/81/32/360_F_271813264_3GVBtWySh8y6ZgRoj8iWc9hXNcOMmzWf.jpg"
             }}
             />
+{/* 
+{
+    isUserParticipant ? (
+        <button
+            onClick={leaveChallengeHandler}
+        >
+            Leave Challenge
+        </button>
+    ) : (
+        <button
+            onClick={joinChallengeHandler}
+        >
+            Join Challenge
+        </button>
+    )
+} */}
+
+
+
             <div className='challenge-info'>
             <p className="challenge-card-title">{challenge && challenge.description}</p>
             <div className="challenge-dates">
