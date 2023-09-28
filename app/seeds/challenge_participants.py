@@ -51,6 +51,12 @@ def seed_challenge_participants():
         participant11,
         participant12,
         participant13,
+        participant14,
+        participant15,
+        participant16,
+        participant17,
+        participant18,
+        participant19,
         ])
         
     db.session.commit()

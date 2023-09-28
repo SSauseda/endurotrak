@@ -106,6 +106,10 @@ const AddChallengeForm = () => {
         }
     };
 
+    const handleReturn = () => {
+        history.goBack();
+    };
+
     
 
     return (
@@ -269,6 +273,7 @@ const AddChallengeForm = () => {
                 {rulesErrors && <div className='input-error'>{rulesErrors}</div>}
             </label>
             <button className='challenge-submit' type="submit">Create Challenge</button>
+            <button className='return-btn' onClick={handleReturn}>Return to Challenges</button>
         </form>
         </>
     )
