@@ -31,7 +31,7 @@ def get_challenge(challenge_id):
     challenge = Challenge.query.get(challenge_id)
     if not challenge:
         return {'errors': ['Challenge not found']}, 404
-    return challenge.to_dict()
+    return challenge.to_dict(current_user)
 
 
 # CREATE A CHALLENGE
@@ -167,3 +167,12 @@ def get_challenges_by_user_id(user_id):
     challenges = Challenge.query.filter(Challenge.id.in_(challenge_ids)).all()
 
     return jsonify([challenge.to_dict() for challenge in challenges])
+
+# # GET A SPECIFIC CHALLENGE BY ID
+# @challenge_routes.route('/<int:challenge_id>')
+# @login_required
+# def get_specific_challenge(challenge_id):
+#     challenge = Challenge.query.get(challenge_id)
+#     if not challenge:
+#         return {'errors': ['Challenge not found']}, 404
+#     return challenge.to_dict(current_user)

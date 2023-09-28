@@ -10,6 +10,7 @@ const LEAVE_CHALLENGE = 'challenges/LEAVE_CHALLENGE';
 const GET_MY_CHALLENGES = 'challenges/GET_MY_CHALLENGES';
 const GET_USER_CHALLENGES = 'challenges/GET_USER_CHALLENGES';
 const CLEAR_CHALLENGES = 'challenges/CLEAR_CHALLENGES'
+const GET_ONE_CHALLENGE = 'challenges/GET_ONE_CHALLENGE';
 
 
 
@@ -58,6 +59,11 @@ const clearChallenges = () => ({
     type: CLEAR_CHALLENGES
 });
 
+const getOneChallenge = (challenge) => ({
+    type: GET_ONE_CHALLENGE,
+    payload: challenge
+});
+
 
 // Thunks
 export const fetchChallenges = () => async (dispatch) => {
@@ -78,6 +84,17 @@ export const fetchChallenges = () => async (dispatch) => {
     //     return challenges;
     // }
 };
+
+export const fetchOneChallenge = (challengeId) => async (dispatch) => {
+    const response = await fetch(`/api/challenges/${challengeId}`);
+
+    if (response.ok) {
+        const challenge = await response.json();
+        dispatch(getOneChallenge(challenge));
+    } else {
+        console.error('Error fetching challenge')
+    }
+}
 
 
 export const addChallenge = (challenge) => async (dispatch) => {
@@ -175,7 +192,8 @@ export const joinChallenge = (challengeId) => async (dispatch, getState) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(participateChallenge(challengeId, data));
-        dispatch(fetchChallenges());
+        dispatch(fetchOneChallenge(challengeId));
+        // dispatch(getOneChallenge(challengeId));
         return null;
     } else {
         const data = await response.json();
@@ -249,6 +267,10 @@ const challengeReducer = (state = initialState, action, getState) => {
             action.payload.forEach(challenge => {
                 newState[challenge.id] = challenge;
             });
+            return newState;
+        case GET_ONE_CHALLENGE:
+            newState = { ...state };
+            newState[action.payload.id] = action.payload;
             return newState;
         case CREATE_CHALLENGE:
             console.log('payload:' , action.payload)

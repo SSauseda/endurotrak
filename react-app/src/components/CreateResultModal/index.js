@@ -55,6 +55,10 @@ const CreateResultModal= ({challenge}) => {
 
         let errorMessages = [];
 
+        if (resultDescription.length < 10) {
+            errorMessages.push('Description must be at least 10 characters');
+        }
+
         if (resultDescription.length > 255) {
             errorMessages.push('Description must be less than 255 characters');
         }
@@ -65,6 +69,9 @@ const CreateResultModal= ({challenge}) => {
 
         if (distance < 0) {
             errorMessages.push('Goal must be greater than 0');
+        }
+        if (distance > 200) {
+            errorMessages.push('Goal must be less than 200');
         }
 
         if (errorMessages.length > 0) {
@@ -91,8 +98,6 @@ const CreateResultModal= ({challenge}) => {
                 console.log("DURATION", duration);
 
                 const newResult = await dispatch(addChallengeResult(challenge.id, result));
-                
-                console.log("CREATERESULT", newResult);
                 
                 setCreateResult(newResult);
                 
@@ -171,6 +176,7 @@ const CreateResultModal= ({challenge}) => {
                     value={distance}
                     onChange={handleDistanceChange}
                     placeholder='Distance'
+                    required
                 />
             </label>
             <label className='result-form-label'>

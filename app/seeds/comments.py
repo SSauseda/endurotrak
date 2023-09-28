@@ -35,6 +35,13 @@ def seed_comments():
     comment10 = Comment(user_id=user2.id, result_id=result5.id, text="You're doing great!")
     comment11 = Comment(user_id=user5.id, result_id=result6.id, text="Fantastic result!")
     comment12 = Comment(user_id=user4.id, result_id=result6.id, text="Keep up the good pace!")
+    comment13 = Comment(user_id=user4.id, result_id=result1.id, text="Outstanding result!")
+    comment14 = Comment(user_id=user6.id, result_id=result1.id, text="This is top-notch!")
+    comment15 = Comment(user_id=user8.id, result_id=result1.id, text="Blown away by your performance!")
+    comment16 = Comment(user_id=user7.id, result_id=result2.id, text="You're setting the bar high!")
+    comment17 = Comment(user_id=user10.id, result_id=result2.id, text="Can't wait to see more from you!")
+    comment18 = Comment(user_id=user5.id, result_id=result2.id, text="Showing us all how it's done!")
+
 
     db.session.add(comment1)
     db.session.add(comment2)
@@ -48,6 +55,12 @@ def seed_comments():
     db.session.add(comment10)
     db.session.add(comment11)
     db.session.add(comment12)
+    db.session.add(comment13)
+    db.session.add(comment14)
+    db.session.add(comment15)
+    db.session.add(comment16)
+    db.session.add(comment17)
+    db.session.add(comment18)
 
     db.session.commit()
 

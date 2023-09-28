@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
-// import { joinChallenge, leaveChallenge } from '../../store/participant';
-import { fetchChallenges, joinChallenge, leaveChallenge, removeChallenge } from '../../store/challenge';
+import { fetchChallenges, joinChallenge, leaveChallenge, removeChallenge, fetchOneChallenge } from '../../store/challenge';
 import ManageChallenges from '../ManageChallenges';
 import './ChallengeCards.css';
 
@@ -14,9 +13,11 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
     
     const { openModal, closeModal } = useModal();
     const user = useSelector((state) => state.session.user);
+    const challengeData = useSelector((state) => state.challenges[challenge.id]);
+    const userParticipantIds = useSelector((state) => state.challenges[challenge.id].participants.map(participant => participant.user_id));
+    const isUserParticipant = userParticipantIds.includes(user.id);
 
     const [buttonText, setButtonText] = useState('Challenge Joined');
-    const [isUserParticipant, setIsUserParticipant] = useState(challenge.isUserParticipant);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleMouseEnter = () => { setButtonText('Leave Challenge') };
@@ -26,7 +27,7 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
         e.stopPropagation();
         const join = await dispatch(joinChallenge(challenge.id));
         if (join) {
-            setIsUserParticipant(true);
+            dispatch(fetchOneChallenge(challenge.id));
         }
     };
 
@@ -34,8 +35,8 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
         e.stopPropagation();
         const leave = await dispatch(leaveChallenge(challenge.id));
         if (leave) {
-            setIsUserParticipant(false);
             setButtonText('Join Challenge');
+            dispatch(fetchOneChallenge(challenge.id));
         }
     }
 
@@ -89,7 +90,7 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                 </Link>
                 <div className='join-leave-button'>
                 {location.pathname === '/challenges' && (
-                    challenge.isUserParticipant ? (
+                    isUserParticipant ? (
                         <button
                             className='leave-challenge-button'
                             onClick={leaveChallengeHandler}
@@ -124,22 +125,6 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
                         </button>
                     </>
                 )}
-                {/* {isManagePage && user.id === challenge.user_id && (
-                    <>
-                        <button
-                            className="delete-challenge-button"
-                            onClick={deleteChallengeHandler}
-                        >
-                            Delete Challenge
-                        </button>
-                        <button
-                            className="edit-challenge-button"
-                            onClick={editChallengeHandler}
-                        >
-                            Edit Challenge
-                        </button>
-                    </>
-                )} */}
             </div>
         </>
     )

@@ -13,6 +13,9 @@ def seed_challenge_participants():
 
     user1 = User.query.get(1)
     user2 = User.query.get(2)
+    user3 = User.query.get(3)
+    user4 = User.query.get(4)
+    user5 = User.query.get(5)
 
     participant1 = ChallengeParticipant(user_id=user1.id, challenge_id=challenge1.id)
     participant2 = ChallengeParticipant(user_id=user1.id, challenge_id=challenge2.id)
@@ -20,8 +23,19 @@ def seed_challenge_participants():
     participant4 = ChallengeParticipant(user_id=user1.id, challenge_id=challenge4.id)
     participant5 = ChallengeParticipant(user_id=user1.id, challenge_id=challenge5.id)
     participant6 = ChallengeParticipant(user_id=user1.id, challenge_id=challenge6.id)
-
     participant7 = ChallengeParticipant(user_id=user2.id, challenge_id=challenge1.id)
+    participant8 = ChallengeParticipant(user_id=user2.id, challenge_id=challenge2.id)
+    participant9 = ChallengeParticipant(user_id=user2.id, challenge_id=challenge3.id)
+    participant10 = ChallengeParticipant(user_id=user2.id, challenge_id=challenge4.id)
+    participant11 = ChallengeParticipant(user_id=user3.id, challenge_id=challenge1.id)
+    participant12 = ChallengeParticipant(user_id=user4.id, challenge_id=challenge1.id)
+    participant13 = ChallengeParticipant(user_id=user5.id, challenge_id=challenge1.id)
+    participant14 = ChallengeParticipant(user_id=user3.id, challenge_id=challenge2.id)
+    participant15 = ChallengeParticipant(user_id=user4.id, challenge_id=challenge2.id)
+    participant16 = ChallengeParticipant(user_id=user5.id, challenge_id=challenge2.id)
+    participant17 = ChallengeParticipant(user_id=user3.id, challenge_id=challenge3.id)
+    participant18 = ChallengeParticipant(user_id=user4.id, challenge_id=challenge3.id)
+    participant19 = ChallengeParticipant(user_id=user5.id, challenge_id=challenge3.id)
 
     db.session.add_all([
         participant1, 
@@ -31,6 +45,12 @@ def seed_challenge_participants():
         participant5,
         participant6,
         participant7,
+        participant8,
+        participant9,
+        participant10,
+        participant11,
+        participant12,
+        participant13,
         ])
         
     db.session.commit()
