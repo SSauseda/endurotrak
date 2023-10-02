@@ -35,7 +35,6 @@ export const getAllResults = (challengeId) => async (dispatch) => {
 
     if (response.ok) {
         const results = await response.json();
-        console.log("IN RESULT THUNK", results)
         dispatch(getChallengeResults(results));
     } else {
         console.error('Error fetching results')
@@ -55,7 +54,6 @@ export const getEachResult = (challengeId, resultId) => async (dispatch) => {
 
 export const addChallengeResult = (challengeId, result) => async (dispatch) => {
     try {
-        console.log(JSON.stringify(result));
         const response = await fetch(`/api/challenges/${challengeId}/results`, {
             method: 'POST',
             headers: {
@@ -79,7 +77,6 @@ export const addChallengeResult = (challengeId, result) => async (dispatch) => {
 
 
 export const removeChallengeResult = (challengeId, resultId) => async (dispatch) => {
-    console.log("THUNK", challengeId)
     const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}`, {
         method: 'DELETE',
     });

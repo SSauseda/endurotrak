@@ -28,7 +28,6 @@ const AthletePage = () => {
 
     const challenges = useSelector((state) => state.challenges);
     const challengesArray = Object.values(challenges);
-    console.log('challenges', challengesArray)
 
     if (!user) {
         return <div>Loading...</div>

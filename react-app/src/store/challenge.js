@@ -71,7 +71,6 @@ export const fetchChallenges = () => async (dispatch) => {
 
     if (response.ok) {
         const { challenges } = await response.json();
-        console.log("FETCHFETCHFETCH", challenges)
         dispatch(getChallenges(challenges));
     } else {
         console.error('Error fetching challenges')
@@ -130,7 +129,6 @@ export const editChallenge = (
     imageUrl,
     rules
 ) => async (dispatch) => {
-    console.log("EDIT", challengeId)
     const response = await fetch(`/api/challenges/${challengeId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -214,7 +212,6 @@ export const leaveChallenge = (challengeId, userId) => async (dispatch, getState
     });
 
     if (response.ok) {
-        console.log("LEAVELEAVELAVEEALEAVE", getChallenges());
         dispatch(unparticipateChallenge({ challengeId, userId }));
         dispatch(fetchChallenges());
         // dispatch(fetchMyChallenges());
@@ -234,7 +231,6 @@ export const fetchMyChallenges = () => async (dispatch) => {
 
     if (response.ok) {
         const challenges = await response.json();
-        // console.log("INSIDE THUNK", challenges)
         dispatch(getMyChallenges(challenges));
     } else {
         console.error('Error fetching challenges')
@@ -273,7 +269,6 @@ const challengeReducer = (state = initialState, action, getState) => {
             newState[action.payload.id] = action.payload;
             return newState;
         case CREATE_CHALLENGE:
-            console.log('payload:' , action.payload)
             newState = { ...state };
             newState[action.payload.id] = action.payload;
             return newState;
@@ -296,7 +291,6 @@ const challengeReducer = (state = initialState, action, getState) => {
             }
             return newState;
         case GET_MY_CHALLENGES:
-            console.log('payload:' , action.payload)
             newState = { ...state };
             Object.values(action.payload).forEach(challenge => {
                 newState[challenge.id] = challenge;
@@ -305,7 +299,6 @@ const challengeReducer = (state = initialState, action, getState) => {
         case GET_USER_CHALLENGES:
             newState = { ...state };
             Object.values(action.payload).forEach(challenge => {
-                // console.log("CHALLENGE", challenge)
                 newState[challenge.id] = challenge;
             });
             return newState;
@@ -320,7 +313,6 @@ const userChallengeReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_MY_CHALLENGES:
-            console.log('payload:' , action.payload)
             newState = { ...state };
             Object.values(action.payload).forEach(challenge => {
                 newState[challenge.id] = challenge;

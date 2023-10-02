@@ -50,7 +50,6 @@ const ChallengeCard = ({challenge, isManagePage, isChallengePage }) => {
 
     const editChallengeHandler = async (e) => {
         e.stopPropagation();
-        console.log("EDITEDITEDIT", challenge.id)
         history.push(`/challenges/${challenge.id}/edit`);
     }
 

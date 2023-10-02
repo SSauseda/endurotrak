@@ -58,7 +58,7 @@ def post_challenge():
         )
         db.session.add(challenge)
         db.session.commit()
-        print('CHALLENGE ADDED!')
+
         return challenge.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

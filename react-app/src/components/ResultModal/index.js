@@ -16,7 +16,6 @@ const ResultModal = () => {
     const { challengeId, resultId } = useParams();
 
     const user = useSelector((state) => state.session.user);
-    console.log("USER", user)
     const result = useSelector((state) => state.results[resultId]);
     const results = useSelector((state) => Object.values(state.results));
 
@@ -34,11 +33,10 @@ const ResultModal = () => {
     }, [dispatch])
     
     const bravos = useSelector((state) => state.bravos);
-    console.log("BRAVOLENGTH", bravos.length)
+
     // const bravosForCurrentResult = bravos.flat().filter(bravo => bravo.result_id === parseInt(resultId));
 
     const hasGivenBravo = user && Boolean(bravos.find(bravo => bravo.user_id === user.id))
-    console.log(hasGivenBravo)
 
     if (!result) {
         return <div>Loading...</div>;
@@ -57,7 +55,7 @@ const ResultModal = () => {
         }
     }
 
-    console.log('USER RESULT', result.participant_user_id)
+
     const handleImageClick = () => {
         history.push(`/athlete/${result.participant_user_id}`)
     }

@@ -164,7 +164,6 @@ export const fetchSingleUser = (userId) => async (dispatch) => {
 
 export const searchUsers = (search) => async (dispatch) => {
 	const response = await fetch(`/api/users/search?search=${search}`);
-	console.log("HELLLOOOOOOO", response)
 
 	if (response.ok) {
 		const { users } = await response.json();

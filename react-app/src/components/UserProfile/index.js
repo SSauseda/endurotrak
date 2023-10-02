@@ -25,7 +25,6 @@ const UserProfile = () => {
     // }, [dispatch]);
     
     const challenges = useSelector((state) => Object.values(state.userChallenges));
-    console.log("CHALLENGES", challenges)
 
     if (!user) return <Redirect to="/" />;
 

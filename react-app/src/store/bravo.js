@@ -17,7 +17,6 @@ export const fetchBravos = (challengeId, resultId) => async (dispatch) => {
 
     if (response.ok) {
         const bravos = await response.json();
-        console.log("Fetched bravos:", bravos.bravos);
         dispatch(setBravos(bravos.bravos));
     }
 };
@@ -31,11 +30,9 @@ export const createBravo = (challengeId, resultId, bravoData) => async (dispatch
 
     if (response.ok) {
     const bravo = await response.json();
-        console.log("BRAVOTHUNK", bravo.bravo)
         dispatch(addBravo(bravo));
         return null;
     } else {
-        // console.log("TEXT", await response.text())
         const data = await response.json();
         if (data.errors) {
             return data.errors;
@@ -46,12 +43,9 @@ export const createBravo = (challengeId, resultId, bravoData) => async (dispatch
 const initialState = [];
 
 const bravoReducer = (state = initialState, action) => {
-    console.log("Current state:", state);
-    console.log("Action:", action);
     
     switch (action.type) {
         case SET_BRAVOS:
-            // console.log('setbravos', action.bravos)
             return action.bravos;
         case ADD_BRAVO:
             return [...state, action.bravo];

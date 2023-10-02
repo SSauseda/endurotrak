@@ -11,7 +11,6 @@ function CommentForm() {
     const { challengeId, resultId } = useParams();
 
     const currentUser = useSelector((state) => state.session.user);
-    console.log("RESULT", resultId)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,7 +29,6 @@ function CommentForm() {
 
         };
         const post = await dispatch(createComment(challengeId, resultId, commentData));
-        // console.log("COMMENT", post)
         
         if (post && post.success) {
             setText('');

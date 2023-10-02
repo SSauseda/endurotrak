@@ -10,7 +10,6 @@ function CommentItem({ comment }) {
     const dispatch = useDispatch();
     const { challengeId, resultId } = useParams();
     const currentUser = useSelector((state) => state.session.user);
-    // console.log("COMMENTEDIT", comment)
 
     const handleSave = () => {
 

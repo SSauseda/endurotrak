@@ -11,22 +11,12 @@ const UserSearch = () => {
     const [query, setQuery] = useState('');
 
     const searchResults = useSelector(state => state.session.searchResults);
-    console.log("SEARCH RESULTS", searchResults)
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        console.log("SEARCHING", query)
         await dispatch (searchUsers(query));
     };
 
-    useEffect(() => {
-        console.log("SEARCH RESULTS", searchResults)
-    }, [searchResults])
-
-    const handleUserClick = (userId) => {
-        console.log("REDIRECT", userId)
-        history.push(`/challenges`)
-    }
 
     return (
         <div>

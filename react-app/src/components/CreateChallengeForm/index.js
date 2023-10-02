@@ -15,7 +15,6 @@ const AddChallengeForm = () => {
             history.push("/");
             return;
         }})
-    // console.log("SESSIONUSER", sessionUser)
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -94,12 +93,10 @@ const AddChallengeForm = () => {
             image_url: imageUrl,
             rules
         };
-        console.log("CHECKINGTIME", challenge)
+
         const createChallenge = await dispatch(addChallenge(challenge));
-        // console.log("CREATECHALLENGECHALLENGECHALLENGE", createChallenge)
-        setNewChallenge(createChallenge);
+
         if (createChallenge.errors) {
-            // console.log("ERRORS", createChallenge.errors)
             setErrors(createChallenge.errors);
         } else {
             history.push('/challenges');

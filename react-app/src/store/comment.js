@@ -34,7 +34,6 @@ const deleteComment = (commentId) => ({
 export const fetchComments = (challengeId, resultId) => async (dispatch) => {
     try {
         const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments`);
-        console.log("FETCH THUNK", response)
         const data = await response.json();
         dispatch(getComments(data));
     } catch (err) {
@@ -55,7 +54,6 @@ export const fetchComment = (challengeId, resultId, commentId) => async (dispatc
 
 export const createComment = (challengeId, resultId, commentData) => async (dispatch) => {
     const payload = JSON.stringify(commentData);
-    console.log("Sending payload:", payload);
     try {
         const response = await fetch(`/api/challenges/${challengeId}/results/${resultId}/comments`, {
             method: 'POST',
@@ -66,7 +64,6 @@ export const createComment = (challengeId, resultId, commentData) => async (disp
         });
 
         const data = await response.json();
-        console.log("DATA", data)
         dispatch(addComment(data));
         return { success: true };
     } catch (err) {

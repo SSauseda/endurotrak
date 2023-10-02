@@ -12,7 +12,7 @@ const Leaderboard = ({ challengeId }) => {
     const history = useHistory();
 
     const currentUser = useSelector((state) => state.session.user);
-    // console.log("USERPARTICIPANTS", currentUser.challengeParticipants.id)
+
 
     const [selectedResult, setSelectedResult] = useState(null);
     const DEFAULT_PROFILE_IMAGE = 'https://i.stack.imgur.com/l60Hf.png'
@@ -27,7 +27,7 @@ const Leaderboard = ({ challengeId }) => {
 
     const results = useSelector((state) => Object.values(state.results))
     const result = useSelector((state) => state.results[selectedResult]);
-    console.log("RESULTS LEADERBOARD", results)
+
 
     const handleDelete = (e, challengeId, resultId) => {
         e.stopPropagation();

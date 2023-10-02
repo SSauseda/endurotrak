@@ -78,12 +78,11 @@ const CreateResultModal= ({challenge}) => {
             setErrors(errorMessages);
             return;
         }
-        // console.log("CHALLENGEID", challenge.id);
+
 
     if (user && Array.isArray(user.challengeParticipants)) {
         for (const participant of user.challengeParticipants) {
             if (participant.user_id === user.id && participant.challenge_id === challenge.id) {
-                console.log("PARTICIPANTID", participant.id);
     
                 const result = {
                     participant_id: participant.id,
@@ -95,7 +94,6 @@ const CreateResultModal= ({challenge}) => {
                     pace: parseFloat(pace),
                 };
                 
-                console.log("DURATION", duration);
 
                 const newResult = await dispatch(addChallengeResult(challenge.id, result));
                 

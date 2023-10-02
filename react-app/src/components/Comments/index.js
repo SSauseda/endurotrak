@@ -20,7 +20,6 @@ const Comments = () => {
     }, [dispatch, challengeId, resultId]);
 
     const comments = useSelector((state) => state.comments);
-    console.log("HELLOOOOOOO", comments)
 
     const sortedComments = [...comments].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 

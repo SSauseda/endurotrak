@@ -28,7 +28,6 @@ const EditChallengeForm = () => {
 
 
     useEffect(() => {
-        // console.log("EDITEDITEDIT2", challengeId)
       if (challenge) {
         setTitle(challenge.title);
         setDescription(challenge.description);
@@ -89,7 +88,6 @@ const EditChallengeForm = () => {
             return;
         }
 
-        console.log("EDITEDITEDIT3", activityType)
         const updatedChallenge = await dispatch(editChallenge(
             challengeId,
             title,
