@@ -35,14 +35,14 @@ const UserSearch = () => {
             </div>
             
             <div className="results-section">
-                {searchResults && searchResults.map(user => (
+                {/* {searchResults && searchResults.map(user => (
                     <div 
                         key={user.id} 
                         onClick={() => handleUserClick(user.id)}
                     >
                         {user.first_name}
                     </div>
-                ))}
+                ))} */}
             </div>
         </div>
     )

@@ -14,6 +14,7 @@ import ManageChallenges from "./components/ManageChallenges";
 import ResultModal from "./components/ResultModal";
 import Homepage from "./components/Homepage";
 import AthletePage from "./components/AthletePage";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer>
+        <Footer isLoaded={ isLoaded }/>
+      </Footer>
     </>
   );
 }
