@@ -213,6 +213,7 @@ export const leaveChallenge = (challengeId, userId) => async (dispatch, getState
 
     if (response.ok) {
         dispatch(unparticipateChallenge({ challengeId, userId }));
+        // dispatch(fetchMyChallenges());
         dispatch(fetchChallenges());
         // dispatch(fetchMyChallenges());
         return null;

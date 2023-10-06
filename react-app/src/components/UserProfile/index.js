@@ -10,6 +10,8 @@ const UserProfile = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector((state) => state.session.user);
+    const challenges = useSelector((state) => Object.values(state.userChallenges));
+
 
     useEffect(()=> {
         if (!user) {
@@ -24,7 +26,7 @@ const UserProfile = () => {
     //     dispatch(fetchMyChallenges());
     // }, [dispatch]);
     
-    const challenges = useSelector((state) => Object.values(state.userChallenges));
+    
 
     if (!user) return <Redirect to="/" />;
 
